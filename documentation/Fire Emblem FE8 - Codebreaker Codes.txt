@@ -1,0 +1,2412 @@
+Fire Emblem: The Sacred Stones
+CodeBreaker Codes for CodeBreaker v1.2 and higher
+by borkborkbork
+
+--------------------
+-     Contents     -
+--------------------
+
+1  -  Introduction
+2  -  Version History
+3  -  Notices for Codes - Important, read before using these codes
+4  -  Enabler Code
+5  -  Character Codes
+6  -  Miscellaneous Codes
+7  -  Digits and Support Character Slot Lists
+8  -  Credits
+9  -  Legal Information
+10 -  Contact Information
+
+
+------------------------
+-   1 - Introduction   -
+------------------------
+After making a codebreaker faq for FE6, I decided to make one for FE8 - the
+North American version. This is the exact template from the last one, so I 
+might accidently leave random bits in. Tell me about them, if you come across 
+them.
+
+Please note that I'm only an newbie code maker, so I can't make everything.
+
+                             *********************
+                                 W A R N I N G
+                             *********************
+I am not responsible for any damage done while you are using these codes. By
+using these, you are taking the risk and freely admit that you are responsible
+your actions. Although the codes _SHOULD_ work, there is a chance that I have
+made a typo and I would be happy for you to contact me and notify me about
+anything you want corrected. 
+
+Keep in mind that this is only for the English Version. Look somewhere else for
+the Japanese version, for those who have it - I recommend the FESS forums.
+
+-----------------------------
+-    2 - Version History    -
+-----------------------------
+v1.3 - 09/10/05
+Thanks to YougnLink, who pointed out that I forgot to put the 
+turn status digits in...So I added them in.
+
+He also wanted me to distinguish between the 3 levels of trainees...
+So I added them in too
+
+v1.2 - 26/07/05
+Ages since an update. Added the level select code, finally added bracketed
+helpers for those you are confused with the item digits
+
+v1.1 - 29/05/05 - 30/05/05
+Found some enabler codes.
+Added Matthew's enalber code. Didn't change version number though.
+
+v1.01 - 27/05/05
+Corrected the big error in the items section. Damn me. Ice Dragon already told
+me about them and I still uploaded the wrong file. Thankyou to all who emailed
+me about this.
+
+v1.0 - 16/05/05
+Finished typing up the codes.
+
+-------------------------------
+-    3 - Notices for Codes    -
+-------------------------------
+Most of these codes were made during the battle preparation, though most of
+them will work in-battle. Using them in the battle preparation is the safest
+way, since if you manage to wreck something, a simple hard reset will cancel
+the codes' effects. In-battle, the game saves every change you make.
+
+In some codes, there is a cluster of Xs. These tell you that these are to be
+replaced with some hexadecimal digits that are shown in the section 7 of this
+document.
+
+In some codes, there is a cluster of #'s. These tell you to replace them with a
+hexadecimal number of your choice. The easiest way to do this is to open up the
+windows calculator, turn it to scientific, type in the number you want in
+decimal, then press the HEX radio button. The screen should show you the digits
+you need to input. In these codes, do not forget that most of the things in FE8
+have caps. Exceeding these caps will probably glitch up your game.
+
+Person Slots refer to the placement they are in on the battle preparation
+screen. The numbers go horizontally like this:
+
+-----------
+- 1  - 2  -
+- 3  - 4  -
+- 5  - 6  -
+
+etc. To check these slots in battle, press R on Seth (who will be slot 1 for
+the 1st few missions) and press DOWN. The game will now show slot 2. Keep
+pressing down to see the others in their orders of slots.
+
+Please remember how codes work. A code will stay active until you turn it off.
+So if you make slot two a mage, turn the code off as soon as your finished,
+because if the characters change slots the next slot 2 will become a mage if
+the code is still active.
+
+Also, to find out which support cheat to use, get in the pre-battle menu and
+choose the supports options. The order shown there is the order for these
+cheats
+
+--------------------------
+-   4 -  Enabler Code    -
+--------------------------
+Big thanks to ArcaneCook on the cmgsccc.com forums. However he did ask for these
+to be tested. Someone else reported them to be working ones. If they dont work,
+can someone email me so I can take them off here?
+
+000005C6 000A
+100013E4 0007
+
+000005C6 000A
+100CFB1C 0007
+
+
+Apparently, the above freeze the game. Thanks to Matthew for the next one:
+
+00006777000A
+10001BE00007
+-----------------------------
+-    5 - Character Codes    - 
+-----------------------------
+
+
+------------------
+-     Slot 1     -
+------------------
+8202BE4C XXXX          Portrait
+8202BE50 XXXX          Class
+3202BE54 00##          Level
+3202BE55 00##          Experience
+3202BE58 00##          Turn Status
+3202BE5E 00##          Max HP
+3202BE5F 00##          Current HP
+3202BE60 00##          Strength
+3202BE61 00##          Skill
+3202BE62 00##          Speed
+3202BE63 00##          Defence
+3202BE64 00##          Resistance
+3202BE65 00##          Luck
+3202BE66 00##          Constitution Bonus
+3202BE69 00##          Move Bonus
+
+3202BE6A 00##          Item Slot 1 Type
+3202BE6C 00##          Item Slot 2 Type
+3202BE6E 00##          Item Slot 3 Type
+3202BE70 00##          Item Slot 4 Type
+3202BE72 00##          Item Slot 5 Type
+3202BE6B 00##          Item Slot 1 Quantity
+3202BE6D 00##          Item Slot 2 Quantity
+3202BE6F 00##          Item Slot 3 Quantity
+3202BE71 00##          Item Slot 4 Quantity
+3202BE73 00##          Item Slot 5 Quantity
+
+3202BE74 00##          Sword Level
+3202BE75 00##          Lance Level
+3202BE76 00##          Axe Level
+3202BE77 00##          Bow Level
+
+3202BE78 00##          Staff Level
+3202BE79 00##          Anima Level
+3202BE7A 00##          Light Level
+3202BE7B 00##          Dark Level
+           
+3202BE7E 00##          Support 1
+3202BE7F 00##          Support 2
+3202BE80 00##          Support 3
+3202BE81 00##          Support 4
+3202BE82 00##          Support 5
+3202BE83 00##          Support 6
+3202BE84 00##          Support 7
+3202BE85 00##          Support 8
+3202BE86 00##          Support 9
+3202BE87 00##          Support 10
+
+
+------------------
+-     Slot 2     -
+------------------
+8202BE94 XXXX          Portrait
+8202BE98 XXXX          Class
+3202BE9C 00##          Level
+3202BE9D 00##          Experience
+3202BEA0 00##          Turn Status
+3202BEA6 00##          Max HP
+3202BEA7 00##          Current HP
+3202BEA8 00##          Strength
+3202BEA9 00##          Skill
+3202BEAA 00##          Speed
+3202BEAB 00##          Defence
+3202BEAC 00##          Resistance
+3202BEAD 00##          Luck
+3202BEAE 00##          Constitution Bonus
+3202BEB1 00##          Move Bonus
+
+3202BEB2 00##          Item Slot 1 Type
+3202BEB4 00##          Item Slot 2 Type
+3202BEB6 00##          Item Slot 3 Type
+3202BEB8 00##          Item Slot 4 Type
+3202BEBA 00##          Item Slot 5 Type
+3202BEB3 00##          Item Slot 1 Quantity
+3202BEB5 00##          Item Slot 2 Quantity
+3202BEB7 00##          Item Slot 3 Quantity
+3202BEB9 00##          Item Slot 4 Quantity
+3202BEBB 00##          Item Slot 5 Quantity
+
+3202BEBC 00##          Sword Level
+3202BEBD 00##          Lance Level
+3202BEBE 00##          Axe Level
+3202BEBF 00##          Bow Level
+
+3202BEC0 00##          Staff Level
+3202BEC1 00##          Anima Level
+3202BEC2 00##          Light Level
+3202BEC3 00##          Dark Level
+
+3202BEC6 00##          Support 1
+3202BEC7 00##          Support 2
+3202BEC8 00##          Support 3
+3202BEC9 00##          Support 4
+3202BECA 00##          Support 5
+3202BECB 00##          Support 6
+3202BECC 00##          Support 7
+3202BECD 00##          Support 8
+3202BECE 00##          Support 9
+3202BECF 00##          Support 10
+
+
+------------------
+-     Slot 3     -
+------------------
+8202BEDC XXXX          Portrait
+8202BEE0 XXXX          Class
+3202BEE4 00##          Level
+3202BEE5 00##          Experience
+3202BEE8 00##          Turn Status
+3202BEEE 00##          Max HP
+3202BEEF 00##          Current HP
+3202BEF0 00##          Strength
+3202BEF1 00##          Skill
+3202BEF2 00##          Speed
+3202BEF3 00##          Defence
+3202BEF4 00##          Resistance
+3202BEF5 00##          Luck
+3202BEF6 00##          Constitution Bonus
+3202BEF9 00##          Move Bonus
+
+3202BEFA 00##          Item Slot 1 Type
+3202BEFC 00##          Item Slot 2 Type
+3202BEFE 00##          Item Slot 3 Type
+3202BF00 00##          Item Slot 4 Type
+3202BF02 00##          Item Slot 5 Type
+3202BEFB 00##          Item Slot 1 Quantity
+3202BEFD 00##          Item Slot 2 Quantity
+3202BEFF 00##          Item Slot 3 Quantity
+3202BF01 00##          Item Slot 4 Quantity
+3202BF03 00##          Item Slot 5 Quantity
+
+3202BF04 00##          Sword Level
+3202BF05 00##          Lance Level
+3202BF06 00##          Axe Level
+3202BF07 00##          Bow Level
+
+3202BF08 00##          Staff Level
+3202BF09 00##          Anima Level
+3202BF0A 00##          Light Level
+3202BF0B 00##          Dark Level
+
+3202BF0E 00##          Support 1
+3202BF0F 00##          Support 2
+3202BF10 00##          Support 3
+3202BF11 00##          Support 4
+3202BF12 00##          Support 5
+3202BF13 00##          Support 6
+3202BF14 00##          Support 7
+3202BF15 00##          Support 8
+3202BF16 00##          Support 9
+3202BF17 00##          Support 10
+
+
+------------------
+-     Slot 4     -
+------------------
+8202BF24 XXXX          Portrait
+8202BF28 XXXX          Class
+3202BF2C 00##          Level
+3202BF2D 00##          Experience
+3202BF30 00##          Turn Status
+3202BF36 00##          Max HP
+3202BF37 00##          Current HP
+3202BF38 00##          Strength
+3202BF39 00##          Skill
+3202BF3A 00##          Speed
+3202BF3B 00##          Defence
+3202BF3C 00##          Resistance
+3202BF3D 00##          Luck
+3202BF3E 00##          Constitution Bonus
+3202BF41 00##          Move Bonus
+
+3202BF42 00##          Item Slot 1 Type
+3202BF44 00##          Item Slot 2 Type
+3202BF46 00##          Item Slot 3 Type
+3202BF48 00##          Item Slot 4 Type
+3202BF4A 00##          Item Slot 5 Type
+3202BF43 00##          Item Slot 1 Quantity
+3202BF45 00##          Item Slot 2 Quantity
+3202BF47 00##          Item Slot 3 Quantity
+3202BF49 00##          Item Slot 4 Quantity
+3202BF4B 00##          Item Slot 5 Quantity
+
+3202BF4C 00##          Sword Level
+3202BF4D 00##          Lance Level
+3202BF4E 00##          Axe Level
+3202BF4F 00##          Bow Level
+
+3202BF50 00##          Staff Level
+3202BF51 00##          Anima Level
+3202BF52 00##          Light Level
+3202BF53 00##          Dark Level
+
+3202BF56 00##          Support 1
+3202BF57 00##          Support 2
+3202BF58 00##          Support 3
+3202BF59 00##          Support 4
+3202BF5A 00##          Support 5
+3202BF5B 00##          Support 6
+3202BF5C 00##          Support 7
+3202BF5D 00##          Support 8
+3202BF5E 00##          Support 9
+3202BF5F 00##          Support 10
+
+
+------------------
+-     Slot 5     -
+------------------
+8202BF6C XXXX          Portrait
+8202BF70 XXXX          Class
+3202BF74 00##          Level
+3202BF75 00##          Experience
+3202BF78 00##          Turn Status
+3202BF7E 00##          Max HP
+3202BF7F 00##          Current HP
+3202BF80 00##          Strength
+3202BF81 00##          Skill
+3202BF82 00##          Speed
+3202BF83 00##          Defence
+3202BF84 00##          Resistance
+3202BF85 00##          Luck
+3202BF86 00##          Constitution Bonus
+3202BF89 00##          Move Bonus
+
+3202BF8A 00##          Item Slot 1 Type
+3202BF8C 00##          Item Slot 2 Type
+3202BF8E 00##          Item Slot 3 Type
+3202BF90 00##          Item Slot 4 Type
+3202BF92 00##          Item Slot 5 Type
+3202BF8B 00##          Item Slot 1 Quantity
+3202BF8D 00##          Item Slot 2 Quantity
+3202BF8F 00##          Item Slot 3 Quantity
+3202BF91 00##          Item Slot 4 Quantity
+3202BF93 00##          Item Slot 5 Quantity
+
+3202BF94 00##          Sword Level
+3202BF95 00##          Lance Level
+3202BF96 00##          Axe Level
+3202BF97 00##          Bow Level
+
+3202BF98 00##          Staff Level
+3202BF99 00##          Anima Level
+3202BF9A 00##          Light Level
+3202BF9B 00##          Dark Level
+
+3202BF9E 00##          Support 1
+3202BF9F 00##          Support 2
+3202BFA0 00##          Support 3
+3202BFA1 00##          Support 4
+3202BFA2 00##          Support 5
+3202BFA3 00##          Support 6
+3202BFA4 00##          Support 7
+3202BFA5 00##          Support 8
+3202BFA6 00##          Support 9
+3202BFA7 00##          Support 10
+
+
+------------------
+-     Slot 6     -
+------------------
+8202BFB4 XXXX          Portrait
+8202BFB8 XXXX          Class
+3202BFBC 00##          Level
+3202BFBD 00##          Experience
+3202BFC0 00##          Turn Status
+3202BFC6 00##          Max HP
+3202BFC7 00##          Current HP
+3202BFC8 00##          Strength
+3202BFC9 00##          Skill
+3202BFCA 00##          Speed
+3202BFCB 00##          Defence
+3202BFCC 00##          Resistance
+3202BFCD 00##          Luck
+3202BFCE 00##          Constitution Bonus
+3202BFD1 00##          Move Bonus
+
+3202BFD2 00##          Item Slot 1 Type
+3202BFD4 00##          Item Slot 2 Type
+3202BFD6 00##          Item Slot 3 Type
+3202BFD8 00##          Item Slot 4 Type
+3202BFDA 00##          Item Slot 5 Type
+3202BFD3 00##          Item Slot 1 Quantity
+3202BFD5 00##          Item Slot 2 Quantity
+3202BFD7 00##          Item Slot 3 Quantity
+3202BFD9 00##          Item Slot 4 Quantity
+3202BFDB 00##          Item Slot 5 Quantity
+
+3202BFDC 00##          Sword Level
+3202BFDD 00##          Lance Level
+3202BFDE 00##          Axe Level
+3202BFDF 00##          Bow Level
+
+3202BFE0 00##          Staff Level
+3202BFE1 00##          Anima Level
+3202BFE2 00##          Light Level
+3202BFE3 00##          Dark Level
+
+3202BFE6 00##          Support 1
+3202BFE7 00##          Support 2
+3202BFE8 00##          Support 3
+3202BFE9 00##          Support 4
+3202BFEA 00##          Support 5
+3202BFEB 00##          Support 6
+3202BFEC 00##          Support 7
+3202BFED 00##          Support 8
+3202BFEE 00##          Support 9
+3202BFEF 00##          Support 10
+
+
+------------------
+-     Slot 7     -
+------------------
+8202BFFC XXXX          Portrait
+8202C000 XXXX          Class
+3202C004 00##          Level
+3202C005 00##          Experience
+3202C008 00##          Turn Status
+3202C00E 00##          Max HP
+3202C00F 00##          Current HP
+3202C010 00##          Strength
+3202C011 00##          Skill
+3202C012 00##          Speed
+3202C013 00##          Defence
+3202C014 00##          Resistance
+3202C015 00##          Luck
+3202C016 00##          Constitution Bonus
+3202C019 00##          Move Bonus
+
+3202C01A 00##          Item Slot 1 Type
+3202C01C 00##          Item Slot 2 Type
+3202C01E 00##          Item Slot 3 Type
+3202C020 00##          Item Slot 4 Type
+3202C022 00##          Item Slot 5 Type
+3202C01B 00##          Item Slot 1 Quantity
+3202C01D 00##          Item Slot 2 Quantity
+3202C01F 00##          Item Slot 3 Quantity
+3202C021 00##          Item Slot 4 Quantity
+3202C023 00##          Item Slot 5 Quantity
+
+3202C024 00##          Sword Level
+3202C025 00##          Lance Level
+3202C026 00##          Axe Level
+3202C027 00##          Bow Level
+
+3202C028 00##          Staff Level
+3202C029 00##          Anima Level
+3202C02A 00##          Light Level
+3202C02B 00##          Dark Level
+
+3202C02E 00##          Support 1
+3202C02F 00##          Support 2
+3202C030 00##          Support 3
+3202C031 00##          Support 4
+3202C032 00##          Support 5
+3202C033 00##          Support 6
+3202C034 00##          Support 7
+3202C035 00##          Support 8
+3202C036 00##          Support 9
+3202C037 00##          Support 10
+
+
+------------------
+-     Slot 8     -
+------------------
+8202C044 XXXX          Portrait
+8202C048 XXXX          Class
+3202C04C 00##          Level
+3202C04D 00##          Experience
+3202C050 00##          Turn Status
+3202C056 00##          Max HP
+3202C057 00##          Current HP
+3202C058 00##          Strength
+3202C059 00##          Skill
+3202C05A 00##          Speed
+3202C05B 00##          Defence
+3202C05C 00##          Resistance
+3202C05D 00##          Luck
+3202C05E 00##          Constitution Bonus
+3202C061 00##          Move Bonus
+
+3202C062 00##          Item Slot 1 Type
+3202C064 00##          Item Slot 2 Type
+3202C066 00##          Item Slot 3 Type
+3202C068 00##          Item Slot 4 Type
+3202C06A 00##          Item Slot 5 Type
+3202C063 00##          Item Slot 1 Quantity
+3202C065 00##          Item Slot 2 Quantity
+3202C067 00##          Item Slot 3 Quantity
+3202C069 00##          Item Slot 4 Quantity
+3202C06B 00##          Item Slot 5 Quantity
+
+3202C06C 00##          Sword Level
+3202C06D 00##          Lance Level
+3202C06E 00##          Axe Level
+3202C06F 00##          Bow Level
+
+3202C070 00##          Staff Level
+3202C071 00##          Anima Level
+3202C072 00##          Light Level
+3202C073 00##          Dark Level
+
+3202C076 00##          Support 1
+3202C077 00##          Support 2
+3202C078 00##          Support 3
+3202C079 00##          Support 4
+3202C07A 00##          Support 5
+3202C07B 00##          Support 6
+3202C07C 00##          Support 7
+3202C07D 00##          Support 8
+3202C07E 00##          Support 9
+3202C07F 00##          Support 10
+
+
+------------------
+-     Slot 9     -
+------------------
+8202C08C XXXX          Portrait
+8202C090 XXXX          Class
+3202C094 00##          Level
+3202C095 00##          Experience
+3202C098 00##          Turn Status
+3202C09E 00##          Max HP
+3202C09F 00##          Current HP
+3202C0A0 00##          Strength
+3202C0A1 00##          Skill
+3202C0A2 00##          Speed
+3202C0A3 00##          Defence
+3202C0A4 00##          Resistance
+3202C0A5 00##          Luck
+3202C0A6 00##          Constitution Bonus
+3202C0A9 00##          Move Bonus
+
+3202C0AA 00##          Item Slot 1 Type
+3202C0AC 00##          Item Slot 2 Type
+3202C0AE 00##          Item Slot 3 Type
+3202C0B0 00##          Item Slot 4 Type
+3202C0B2 00##          Item Slot 5 Type
+3202C0AB 00##          Item Slot 1 Quantity
+3202C0AD 00##          Item Slot 2 Quantity
+3202C0AF 00##          Item Slot 3 Quantity
+3202C0B1 00##          Item Slot 4 Quantity
+3202C0B3 00##          Item Slot 5 Quantity
+
+3202C0B4 00##          Sword Level
+3202C0B5 00##          Lance Level
+3202C0B6 00##          Axe Level
+3202C0B7 00##          Bow Level
+
+3202C0B8 00##          Staff Level
+3202C0B9 00##          Anima Level
+3202C0BA 00##          Light Level
+3202C0BB 00##          Dark Level
+
+3202C0BE 00##          Support 1
+3202C0BF 00##          Support 2
+3202C0C0 00##          Support 3
+3202C0C1 00##          Support 4
+3202C0C2 00##          Support 5
+3202C0C3 00##          Support 6
+3202C0C4 00##          Support 7
+3202C0C5 00##          Support 8
+3202C0C6 00##          Support 9
+3202C0C7 00##          Support 10
+
+
+------------------
+-     Slot 10    -
+------------------
+8202C0D4 XXXX          Portrait
+8202C0D8 XXXX          Class
+3202C0DC 00##          Level
+3202C0DD 00##          Experience
+3202C0E0 00##          Turn Status
+3202C0E6 00##          Max HP
+3202C0E7 00##          Current HP
+3202C0E8 00##          Strength
+3202C0E9 00##          Skill
+3202C0EA 00##          Speed
+3202C0EB 00##          Defence
+3202C0EC 00##          Resistance
+3202C0ED 00##          Luck
+3202C0EE 00##          Constitution Bonus
+3202C0F1 00##          Move Bonus
+
+3202C0F2 00##          Item Slot 1 Type
+3202C0F4 00##          Item Slot 2 Type
+3202C0F6 00##          Item Slot 3 Type
+3202C0F8 00##          Item Slot 4 Type
+3202C0FA 00##          Item Slot 5 Type
+3202C0F3 00##          Item Slot 1 Quantity
+3202C0F5 00##          Item Slot 2 Quantity
+3202C0F7 00##          Item Slot 3 Quantity
+3202C0F9 00##          Item Slot 4 Quantity
+3202C0FB 00##          Item Slot 5 Quantity
+
+3202C0FC 00##          Sword Level
+3202C0FD 00##          Lance Level
+3202C0FE 00##          Axe Level
+3202C0FF 00##          Bow Level
+
+3202C100 00##          Staff Level
+3202C101 00##          Anima Level
+3202C102 00##          Light Level
+3202C103 00##          Dark Level
+
+3202C106 00##          Support 1
+3202C107 00##          Support 2
+3202C108 00##          Support 3
+3202C109 00##          Support 4
+3202C10A 00##          Support 5
+3202C10B 00##          Support 6
+3202C10C 00##          Support 7
+3202C10D 00##          Support 8
+3202C10E 00##          Support 9
+3202C10F 00##          Support 10
+
+
+------------------
+-     Slot 11     -
+------------------
+8202C11C XXXX          Portrait
+8202C120 XXXX          Class
+3202C124 00##          Level
+3202C125 00##          Experience
+3202C128 00##          Turn Status
+3202C12E 00##          Max HP
+3202C12F 00##          Current HP
+3202C130 00##          Strength
+3202C131 00##          Skill
+3202C132 00##          Speed
+3202C133 00##          Defence
+3202C134 00##          Resistance
+3202C135 00##          Luck
+3202C136 00##          Constitution Bonus
+3202C139 00##          Move Bonus
+
+3202C13A 00##          Item Slot 1 Type
+3202C13C 00##          Item Slot 2 Type
+3202C13E 00##          Item Slot 3 Type
+3202C140 00##          Item Slot 4 Type
+3202C142 00##          Item Slot 5 Type
+3202C13B 00##          Item Slot 1 Quantity
+3202C13D 00##          Item Slot 2 Quantity
+3202C13F 00##          Item Slot 3 Quantity
+3202C141 00##          Item Slot 4 Quantity
+3202C143 00##          Item Slot 5 Quantity
+
+3202C144 00##          Sword Level
+3202C145 00##          Lance Level
+3202C146 00##          Axe Level
+3202C147 00##          Bow Level
+
+3202C148 00##          Staff Level
+3202C149 00##          Anima Level
+3202C14A 00##          Light Level
+3202C14B 00##          Dark Level
+
+3202C14E 00##          Support 1
+3202C14F 00##          Support 2
+3202C150 00##          Support 3
+3202C151 00##          Support 4
+3202C152 00##          Support 5
+3202C153 00##          Support 6
+3202C154 00##          Support 7
+3202C155 00##          Support 8
+3202C156 00##          Support 9
+3202C157 00##          Support 10
+
+
+------------------
+-     Slot 12     -
+------------------
+8202C164 XXXX          Portrait
+8202C168 XXXX          Class
+3202C16C 00##          Level
+3202C16D 00##          Experience
+3202C170 00##          Turn Status
+3202C176 00##          Max HP
+3202C177 00##          Current HP
+3202C178 00##          Strength
+3202C179 00##          Skill
+3202C17A 00##          Speed
+3202C17B 00##          Defence
+3202C17C 00##          Resistance
+3202C17D 00##          Luck
+3202C17E 00##          Constitution Bonus
+3202C181 00##          Move Bonus
+
+3202C182 00##          Item Slot 1 Type
+3202C184 00##          Item Slot 2 Type
+3202C186 00##          Item Slot 3 Type
+3202C188 00##          Item Slot 4 Type
+3202C18A 00##          Item Slot 5 Type
+3202C183 00##          Item Slot 1 Quantity
+3202C185 00##          Item Slot 2 Quantity
+3202C187 00##          Item Slot 3 Quantity
+3202C189 00##          Item Slot 4 Quantity
+3202C18B 00##          Item Slot 5 Quantity
+
+3202C18C 00##          Sword Level
+3202C18D 00##          Lance Level
+3202C18E 00##          Axe Level
+3202C18F 00##          Bow Level
+
+3202C190 00##          Staff Level
+3202C191 00##          Anima Level
+3202C192 00##          Light Level
+3202C193 00##          Dark Level
+
+3202C196 00##          Support 1
+3202C197 00##          Support 2
+3202C198 00##          Support 3
+3202C199 00##          Support 4
+3202C19A 00##          Support 5
+3202C19B 00##          Support 6
+3202C19C 00##          Support 7
+3202C19D 00##          Support 8
+3202C19E 00##          Support 9
+3202C19F 00##          Support 10
+
+
+------------------
+-     Slot 13     -
+------------------
+8202C1AC XXXX          Portrait
+8202C1B0 XXXX          Class
+3202C1B4 00##          Level
+3202C1B5 00##          Experience
+3202C1B8 00##          Turn Status
+3202C1BE 00##          Max HP
+3202C1BF 00##          Current HP
+3202C1C0 00##          Strength
+3202C1C1 00##          Skill
+3202C1C2 00##          Speed
+3202C1C3 00##          Defence
+3202C1C4 00##          Resistance
+3202C1C5 00##          Luck
+3202C1C6 00##          Constitution Bonus
+3202C1C9 00##          Move Bonus
+
+3202C1CA 00##          Item Slot 1 Type
+3202C1CC 00##          Item Slot 2 Type
+3202C1CE 00##          Item Slot 3 Type
+3202C1D0 00##          Item Slot 4 Type
+3202C1D2 00##          Item Slot 5 Type
+3202C1CB 00##          Item Slot 1 Quantity
+3202C1CD 00##          Item Slot 2 Quantity
+3202C1CF 00##          Item Slot 3 Quantity
+3202C1D1 00##          Item Slot 4 Quantity
+3202C1D3 00##          Item Slot 5 Quantity
+
+3202C1D4 00##          Sword Level
+3202C1D5 00##          Lance Level
+3202C1D6 00##          Axe Level
+3202C1D7 00##          Bow Level
+
+3202C1D8 00##          Staff Level
+3202C1D9 00##          Anima Level
+3202C1DA 00##          Light Level
+3202C1DB 00##          Dark Level
+
+3202C1DE 00##          Support 1
+3202C1DF 00##          Support 2
+3202C1E0 00##          Support 3
+3202C1E1 00##          Support 4
+3202C1E2 00##          Support 5
+3202C1E3 00##          Support 6
+3202C1E4 00##          Support 7
+3202C1E5 00##          Support 8
+3202C1E6 00##          Support 9
+3202C1E7 00##          Support 10
+
+
+------------------
+-     Slot 14     -
+------------------
+8202C1F4 XXXX          Portrait
+8202C1F8 XXXX          Class
+3202C1FC 00##          Level
+3202C1FD 00##          Experience
+3202C200 00##          Turn Status
+3202C206 00##          Max HP
+3202C207 00##          Current HP
+3202C208 00##          Strength
+3202C209 00##          Skill
+3202C20A 00##          Speed
+3202C20B 00##          Defence
+3202C20C 00##          Resistance
+3202C20D 00##          Luck
+3202C20E 00##          Constitution Bonus
+3202C211 00##          Move Bonus
+
+3202C212 00##          Item Slot 1 Type
+3202C214 00##          Item Slot 2 Type
+3202C216 00##          Item Slot 3 Type
+3202C218 00##          Item Slot 4 Type
+3202C21A 00##          Item Slot 5 Type
+3202C213 00##          Item Slot 1 Quantity
+3202C215 00##          Item Slot 2 Quantity
+3202C217 00##          Item Slot 3 Quantity
+3202C219 00##          Item Slot 4 Quantity
+3202C21B 00##          Item Slot 5 Quantity
+
+3202C21C 00##          Sword Level
+3202C21D 00##          Lance Level
+3202C21E 00##          Axe Level
+3202C21F 00##          Bow Level
+
+3202C220 00##          Staff Level
+3202C221 00##          Anima Level
+3202C222 00##          Light Level
+3202C223 00##          Dark Level
+
+3202C226 00##          Support 1
+3202C227 00##          Support 2
+3202C228 00##          Support 3
+3202C229 00##          Support 4
+3202C22A 00##          Support 5
+3202C22B 00##          Support 6
+3202C22C 00##          Support 7
+3202C22D 00##          Support 8
+3202C22E 00##          Support 9
+3202C22F 00##          Support 10
+
+
+------------------
+-     Slot 15     -
+------------------
+8202C23C XXXX          Portrait
+8202C240 XXXX          Class
+3202C244 00##          Level
+3202C245 00##          Experience
+3202C248 00##          Turn Status
+3202C24E 00##          Max HP
+3202C24F 00##          Current HP
+3202C250 00##          Strength
+3202C251 00##          Skill
+3202C252 00##          Speed
+3202C253 00##          Defence
+3202C254 00##          Resistance
+3202C255 00##          Luck
+3202C256 00##          Constitution Bonus
+3202C259 00##          Move Bonus
+
+3202C25A 00##          Item Slot 1 Type
+3202C25C 00##          Item Slot 2 Type
+3202C25E 00##          Item Slot 3 Type
+3202C260 00##          Item Slot 4 Type
+3202C262 00##          Item Slot 5 Type
+3202C25B 00##          Item Slot 1 Quantity
+3202C25D 00##          Item Slot 2 Quantity
+3202C25F 00##          Item Slot 3 Quantity
+3202C261 00##          Item Slot 4 Quantity
+3202C263 00##          Item Slot 5 Quantity
+
+3202C264 00##          Sword Level
+3202C265 00##          Lance Level
+3202C266 00##          Axe Level
+3202C267 00##          Bow Level
+
+3202C268 00##          Staff Level
+3202C269 00##          Anima Level
+3202C26A 00##          Light Level
+3202C26B 00##          Dark Level
+
+3202C26E 00##          Support 1
+3202C26F 00##          Support 2
+3202C270 00##          Support 3
+3202C271 00##          Support 4
+3202C272 00##          Support 5
+3202C273 00##          Support 6
+3202C274 00##          Support 7
+3202C275 00##          Support 8
+3202C276 00##          Support 9
+3202C277 00##          Support 10
+
+
+------------------
+-     Slot 16     -
+------------------
+8202C284 XXXX          Portrait
+8202C288 XXXX          Class
+3202C28C 00##          Level
+3202C28D 00##          Experience
+3202C290 00##          Turn Status
+3202C296 00##          Max HP
+3202C297 00##          Current HP
+3202C298 00##          Strength
+3202C299 00##          Skill
+3202C29A 00##          Speed
+3202C29B 00##          Defence
+3202C29C 00##          Resistance
+3202C29D 00##          Luck
+3202C29E 00##          Constitution Bonus
+3202C2A1 00##          Move Bonus
+
+3202C2A2 00##          Item Slot 1 Type
+3202C2A4 00##          Item Slot 2 Type
+3202C2A6 00##          Item Slot 3 Type
+3202C2A8 00##          Item Slot 4 Type
+3202C2AA 00##          Item Slot 5 Type
+3202C2A3 00##          Item Slot 1 Quantity
+3202C2A5 00##          Item Slot 2 Quantity
+3202C2A7 00##          Item Slot 3 Quantity
+3202C2A9 00##          Item Slot 4 Quantity
+3202C2AB 00##          Item Slot 5 Quantity
+
+3202C2AC 00##          Sword Level
+3202C2AD 00##          Lance Level
+3202C2AE 00##          Axe Level
+3202C2AF 00##          Bow Level
+
+3202C2B0 00##          Staff Level
+3202C2B1 00##          Anima Level
+3202C2B2 00##          Light Level
+3202C2B3 00##          Dark Level
+
+3202C2B6 00##          Support 1
+3202C2B7 00##          Support 2
+3202C2B8 00##          Support 3
+3202C2B9 00##          Support 4
+3202C2BA 00##          Support 5
+3202C2BB 00##          Support 6
+3202C2BC 00##          Support 7
+3202C2BD 00##          Support 8
+3202C2BE 00##          Support 9
+3202C2BF 00##          Support 10
+
+
+------------------
+-     Slot 17     -
+------------------
+8202C2CC XXXX          Portrait
+8202C2D0 XXXX          Class
+3202C2D4 00##          Level
+3202C2D5 00##          Experience
+3202C2D8 00##          Turn Status
+3202C2DE 00##          Max HP
+3202C2DF 00##          Current HP
+3202C2E0 00##          Strength
+3202C2E1 00##          Skill
+3202C2E2 00##          Speed
+3202C2E3 00##          Defence
+3202C2E4 00##          Resistance
+3202C2E5 00##          Luck
+3202C2E6 00##          Constitution Bonus
+3202C2E9 00##          Move Bonus
+
+3202C2EA 00##          Item Slot 1 Type
+3202C2EC 00##          Item Slot 2 Type
+3202C2EE 00##          Item Slot 3 Type
+3202C2F0 00##          Item Slot 4 Type
+3202C2F2 00##          Item Slot 5 Type
+3202C2EB 00##          Item Slot 1 Quantity
+3202C2ED 00##          Item Slot 2 Quantity
+3202C2EF 00##          Item Slot 3 Quantity
+3202C2F1 00##          Item Slot 4 Quantity
+3202C2F3 00##          Item Slot 5 Quantity
+
+3202C2F4 00##          Sword Level
+3202C2F5 00##          Lance Level
+3202C2F6 00##          Axe Level
+3202C2F7 00##          Bow Level
+
+3202C2F8 00##          Staff Level
+3202C2F9 00##          Anima Level
+3202C2FA 00##          Light Level
+3202C2FB 00##          Dark Level
+
+3202C2FE 00##          Support 1
+3202C2FF 00##          Support 2
+3202C300 00##          Support 3
+3202C301 00##          Support 4
+3202C302 00##          Support 5
+3202C303 00##          Support 6
+3202C304 00##          Support 7
+3202C305 00##          Support 8
+3202C306 00##          Support 9
+3202C307 00##          Support 10
+
+
+------------------
+-     Slot 18     -
+------------------
+8202C314 XXXX          Portrait
+8202C318 XXXX          Class
+3202C31C 00##          Level
+3202C31D 00##          Experience
+3202C320 00##          Turn Status
+3202C326 00##          Max HP
+3202C327 00##          Current HP
+3202C328 00##          Strength
+3202C329 00##          Skill
+3202C32A 00##          Speed
+3202C32B 00##          Defence
+3202C32C 00##          Resistance
+3202C32D 00##          Luck
+3202C32E 00##          Constitution Bonus
+3202C331 00##          Move Bonus
+
+3202C332 00##          Item Slot 1 Type
+3202C334 00##          Item Slot 2 Type
+3202C336 00##          Item Slot 3 Type
+3202C338 00##          Item Slot 4 Type
+3202C33A 00##          Item Slot 5 Type
+3202C333 00##          Item Slot 1 Quantity
+3202C335 00##          Item Slot 2 Quantity
+3202C337 00##          Item Slot 3 Quantity
+3202C339 00##          Item Slot 4 Quantity
+3202C33B 00##          Item Slot 5 Quantity
+
+3202C33C 00##          Sword Level
+3202C33D 00##          Lance Level
+3202C33E 00##          Axe Level
+3202C33F 00##          Bow Level
+
+3202C340 00##          Staff Level
+3202C341 00##          Anima Level
+3202C342 00##          Light Level
+3202C343 00##          Dark Level
+
+3202C346 00##          Support 1
+3202C347 00##          Support 2
+3202C348 00##          Support 3
+3202C349 00##          Support 4
+3202C34A 00##          Support 5
+3202C34B 00##          Support 6
+3202C34C 00##          Support 7
+3202C34D 00##          Support 8
+3202C34E 00##          Support 9
+3202C34F 00##          Support 10
+
+
+------------------
+-     Slot 19     -
+------------------
+8202C35C XXXX          Portrait
+8202C360 XXXX          Class
+3202C364 00##          Level
+3202C365 00##          Experience
+3202C368 00##          Turn Status
+3202C36E 00##          Max HP
+3202C36F 00##          Current HP
+3202C370 00##          Strength
+3202C371 00##          Skill
+3202C372 00##          Speed
+3202C373 00##          Defence
+3202C374 00##          Resistance
+3202C375 00##          Luck
+3202C376 00##          Constitution Bonus
+3202C379 00##          Move Bonus
+
+3202C37A 00##          Item Slot 1 Type
+3202C37C 00##          Item Slot 2 Type
+3202C37E 00##          Item Slot 3 Type
+3202C380 00##          Item Slot 4 Type
+3202C382 00##          Item Slot 5 Type
+3202C37B 00##          Item Slot 1 Quantity
+3202C37D 00##          Item Slot 2 Quantity
+3202C37F 00##          Item Slot 3 Quantity
+3202C381 00##          Item Slot 4 Quantity
+3202C383 00##          Item Slot 5 Quantity
+
+3202C384 00##          Sword Level
+3202C385 00##          Lance Level
+3202C386 00##          Axe Level
+3202C387 00##          Bow Level
+
+3202C388 00##          Staff Level
+3202C389 00##          Anima Level
+3202C38A 00##          Light Level
+3202C38B 00##          Dark Level
+
+3202C38E 00##          Support 1
+3202C38F 00##          Support 2
+3202C390 00##          Support 3
+3202C391 00##          Support 4
+3202C392 00##          Support 5
+3202C393 00##          Support 6
+3202C394 00##          Support 7
+3202C395 00##          Support 8
+3202C396 00##          Support 9
+3202C397 00##          Support 10
+
+
+------------------
+-     Slot 20     -
+------------------
+8202C3A4 XXXX          Portrait
+8202C3A8 XXXX          Class
+3202C3AC 00##          Level
+3202C3AD 00##          Experience
+3202C3B0 00##          Turn Status
+3202C3B6 00##          Max HP
+3202C3B7 00##          Current HP
+3202C3B8 00##          Strength
+3202C3B9 00##          Skill
+3202C3BA 00##          Speed
+3202C3BB 00##          Defence
+3202C3BC 00##          Resistance
+3202C3BD 00##          Luck
+3202C3BE 00##          Constitution Bonus
+3202C3C1 00##          Move Bonus
+
+3202C3C2 00##          Item Slot 1 Type
+3202C3C4 00##          Item Slot 2 Type
+3202C3C6 00##          Item Slot 3 Type
+3202C3C8 00##          Item Slot 4 Type
+3202C3CA 00##          Item Slot 5 Type
+3202C3C3 00##          Item Slot 1 Quantity
+3202C3C5 00##          Item Slot 2 Quantity
+3202C3C7 00##          Item Slot 3 Quantity
+3202C3C9 00##          Item Slot 4 Quantity
+3202C3CB 00##          Item Slot 5 Quantity
+
+3202C3CC 00##          Sword Level
+3202C3CD 00##          Lance Level
+3202C3CE 00##          Axe Level
+3202C3CF 00##          Bow Level
+
+3202C3D0 00##          Staff Level
+3202C3D1 00##          Anima Level
+3202C3D2 00##          Light Level
+3202C3D3 00##          Dark Level
+
+3202C3D6 00##          Support 1
+3202C3D7 00##          Support 2
+3202C3D8 00##          Support 3
+3202C3D9 00##          Support 4
+3202C3DA 00##          Support 5
+3202C3DB 00##          Support 6
+3202C3DC 00##          Support 7
+3202C3DD 00##          Support 8
+3202C3DE 00##          Support 9
+3202C3DF 00##          Support 10
+
+
+------------------
+-     Slot 21     -
+------------------
+8202C3EC XXXX          Portrait
+8202C3F0 XXXX          Class
+3202C3F4 00##          Level
+3202C3F5 00##          Experience
+3202C3F8 00##          Turn Status
+3202C3FE 00##          Max HP
+3202C3FF 00##          Current HP
+3202C400 00##          Strength
+3202C401 00##          Skill
+3202C402 00##          Speed
+3202C403 00##          Defence
+3202C404 00##          Resistance
+3202C405 00##          Luck
+3202C406 00##          Constitution Bonus
+3202C409 00##          Move Bonus
+
+3202C40A 00##          Item Slot 1 Type
+3202C40C 00##          Item Slot 2 Type
+3202C40E 00##          Item Slot 3 Type
+3202C410 00##          Item Slot 4 Type
+3202C412 00##          Item Slot 5 Type
+3202C40B 00##          Item Slot 1 Quantity
+3202C40D 00##          Item Slot 2 Quantity
+3202C40F 00##          Item Slot 3 Quantity
+3202C411 00##          Item Slot 4 Quantity
+3202C413 00##          Item Slot 5 Quantity
+
+3202C414 00##          Sword Level
+3202C415 00##          Lance Level
+3202C416 00##          Axe Level
+3202C417 00##          Bow Level
+
+3202C418 00##          Staff Level
+3202C419 00##          Anima Level
+3202C41A 00##          Light Level
+3202C41B 00##          Dark Level
+
+3202C41E 00##          Support 1
+3202C41F 00##          Support 2
+3202C420 00##          Support 3
+3202C421 00##          Support 4
+3202C422 00##          Support 5
+3202C423 00##          Support 6
+3202C424 00##          Support 7
+3202C425 00##          Support 8
+3202C426 00##          Support 9
+3202C427 00##          Support 10
+
+
+------------------
+-     Slot 22     -
+------------------
+8202C434 XXXX          Portrait
+8202C438 XXXX          Class
+3202C43C 00##          Level
+3202C43D 00##          Experience
+3202C440 00##          Turn Status
+3202C446 00##          Max HP
+3202C447 00##          Current HP
+3202C448 00##          Strength
+3202C449 00##          Skill
+3202C44A 00##          Speed
+3202C44B 00##          Defence
+3202C44C 00##          Resistance
+3202C44D 00##          Luck
+3202C44E 00##          Constitution Bonus
+3202C451 00##          Move Bonus
+
+3202C452 00##          Item Slot 1 Type
+3202C454 00##          Item Slot 2 Type
+3202C456 00##          Item Slot 3 Type
+3202C458 00##          Item Slot 4 Type
+3202C45A 00##          Item Slot 5 Type
+3202C453 00##          Item Slot 1 Quantity
+3202C455 00##          Item Slot 2 Quantity
+3202C457 00##          Item Slot 3 Quantity
+3202C459 00##          Item Slot 4 Quantity
+3202C45B 00##          Item Slot 5 Quantity
+
+3202C45C 00##          Sword Level
+3202C45D 00##          Lance Level
+3202C45E 00##          Axe Level
+3202C45F 00##          Bow Level
+
+3202C460 00##          Staff Level
+3202C461 00##          Anima Level
+3202C462 00##          Light Level
+3202C463 00##          Dark Level
+
+3202C466 00##          Support 1
+3202C467 00##          Support 2
+3202C468 00##          Support 3
+3202C469 00##          Support 4
+3202C46A 00##          Support 5
+3202C46B 00##          Support 6
+3202C46C 00##          Support 7
+3202C46D 00##          Support 8
+3202C46E 00##          Support 9
+3202C46F 00##          Support 10
+
+
+------------------
+-     Slot 23     -
+------------------
+8202C47C XXXX          Portrait
+8202C480 XXXX          Class
+3202C484 00##          Level
+3202C485 00##          Experience
+3202C488 00##          Turn Status
+3202C48E 00##          Max HP
+3202C48F 00##          Current HP
+3202C490 00##          Strength
+3202C491 00##          Skill
+3202C492 00##          Speed
+3202C493 00##          Defence
+3202C494 00##          Resistance
+3202C495 00##          Luck
+3202C496 00##          Constitution Bonus
+3202C499 00##          Move Bonus
+
+3202C49A 00##          Item Slot 1 Type
+3202C49C 00##          Item Slot 2 Type
+3202C49E 00##          Item Slot 3 Type
+3202C4A0 00##          Item Slot 4 Type
+3202C4A2 00##          Item Slot 5 Type
+3202C49B 00##          Item Slot 1 Quantity
+3202C49D 00##          Item Slot 2 Quantity
+3202C49F 00##          Item Slot 3 Quantity
+3202C4A1 00##          Item Slot 4 Quantity
+3202C4A3 00##          Item Slot 5 Quantity
+
+3202C4A4 00##          Sword Level
+3202C4A5 00##          Lance Level
+3202C4A6 00##          Axe Level
+3202C4A7 00##          Bow Level
+
+3202C4A8 00##          Staff Level
+3202C4A9 00##          Anima Level
+3202C4AA 00##          Light Level
+3202C4AB 00##          Dark Level
+
+3202C4AE 00##          Support 1
+3202C4AF 00##          Support 2
+3202C4B0 00##          Support 3
+3202C4B1 00##          Support 4
+3202C4B2 00##          Support 5
+3202C4B3 00##          Support 6
+3202C4B4 00##          Support 7
+3202C4B5 00##          Support 8
+3202C4B6 00##          Support 9
+3202C4B7 00##          Support 10
+
+
+------------------
+-     Slot 24     -
+------------------
+8202C4C4 XXXX          Portrait
+8202C4C8 XXXX          Class
+3202C4CC 00##          Level
+3202C4CD 00##          Experience
+3202C4D0 00##          Turn Status
+3202C4D6 00##          Max HP
+3202C4D7 00##          Current HP
+3202C4D8 00##          Strength
+3202C4D9 00##          Skill
+3202C4DA 00##          Speed
+3202C4DB 00##          Defence
+3202C4DC 00##          Resistance
+3202C4DD 00##          Luck
+3202C4DE 00##          Constitution Bonus
+3202C4E1 00##          Move Bonus
+
+3202C4E2 00##          Item Slot 1 Type
+3202C4E4 00##          Item Slot 2 Type
+3202C4E6 00##          Item Slot 3 Type
+3202C4E8 00##          Item Slot 4 Type
+3202C4EA 00##          Item Slot 5 Type
+3202C4E3 00##          Item Slot 1 Quantity
+3202C4E5 00##          Item Slot 2 Quantity
+3202C4E7 00##          Item Slot 3 Quantity
+3202C4E9 00##          Item Slot 4 Quantity
+3202C4EB 00##          Item Slot 5 Quantity
+
+3202C4EC 00##          Sword Level
+3202C4ED 00##          Lance Level
+3202C4EE 00##          Axe Level
+3202C4EF 00##          Bow Level
+
+3202C4F0 00##          Staff Level
+3202C4F1 00##          Anima Level
+3202C4F2 00##          Light Level
+3202C4F3 00##          Dark Level
+
+3202C4F6 00##          Support 1
+3202C4F7 00##          Support 2
+3202C4F8 00##          Support 3
+3202C4F9 00##          Support 4
+3202C4FA 00##          Support 5
+3202C4FB 00##          Support 6
+3202C4FC 00##          Support 7
+3202C4FD 00##          Support 8
+3202C4FE 00##          Support 9
+3202C4FF 00##          Support 10
+
+
+------------------
+-     Slot 25     -
+------------------
+8202C50C XXXX          Portrait
+8202C510 XXXX          Class
+3202C514 00##          Level
+3202C515 00##          Experience
+3202C518 00##          Turn Status
+3202C51E 00##          Max HP
+3202C51F 00##          Current HP
+3202C520 00##          Strength
+3202C521 00##          Skill
+3202C522 00##          Speed
+3202C523 00##          Defence
+3202C524 00##          Resistance
+3202C525 00##          Luck
+3202C526 00##          Constitution Bonus
+3202C529 00##          Move Bonus
+
+3202C52A 00##          Item Slot 1 Type
+3202C52C 00##          Item Slot 2 Type
+3202C52E 00##          Item Slot 3 Type
+3202C530 00##          Item Slot 4 Type
+3202C532 00##          Item Slot 5 Type
+3202C52B 00##          Item Slot 1 Quantity
+3202C52D 00##          Item Slot 2 Quantity
+3202C52F 00##          Item Slot 3 Quantity
+3202C531 00##          Item Slot 4 Quantity
+3202C533 00##          Item Slot 5 Quantity
+
+3202C534 00##          Sword Level
+3202C535 00##          Lance Level
+3202C536 00##          Axe Level
+3202C537 00##          Bow Level
+
+3202C538 00##          Staff Level
+3202C539 00##          Anima Level
+3202C53A 00##          Light Level
+3202C53B 00##          Dark Level
+
+3202C53E 00##          Support 1
+3202C53F 00##          Support 2
+3202C540 00##          Support 3
+3202C541 00##          Support 4
+3202C542 00##          Support 5
+3202C543 00##          Support 6
+3202C544 00##          Support 7
+3202C545 00##          Support 8
+3202C546 00##          Support 9
+3202C547 00##          Support 10
+
+
+- O t h e r    S l o t s - 
+
+To get the 2nd person , add 48 HEX to the address ( 1st part ).
+To get the 3rd person , add 96 HEX to the address.
+
+Basically , find out what person slot the character is in, subtract it by 1.
+Convert the answer to hexadecimal and multiply by 48 HEX. Then add it to a
+code's address and done. 
+
+
+---------------------------
+-    6 - Miscellaneous    -
+---------------------------
+3202bCFE 00## Level Select 
+
+*******Very Dangerous, suggested values are 2B for the last level of the Tower,
+and 37 for the last level of the Ruins. Only enter this code if you have
+unlocked the stage you are warping to*******
+
+3202bd00 00## Turn Number
+3202bCFF 00XX Phase Code
+
+8202BCF8 423F Max gold
+8202BCFA 000F
+
+
+Merchant Codes:
+
+You have to keep them in order. That means if you only have 21 items in the
+merchant, you should use slot 22's code, not slot 99's
+
+3203A81C 00XX          Merchant Slot 1 Type
+3203A81D 00##          Merchant Slot 1 Quantity
+3203A81E 00XX          Merchant Slot 2 Type
+3203A81F 00##          Merchant Slot 2 Quantity
+3203A820 00XX          Merchant Slot 3 Type
+3203A821 00##          Merchant Slot 3 Quantity
+3203A822 00XX          Merchant Slot 4 Type
+3203A823 00##          Merchant Slot 4 Quantity
+3203A824 00XX          Merchant Slot 5 Type
+3203A825 00##          Merchant Slot 5 Quantity
+3203A826 00XX          Merchant Slot 6 Type
+3203A827 00##          Merchant Slot 6 Quantity
+3203A828 00XX          Merchant Slot 7 Type
+3203A829 00##          Merchant Slot 7 Quantity
+3203A82A 00XX          Merchant Slot 8 Type
+3203A82B 00##          Merchant Slot 8 Quantity
+3203A82C 00XX          Merchant Slot 9 Type
+3203A82D 00##          Merchant Slot 9 Quantity
+3203A82E 00XX          Merchant Slot 10 Type
+3203A82F 00##          Merchant Slot 10 Quantity
+3203A830 00XX          Merchant Slot 11 Type
+3203A831 00##          Merchant Slot 11 Quantity
+3203A832 00XX          Merchant Slot 12 Type
+3203A833 00##          Merchant Slot 12 Quantity
+3203A834 00XX          Merchant Slot 13 Type
+3203A835 00##          Merchant Slot 13 Quantity
+3203A836 00XX          Merchant Slot 14 Type
+3203A837 00##          Merchant Slot 14 Quantity
+3203A838 00XX          Merchant Slot 15 Type
+3203A839 00##          Merchant Slot 15 Quantity
+3203A83A 00XX          Merchant Slot 16 Type
+3203A83B 00##          Merchant Slot 16 Quantity
+3203A83C 00XX          Merchant Slot 17 Type
+3203A83D 00##          Merchant Slot 17 Quantity
+3203A83E 00XX          Merchant Slot 18 Type
+3203A83F 00##          Merchant Slot 18 Quantity
+3203A840 00XX          Merchant Slot 19 Type
+3203A841 00##          Merchant Slot 19 Quantity
+3203A842 00XX          Merchant Slot 20 Type
+3203A843 00##          Merchant Slot 20 Quantity
+3203A844 00XX          Merchant Slot 21 Type
+3203A845 00##          Merchant Slot 21 Quantity
+3203A846 00XX          Merchant Slot 22 Type
+3203A847 00##          Merchant Slot 22 Quantity
+3203A848 00XX          Merchant Slot 23 Type
+3203A849 00##          Merchant Slot 23 Quantity
+3203A84A 00XX          Merchant Slot 24 Type
+3203A84B 00##          Merchant Slot 24 Quantity
+3203A84C 00XX          Merchant Slot 25 Type
+3203A84D 00##          Merchant Slot 25 Quantity
+3203A84E 00XX          Merchant Slot 26 Type
+3203A84F 00##          Merchant Slot 26 Quantity
+3203A850 00XX          Merchant Slot 27 Type
+3203A851 00##          Merchant Slot 27 Quantity
+3203A852 00XX          Merchant Slot 28 Type
+3203A853 00##          Merchant Slot 28 Quantity
+3203A854 00XX          Merchant Slot 29 Type
+3203A855 00##          Merchant Slot 29 Quantity
+3203A856 00XX          Merchant Slot 30 Type
+3203A857 00##          Merchant Slot 30 Quantity
+3203A858 00XX          Merchant Slot 31 Type
+3203A859 00##          Merchant Slot 31 Quantity
+3203A85A 00XX          Merchant Slot 32 Type
+3203A85B 00##          Merchant Slot 32 Quantity
+3203A85C 00XX          Merchant Slot 33 Type
+3203A85D 00##          Merchant Slot 33 Quantity
+3203A85E 00XX          Merchant Slot 34 Type
+3203A85F 00##          Merchant Slot 34 Quantity
+3203A860 00XX          Merchant Slot 35 Type
+3203A861 00##          Merchant Slot 35 Quantity
+3203A862 00XX          Merchant Slot 36 Type
+3203A863 00##          Merchant Slot 36 Quantity
+3203A864 00XX          Merchant Slot 37 Type
+3203A865 00##          Merchant Slot 37 Quantity
+3203A866 00XX          Merchant Slot 38 Type
+3203A867 00##          Merchant Slot 38 Quantity
+3203A868 00XX          Merchant Slot 39 Type
+3203A869 00##          Merchant Slot 39 Quantity
+3203A86A 00XX          Merchant Slot 40 Type
+3203A86B 00##          Merchant Slot 40 Quantity
+3203A86C 00XX          Merchant Slot 41 Type
+3203A86D 00##          Merchant Slot 41 Quantity
+3203A86E 00XX          Merchant Slot 42 Type
+3203A86F 00##          Merchant Slot 42 Quantity
+3203A870 00XX          Merchant Slot 43 Type
+3203A871 00##          Merchant Slot 43 Quantity
+3203A872 00XX          Merchant Slot 44 Type
+3203A873 00##          Merchant Slot 44 Quantity
+3203A874 00XX          Merchant Slot 45 Type
+3203A875 00##          Merchant Slot 45 Quantity
+3203A876 00XX          Merchant Slot 46 Type
+3203A877 00##          Merchant Slot 46 Quantity
+3203A878 00XX          Merchant Slot 47 Type
+3203A879 00##          Merchant Slot 47 Quantity
+3203A87A 00XX          Merchant Slot 48 Type
+3203A87B 00##          Merchant Slot 48 Quantity
+3203A87C 00XX          Merchant Slot 49 Type
+3203A87D 00##          Merchant Slot 49 Quantity
+3203A87E 00XX          Merchant Slot 50 Type
+3203A87F 00##          Merchant Slot 50 Quantity
+3203A880 00XX          Merchant Slot 51 Type
+3203A881 00##          Merchant Slot 51 Quantity
+
+3203A882 00XX          Merchant Slot 52 Type
+3203A883 00##          Merchant Slot 52 Quantity
+3203A884 00XX          Merchant Slot 53 Type
+3203A885 00##          Merchant Slot 53 Quantity
+3203A886 00XX          Merchant Slot 54 Type
+3203A887 00##          Merchant Slot 54 Quantity
+3203A888 00XX          Merchant Slot 55 Type
+3203A889 00##          Merchant Slot 55 Quantity
+3203A88A 00XX          Merchant Slot 56 Type
+3203A88B 00##          Merchant Slot 56 Quantity
+3203A88C 00XX          Merchant Slot 57 Type
+3203A88D 00##          Merchant Slot 57 Quantity
+3203A88E 00XX          Merchant Slot 58 Type
+3203A88F 00##          Merchant Slot 58 Quantity
+3203A890 00XX          Merchant Slot 59 Type
+3203A891 00##          Merchant Slot 59 Quantity
+3203A892 00XX          Merchant Slot 60 Type
+3203A893 00##          Merchant Slot 60 Quantity
+3203A894 00XX          Merchant Slot 61 Type
+3203A895 00##          Merchant Slot 61 Quantity
+3203A896 00XX          Merchant Slot 62 Type
+3203A897 00##          Merchant Slot 62 Quantity
+3203A898 00XX          Merchant Slot 63 Type
+3203A899 00##          Merchant Slot 63 Quantity
+3203A89A 00XX          Merchant Slot 64 Type
+3203A89B 00##          Merchant Slot 64 Quantity
+3203A89C 00XX          Merchant Slot 65 Type
+3203A89D 00##          Merchant Slot 65 Quantity
+3203A89E 00XX          Merchant Slot 66 Type
+3203A89F 00##          Merchant Slot 66 Quantity
+3203A8A0 00XX          Merchant Slot 67 Type
+3203A8A1 00##          Merchant Slot 67 Quantity
+3203A8A2 00XX          Merchant Slot 68 Type
+3203A8A3 00##          Merchant Slot 68 Quantity
+3203A8A4 00XX          Merchant Slot 69 Type
+3203A8A5 00##          Merchant Slot 69 Quantity
+3203A8A6 00XX          Merchant Slot 70 Type
+3203A8A7 00##          Merchant Slot 70 Quantity
+3203A8A8 00XX          Merchant Slot 71 Type
+3203A8A9 00##          Merchant Slot 71 Quantity
+3203A8AA 00XX          Merchant Slot 72 Type
+3203A8AB 00##          Merchant Slot 72 Quantity
+3203A8AC 00XX          Merchant Slot 73 Type
+3203A8AD 00##          Merchant Slot 73 Quantity
+3203A8AE 00XX          Merchant Slot 74 Type
+3203A8AF 00##          Merchant Slot 74 Quantity
+3203A8B0 00XX          Merchant Slot 75 Type
+3203A8B1 00##          Merchant Slot 75 Quantity
+3203A8B2 00XX          Merchant Slot 76 Type
+3203A8B3 00##          Merchant Slot 76 Quantity
+3203A8B4 00XX          Merchant Slot 77 Type
+3203A8B5 00##          Merchant Slot 77 Quantity
+3203A8B6 00XX          Merchant Slot 78 Type
+3203A8B7 00##          Merchant Slot 78 Quantity
+3203A8B8 00XX          Merchant Slot 79 Type
+3203A8B9 00##          Merchant Slot 79 Quantity
+3203A8BA 00XX          Merchant Slot 80 Type
+3203A8BB 00##          Merchant Slot 80 Quantity
+3203A8BC 00XX          Merchant Slot 81 Type
+3203A8BD 00##          Merchant Slot 81 Quantity
+3203A8BE 00XX          Merchant Slot 82 Type
+3203A8BF 00##          Merchant Slot 82 Quantity
+3203A8C0 00XX          Merchant Slot 83 Type
+3203A8C1 00##          Merchant Slot 83 Quantity
+3203A8C2 00XX          Merchant Slot 84 Type
+3203A8C3 00##          Merchant Slot 84 Quantity
+3203A8C4 00XX          Merchant Slot 85 Type
+3203A8C5 00##          Merchant Slot 85 Quantity
+3203A8C6 00XX          Merchant Slot 86 Type
+3203A8C7 00##          Merchant Slot 86 Quantity
+3203A8C8 00XX          Merchant Slot 87 Type
+3203A8C9 00##          Merchant Slot 87 Quantity
+3203A8CA 00XX          Merchant Slot 88 Type
+3203A8CB 00##          Merchant Slot 88 Quantity
+3203A8CC 00XX          Merchant Slot 89 Type
+3203A8CD 00##          Merchant Slot 89 Quantity
+3203A8CE 00XX          Merchant Slot 90 Type
+3203A8CF 00##          Merchant Slot 90 Quantity
+3203A8D0 00XX          Merchant Slot 91 Type
+3203A8D1 00##          Merchant Slot 91 Quantity
+3203A8D2 00XX          Merchant Slot 92 Type
+3203A8D3 00##          Merchant Slot 92 Quantity
+3203A8D4 00XX          Merchant Slot 93 Type
+3203A8D5 00##          Merchant Slot 93 Quantity
+3203A8D6 00XX          Merchant Slot 94 Type
+3203A8D7 00##          Merchant Slot 94 Quantity
+3203A8D8 00XX          Merchant Slot 95 Type
+3203A8D9 00##          Merchant Slot 95 Quantity
+3203A8DA 00XX          Merchant Slot 96 Type
+3203A8DB 00##          Merchant Slot 96 Quantity
+3203A8DC 00XX          Merchant Slot 97 Type
+3203A8DD 00##          Merchant Slot 97 Quantity
+3203A8DE 00XX          Merchant Slot 98 Type
+3203A8DF 00##          Merchant Slot 98 Quantity
+3203A8E0 00XX          Merchant Slot 99 Type
+3203A8E1 00##          Merchant Slot 99 Quantity
+3203A8E2 00XX          Merchant Slot 100 Type
+3203A8E3 00##          Merchant Slot 100 Quantity
+
+----------------------------------------------------
+-    7 - Digits and Support Character Slot Lists   -
+----------------------------------------------------
+Magic and Weapon Levels
+
+Values:FB=S Rank
+       B5=A Rank
+       79=B Rank
+       47=C Rank
+       1F=D Rank
+       01=E Rank
+       00=Can't Use Weapon
+
+Turn Status
+
+00 - Waiting for an order
+10 - Carrying someone, waiting for an order
+42 - Grayed out
+52 - Grayed out, carrying someone
+63 - Being carried
+
+Phase Digits:
+	00 - Player Phase
+	40 - Neutral Phase
+	80 - Enemy Phase
+
+
+Support Levels
+
+In these codes, replace the ## with:
+50=Support C ready, just need to talk
+51=Support C
+A0=Support B ready, just need to talk
+A1=Support B
+F0=Support A ready, just need to talk
+F1=Support A
+
+These Slots were found by Ice Dragon on the FESS forums:
+
+Item Values:
+
+00 (blank)
+01 Iron sword
+02 Slim sword
+03 Steel sword
+04 Silver sword
+05 Iron blade
+06 Steel blade
+07 Silver blade
+08 Poison sword
+09 Rapier
+0A Dummy
+0B Hero's sword (Brave Sword)
+0C Shamshir
+0D Killing sword
+0E Armorkiller
+0F Dragonkiller
+10 Light sword (Light Brand)
+11 Runesword
+12 Lancebuster (Lance Reaver)
+13 Longsword (Zanbato)
+14 Iron spear (Iron Lance)
+15 Slim spear (Slim Lance)
+16 Steel spear (Steel Lance)
+17 Silver spear (Silver Lance)
+18 Poison spear (Poison Lance)
+19 Hero's spear (Brave Lance)
+1A Killer spear (Killer Lance)
+1B Horsekiller (Horseslayer)
+1C Javelin
+1D Slender spear (Spear)
+1E Axebuster (Axereaver)
+1F Iron axe
+20 Steel axe
+21 Silver axe
+22 Poison axe
+23 Hero's axe (Brave Axe)
+24 Killer axe
+25 Halberd
+26 Hammer
+27 Devil axe
+28 Hand axe
+29 Tomahawk
+2A Swordbuster (Swordreaver)
+2B Swordkiller (Swordslayer)
+2C Throwing axe (Hatchet)
+2D Iron bow
+2E Steel bow
+2F Silver bow
+30 Poison bow
+31 Killer bow
+32 Hero's bow (Brave Bow)
+33 Short bow
+34 Longbow (Ballista)
+35 Long arch (Long Ballista)
+36 Iron arch (Iron Ballista)
+37 Killer arch (Killer Ballista)
+38 Fire
+39 Thunder
+3A Elfire
+3B Thunderstorm (Bolting)
+3C Fimbulvetr
+3D Dummy
+3E Excalibur
+3F Lightning
+40 Shine
+41 Divine
+42 Purge
+43 Aura
+44 Dummy
+45 Miir (Flux)
+46 Luna
+47 Rizziah (Nosferautu)
+48 Eclipse
+49 Nosferatu (Fenrir)
+4A Gleipnir
+4B Life (Heal)
+4C Relife (Mend)
+4D Recover
+4E Libro (Physic)
+4F Reserve (Fortify)
+50 Rest (Restore)
+51 Silence
+52 Sleep
+53 Berserk
+54 Warp
+55 Rescue
+56 Torch
+57 Hammerne
+58 Unlock
+59 M shield (Barrier)
+5A Dragon axe
+5B Angelic clothes (Angelic Robe)
+5C Energy ring
+5D Secret book
+5E Speedwing
+5F Goddess statue
+60 Dragonshield
+61 Talisman
+62 Boots (Swiftsole)
+63 Body ring
+64 Hero's proof (Hero Crest)
+65 Knight's medal (Knight Crest)
+66 Orion's arrows (Orion Bolt)
+67 Sky whip (Elysian Whip)
+68 Guiding ring (Guiding Ring)
+69 Treasure key (Chest Key)
+6A Door key
+6B Thief's key (Lockpick)
+6C Salve (Vulnerary)
+6D Special medicine (Elixir)
+6E Pure water
+6F Antidote
+70 Torch
+71 Fairy shield (Fili Shield)
+72 Member card 
+73 Silver card
+74 White gem
+75 Blue gem
+76 Red gem
+77 Gold
+78 Reginleif
+79 Treasure key (Chest Key x5)
+7A Dummy
+7B Dummy
+7C Hopron shield (Hoplon Gaurd)
+7D Dummy
+7E Dummy
+7F Dummy
+80 Dummy
+81 Demon killer sword (Shadow Killer)
+82 Demon defeater spear (Bright Lance)
+83 Demon cutter axe (Fiend Cleaver)
+84 Demon render bow (Beacon Bow)
+85 Sieglinde
+86 Battle axe
+87 Ivaldi
+88 Master proof (Master Seal)
+89 Metis scroll
+8A Dummy
+8B Sharp claws
+8C Ratona (Latona)
+8D Dragon spear
+8E Vidofnir
+8F Naglfar
+90 Decaying breath
+91 Audhumla
+92 Siegmund
+93 Garm
+94 Nidhogg
+95 Heavy spear
+96 Short spear
+97 Champion's proof (Ocean Seal)
+98 Moon bracelet (Lunar Brace)
+99 Sun bracelet (Solar Brace)
+9A 1G
+9B 5G
+9C 10G
+9D 50G
+9E 100G
+9F 3000G
+A0 5000G
+A1 Wind sword
+A2 Salve
+A3 Salve
+A4 Salve
+A5 Dance
+A6 Black nightmare
+A7 Demon stone fragment
+A8 Unclean demonic light
+A9 Reducing demon fist
+AA Dragonstone
+AB Demon surge
+AC Dark bullets
+AD Rotting claws
+AE Long rotting claws
+AF Poison claws
+B0 Deadly poison claws
+B1 Scorching fangs
+B2 Burning fangs
+B3 Evil eye
+B4 Bloody eye
+B5 Stone
+B6 Aircalibur
+B7 Juna's nut
+B8 150G
+B9 200G
+BA Black gem
+BB Gold gem 
+
+
+Portrait values:
+
+3D64 Eirika
+3D98 Seth
+3DCC Gilliam
+3E00 Franz
+3E34 Moulder
+3E68 Vanessa
+3E9C Ross
+3ED0 Neimi
+3F04 Colm
+3F38 Garcia
+3F6C Innes
+3FA0 Lute
+3FD4 Natasha
+4008 Cormag
+403C Ephraim
+4070 Forde
+40A4 Kyle
+40D8 Amelia
+410C Artur
+4140 Gerik
+4174 Tethys
+41A8 Marisa
+41DC Saleh
+4210 Ewan
+4244 L'Arachel
+4278 Dozla
+42AC Enemy
+42E0 Rennac
+4314 Duessel
+4348 Myrrh
+437C Knoll
+43B0 Joshua
+43E4 Syrene
+4418 Tana
+444C Lyon
+4480 Orson
+44B4 Glen
+44E8 Selena
+451C Valter
+4550 Riev
+4584 Caellach
+45B8 Fado
+45EC Ismaire
+4620 Hayden
+
+Class values:
+
+7164 Lord
+71B8 Lord
+720C Great Lord
+7260 Great Lord
+72B4 Cavalier
+7308 Cavalier
+735C Paladin
+73B0 Paladin
+7404 Knight
+7458 Knight
+74AC General
+7500 General
+7554 Thief
+75A8 Manakete
+75FC Mercenary
+7650 Mercenary
+76A4 Hero
+76F8 Hero
+774C Myrmidon
+77A0 Myrmidon
+77F4 Swordmaster
+7848 Swordmaster
+789C Assassin
+78F0 Assassin
+7944 Archer
+7998 Archer
+79EC Sniper
+7A40 Sniper
+7A94 Ranger
+7AE8 Ranger
+7B3C Wyvern Rider
+7B90 Wyvern Rider
+7BE4 Wyvern Lord
+7C38 Wyvern Lord
+7C8C Wyvern Kn.
+7CE0 Wyvern Kn.
+7D34 Mage
+7D88 Mage
+7DDC Sage
+7E30 Sage
+7E84 Mage Knight
+7ED8 Mage Knight
+7F2C Bishop
+7F80 Bishop
+7FD4 Shaman
+8028 Shaman
+807C Druid
+80D0 Druid
+8124 Summoner
+8178 Summoner
+81CC Rogue
+8220 (Egg)
+8274 Great Knight
+82C8 Great Knight
+831C Recruit (2)
+8370 Journeyman (3)
+83C4 Pupil (3)
+8418 Recruit (3)
+846C Manakete
+84C0 Manakete
+8514 Journeyman (1)
+8568 Pupil (1)
+85BC Fighter
+8610 Warrior
+8664 Brigand
+86B8 Pirate
+870C Berserker
+8760 Monk
+87B4 Priest
+8808 Bard
+885C Recruit (1)
+88B0 Pegasus Kn.
+8904 Falcoknight
+8958 Cleric
+89AC Troubadour
+8A00 Valkyrie
+8A54 Dancer
+8AA8 Soldier
+8AFC Necromancer
+8B50 Fleet
+8BA4 Phantom
+8BF8 Revenant
+8C4C Entombed
+8CA0 Bonewalker
+8CF4 Bonewalker
+8D48 Wight
+8D9C Wight
+8DF0 Bael
+8E44 Elder Bael
+8E98 Cyclops
+8EEC Mauthe Doog
+8F40 Gwyllgi
+8F94 Tarvos
+8FE8 Maelduin
+903C Mogall
+9090 Arch Mogall
+90E4 Gorgon
+9138 (Egg)
+918C Gargoyle
+91E0 Deathgoyle
+9234 Draco Zombie
+9288 Demon King
+92DC (Archer on Ballista)
+9330 (Archer on Iron Ballista)
+9384 (Archer on Killer Ballista)
+93D8 (Ballista)
+942C (Iron Ballista)
+9480 (Killer Ballista)
+94D4 Civilian
+9528 Civilian
+957C Civilian
+95D0 Civilian
+9624 Civilian
+9678 Civilian
+96CC (Peer)
+9720 Queen
+9774 (Prince)
+97C8 Queen
+981C (Empty)
+9870 (Dead Prince)
+98C4 (Tent)
+9918 Pontifex
+996C (Dead Peer)
+99C0 Cyclops
+9A14 Elder Bael
+9A68 Journeyman (2)
+9ABC Pupil (2)
+
+
+---------------------
+-    8 - Credits    -
+---------------------
+
+Thanks to Ice Dragon and others on the FESS forums:
+(http://s7.invisionfree.com/FESS/index.php?act=idx) for the digits and for
+correcting a few codes fo me.
+
+Thanks to crazyguy 19992000 for noticing by off addresses
+
+Thanks for the enabler codes, ArcaneCook. A very big thanks to Matthew for 
+giving and testing the other enabler code
+
+Thanks to YougnLink for emailing me about certain mistakes in the faq and
+helping to improve the guide
+
+Also, big thanks to Intelligent Systems and Nintendo for making this game.
+
+-------------------------------
+-    9 - Legal Information    -
+-------------------------------
+
+This may be not be reproduced under any circumstances except for personal,
+private use. It may not be placed on any web site or otherwise distributed
+publicly without advance permission. Use of this guide on any other web site
+or as a part of any public display is strictly prohibited, and a violation of 
+copyright.
+
+^An altered form of GameFAQS' example on Contributer Central, but its just as
+valid.
+---------------------------------
+-    10- Contact Information    -
+---------------------------------
+
+I can be contacted at borkey@gmail.com
+
+
+Since It's a gmail account, spamm isn't that much of a problem, but if you do
+send an email to me, make sure you have this exact phrase in the subject or it
+will be thrown into my junk folder:
+
+"FE8 Codebreaker Codes"
+
+Also say what the email deals with, eg - request, correction etc.
+
+Restore Page
+
+// Menu
+//
+
+  * Home <https://gamefaqs.gamespot.com/>
+  * Boards <https://gamefaqs.gamespot.com/boards>
+  * News <https://gamefaqs.gamespot.com/news>
+  * Q&A <https://gamefaqs.gamespot.com/answers>
+  * Community <https://gamefaqs.gamespot.com/community>
+  * Contribute <https://gamefaqs.gamespot.com/contribute>
+  * Games <https://gamefaqs.gamespot.com/games>
+
+
+  * 3DS <https://gamefaqs.gamespot.com/3ds>
+  * Android <https://gamefaqs.gamespot.com/android>
+  * Board/Card <https://gamefaqs.gamespot.com/board-card>
+  * iOS <https://gamefaqs.gamespot.com/iphone>
+  * PC <https://gamefaqs.gamespot.com/pc>
+  * PlayStation 3 <https://gamefaqs.gamespot.com/ps3>
+  * PlayStation 4 <https://gamefaqs.gamespot.com/ps4>
+  * PlayStation 5 <https://gamefaqs.gamespot.com/ps5>
+  * Switch <https://gamefaqs.gamespot.com/switch>
+  * Vita <https://gamefaqs.gamespot.com/vita>
+  * Xbox 360 <https://gamefaqs.gamespot.com/xbox360>
+  * Xbox One <https://gamefaqs.gamespot.com/xboxone>
+  * Xbox Series <https://gamefaqs.gamespot.com/xbox-series-x>
+  * More Systems <https://gamefaqs.gamespot.com/games/systems>
+
+PC <https://gamefaqs.gamespot.com/pc>PS4 <https://gamefaqs.gamespot.com/
+ps4>PS5 <https://gamefaqs.gamespot.com/ps5>Switch <https://
+gamefaqs.gamespot.com/switch>Xbox One <https://gamefaqs.gamespot.com/
+xboxone>Xbox Series <https://gamefaqs.gamespot.com/xbox-series-
+x>More Systems //// <https://gamefaqs.gamespot.com/games/systems>
+
+  * 3DS <https://gamefaqs.gamespot.com/3ds>
+  * Android <https://gamefaqs.gamespot.com/android>
+  * Board / Card <https://gamefaqs.gamespot.com/board-card>
+  * DS <https://gamefaqs.gamespot.com/ds>
+  * Game Boy Advance <https://gamefaqs.gamespot.com/gba>
+  * GameCube <https://gamefaqs.gamespot.com/gamecube>
+  * iOS <https://gamefaqs.gamespot.com/iphone>
+  * Nintendo 64 <https://gamefaqs.gamespot.com/n64>
+  * PlayStation <https://gamefaqs.gamespot.com/ps>
+  * PlayStation 2 <https://gamefaqs.gamespot.com/ps2>
+  * PlayStation 3 <https://gamefaqs.gamespot.com/ps3>
+  * PSP <https://gamefaqs.gamespot.com/psp>
+  * Super Nintendo <https://gamefaqs.gamespot.com/snes>
+  * Vita <https://gamefaqs.gamespot.com/vita>
+  * Wii <https://gamefaqs.gamespot.com/wii>
+  * Wii U <https://gamefaqs.gamespot.com/wii-u>
+  * Xbox 360 <https://gamefaqs.gamespot.com/xbox360>
+  * See All 143... <https://gamefaqs.gamespot.com/games/systems>
+
+//Log In <https://gamefaqs.gamespot.com/user/login> Sign Up <https://
+gamefaqs.gamespot.com/user/register>
+GameFAQs <https://gamefaqs.gamespot.com/>
+//
+//
+
+Boards <https://gamefaqs.gamespot.com/boards>News <https://
+gamefaqs.gamespot.com/news>Q&A <https://gamefaqs.gamespot.com/
+answers>Community <https://gamefaqs.gamespot.com/community>Contribute
+<https://gamefaqs.gamespot.com/contribute>Games <https://
+gamefaqs.gamespot.com/games>//
+
+
+  Fire Emblem: The Sacred Stones – Codebreaker Codes
+
+
+      Game Boy Advance
+
+//Log in to add games to your lists
+//Notify me about new:
+// Guides
+// Cheats
+// Reviews
+// Questions
+// News
+// Board Topics
+// Board Messages
+//Add this game to my:
+// Favorite Games
+// Favorite Boards
+
+Guides <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-sacred-
+stones/faqs>
+Q&A <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-sacred-
+stones/answers>
+Board <https://gamefaqs.gamespot.com/boards/921183-fire-emblem-the-
+sacred-stones>
+More
+
+ 1. Home <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones>
+     1. Summary <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-
+        the-sacred-stones>
+     2. Release Data <https://gamefaqs.gamespot.com/gba/921183-fire-
+        emblem-the-sacred-stones/data>
+     3. Game Credits <https://gamefaqs.gamespot.com/gba/921183-fire-
+        emblem-the-sacred-stones/credit>
+     4. Also Playing <https://gamefaqs.gamespot.com/gba/921183-fire-
+        emblem-the-sacred-stones/playing>
+     5. Collection Stats <https://gamefaqs.gamespot.com/gba/921183-fire-
+        emblem-the-sacred-stones/stats>
+     6. Game Trivia <https://gamefaqs.gamespot.com/gba/921183-fire-
+        emblem-the-sacred-stones/trivia>
+ 2. Guides <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/faqs>
+ 3. Q&A <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/answers>
+ 4. Cheats <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/cheats>
+ 5. Saves <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/saves>
+ 6. Reviews <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/reviews>
+ 7. Media <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+    sacred-stones/media>
+     1. Boxes <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-the-
+        sacred-stones/boxes>
+     2. Images <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-
+        the-sacred-stones/images?pid=921183>
+     3. Videos <https://gamefaqs.gamespot.com/gba/921183-fire-emblem-
+        the-sacred-stones/videos>
+ 8. Board <https://gamefaqs.gamespot.com/boards/921183-fire-emblem-the-
+    sacred-stones>
+
+GameFAQs <https://gamefaqs.gamespot.com/> //
+What do you need help on? Cancel X
+//
+
+//
+BOOKMARK
+Jump to:
+Would you recommend this Guide? Yes No Hide //
+Send Skip Hide //
+//  Message Sent
+Jump to:
+//
+
+
+    Codebreaker Codes (GBA) by borkborkbork <https://
+    gamefaqs.gamespot.com/community/borkborkbork>
+
+*Version:* v1.3 | *Updated:* 01/19/2006
+
+View in: Text Mode
+
+GameFAQs <https://gamefaqs.gamespot.com/>//facebook.com/GFAQs <http://
+www.facebook.com/GFAQs>//twitter.com/GameFAQs <http://www.twitter.com/
+GameFAQs>Help / Contact Us <https://gamefaqs.gamespot.com/help>Change
+Colors //
+
+  * Blue (Default)
+  * Blue on Black
+  * Red
+  * Red on Black
+  * Green
+  * Green on Black
+  * Orange
+  * Orange on Black
+  * Purple
+  * Purple on Black
+  * Cloudy Blue
+  * Grayscale
+  * Sepia
+  * Cotton Candy
+
+gamespot.com <https://www.gamespot.com/?
+utm_source=gamefaqs&utm_medium=partner&utm_content=footer&utm_campaign=footer>giantbomb.com <https://www.giantbomb.com/>metacritic.com <https://www.metacritic.com/>fandom.com <https://www.fandom.com/>fanatical.com <https://www.fanatical.com/>
+
+Sitemap <https://gamefaqs.gamespot.com/sitemap>Partnerships <https://
+about.fandom.com/mediakit#contact>Careers <https://about.fandom.com/
+careers>Terms of Use <https://www.fandom.com/terms-of-service-
+pp1>Digital Services Act <https://www.fandom.com/digital-services-act-
+gamefaqs>
+
+Privacy Policy <https://www.fandom.com/privacy-policy-pp1>Do Not Sell My
+Personal InformationReport Ad
+
+© 2025 FANDOM, INC. ALL RIGHTS RESERVED.
+
+Company Logo
+
+
+    Do Not Sell My Personal Information
+
+When you visit our website, we store cookies on your browser to collect
+information. The information collected might relate to you, your
+preferences or your device, and is mostly used to make the site work as
+you expect it to and to provide a more personalized web experience.
+However, you can choose not to allow certain types of cookies, which may
+impact your experience of the site and the services we are able to
+offer. Click on the different category headings to find out more and
+change our default settings according to your preference. You cannot
+opt-out of our First Party Strictly Necessary Cookies as they are
+deployed in order to ensure the proper functioning of our website (such
+as prompting the cookie banner and remembering your settings, to log
+into your account, to redirect you when you log out, etc.). For more
+information about the First and Third Party Cookies used please follow
+this link.
+Privacy Policy <https://www.fandom.com/privacy-policy-pp1>
+Allow All
+
+
+      Manage Consent Preferences
+
+
+        Strictly Necessary Cookies
+
+Always Active
+
+These cookies are necessary for the website to function and cannot be
+switched off in our systems. They are usually only set in response to
+actions made by you which amount to a request for services, such as
+setting your privacy preferences, logging in or filling in forms. You
+can set your browser to block or alert you about these cookies, but some
+parts of the site will not then work. These cookies do not store any
+personally identifiable information.
+
+
+        Functional Cookies
+
+Functional Cookies
+
+These cookies enable the website to provide enhanced functionality and
+personalisation. They may be set by us or by third party providers whose
+services we have added to our pages. If you do not allow these cookies
+then some or all of these services may not function properly.
+
+
+        Performance Cookies
+
+Performance Cookies
+
+These cookies allow us to count visits and traffic sources so we can
+measure and improve the performance of our site. They help us to know
+which pages are the most and least popular and see how visitors move
+around the site. All information these cookies collect is aggregated and
+therefore anonymous. If you do not allow these cookies we will not know
+when you have visited our site, and will not be able to monitor its
+performance.
+
+
+        Targeting Cookies
+
+Targeting Cookies
+
+These cookies may be set through our site by our advertising partners.
+They may be used by those companies to build a profile of your interests
+and show you relevant adverts on other sites. They do not store directly
+personal information, but are based on uniquely identifying your browser
+and internet device. If you do not allow these cookies, you will
+experience less targeted advertising.
+
+
+        Social Media Cookies
+
+Social Media Cookies
+
+These cookies are set by a range of social media services that we have
+added to the site to enable you to share our content with your friends
+and networks. They are capable of tracking your browser across other
+sites and building up a profile of your interests. This may impact the
+content and messages you see on other websites you visit. If you do not
+allow these cookies you may not be able to use or see these sharing tools.
+
+Back Button
+
+
+Cookie List
+
+Search Icon
+
+Filter Icon
+
+Clear
+
+checkbox label label
+Apply Cancel
+Consent Leg.Interest
+checkbox label
+
+label
+checkbox label
+
+label
+checkbox label
+
+label
+
+Confirm My Choices
+Powered by Onetrust <https://www.onetrust.com/products/cookie-consent/>

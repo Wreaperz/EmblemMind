@@ -1,0 +1,2321 @@
+Fire Emblem: Blazing Sword
+CodeBreaker Codes for CodeBreaker v1.2 and higher
+by Andrew Gu a.k.a. Guru2012
+
+Last updated: August 11, 2006 (v1.0)
+
+***********************************
+*        TABLE OF CONTENTS        *
+***********************************
+  0. Contact Information
+  1. Introduction
+  2. Version History
+  3. Code Notes
+  4. Enabler Code
+  5. Character Codes
+  6. Miscellaneous Codes
+  7. Merchant Codes
+  8. Value Lists
+  9. “Bibliography”
+  10. Credits and Copyright Info
+
+
+***********************************
+*     0. Contact Information      *
+***********************************
+
+ === 8/11/2006 update ===
+
+It’s been over two years, but I was recently surprised by a multitude of 
+emails relating to this guide which I forgot even existed. 
+
+I have definitely moved on from Fire Emblem and have not touched that game 
+since before the 5/21/2005 update. Since there is still a very active Fire
+Emblem community and since there are plenty of people more capable of 
+answering code questions than I am, I will be no longer responding to code
+questions. I can be reached at mykonine(at)hotmail.com if you have questions 
+about displaying content from this guide elsewhere. 
+
+         ???            ??
+         ???=          ???                                        +++==
+          ?===        =??=                                         +??+
+            =====     =??                                       == +??
+               ====   ===                                     ===??
+                ==== ===                                    =??==+?
+                  =====?                                  ???==?=
+                   ????==!                             ????=====
+                   =+=?====                          ??=??===
+                   ==!=====??                      ?===????==
+                  ==???======+?                 ?===== =
+                 ??=    ?=?====?               ??====
+                ?=??      ???===?+           ??====
+               ????        ???====?+       ?===
+               ??            ???====?+   ?===
+
+@@@@@@ @@@ @@@@@  @@@@@@  @@@@@@@@ @@ @@@ @@   @@@@@  @@@   @@@@@@ @@ @@@ @@
+@@@@@@ @@@ @@ @@@ @@@@@    @@@@@@@ @@@@@@@@@@  @@@@@@ @@@   @@@@@ @@@@@@@@@@@
+@@@    @@@ @@  @@ @@@       @@@     @@ @@@ @@  @@  @@ @@@   @@@    @@  @@  @@
+@@@@@@ @@@ @@@@@  @@@@@@    @@@@@@  @@ @@@ @@  @@@@@  @@@   @@@@@@ @@  @@  @@
+@@@@@  @@@ @@ @@  @@@       @@@     @@ @@@ @@  @@  @@ @@@   @@@    @@  @@  @@
+@@@    @@@ @@ @@@ @@@      @@@@@@@  @@ @@@ @@  @@  @@ @@@@@ @@@    @@  @@  @@
+@@@    @@@ @@ @@@ @@@@@@  @@@@@@@@@ @@ @@@ @@  @@@@@  @@@@@ @@@@@@ @@  @@  @@
+
+                  =====+? ========       =========
+               ====?????=???=  =??        =??+&&?!!=
+           =======?==????????=????==?        !!&+=?!=
+           =====     =????=??=???????????  ==  !&&?=&+=
+           === =      =??=??===?????????====      !&&==!+
+                ??????????????????????=====         !!!===
+                  ?????????????????======             !!?!!!
+                   ?????????????======                  !?!!!
+                  ??????????=======                        !!!
+                 ?????=========                               !
+                =========
+             =====
+
+
+***********************************
+*        1. Introduction          *
+***********************************
+Many of these CodeBreaker codes have been on the internet for quite a while,
+but it surprised me that nobody ever wrote a CodeBreaker codes FAQ for Fire
+Emblem (Fire Emblem 7) here, so here’s my version. Bear with me; this is my
+first FAQ ever, let alone for GameFAQs.
+
+All codes here except the master code were found by me. However, you rarely
+see a code FAQ made all by one person, and this is no exception. I found the
+codes based on guesses made based on observations from other code lists (see
+section 9). If you see an identical code somewhere else, that’s just the way
+CodeBreaker codes are.
+
+I am not responsible for any possible damage that might be done to your GBA
+or game-save in the process of using these cheats. Though I have double-
+checked them I give no guarantees.
+
+With that said, have fun and enjoy your new army of dragons! ;)
+
+  -- Guru2012
+
+***********************************
+*       2. Version History        *
+***********************************
+V1.0 – 8/11/2006
+Minor update to contact information.
+
+v1.0 - 5/21/2005
+Not really an update, so the numbers aren't going to change. The only thing
+I modified was up at the top: an update in the contact information section.
+
+v1.0 - 7/30/2004
+Final draft is ready for submission. I’ve added two names to the credits
+section because they helped me check the codes. The entire FAQ has been
+proofread and revised. There is nothing new in the way of content.
+
+v0.9 - 7/23/2004
+First draft completed and revised. All initially planned code and value
+lists are complete. Once the codes are triple-checked and the FAQ is revised
+and proofread one more time it should be ready for submission. The FAQ
+itself is still in Word document format for ease of editing and needs to be
+converted to plain text format.
+
+v0.0 – 7/16/2004
+FAQ started
+
+
+***********************************
+*         3. Code Notes           *
+*  [VERY IMPORTANT! READ FIRST!]  *
+***********************************
+These codes are tested to be used in-chapter though many of them will also
+work during pre-battle preparations.
+
+You will notice that every code ends with either “00ZZ” or “YYZZ”. This is
+because CodeBreaker codes are made in a way that lets you choose, for
+example, how much HP you want to give the character. If it’s a basic
+numerical code, replace the “ZZ” with a two-digit hexadecimal number (the
+left digit can be 0) that represents the number you want. For example, if
+you want the character to have 30 HP you would replace the “ZZ” with “1E”.
+
+Where it says “Item X alternate” it’s really just the item type and quantity
+code combined. The quantity is expressed in the first two digits (YY) while
+the type is expressed in the last two digits (ZZ). Replace the YY with the
+amount you want and the ZZ with the item you want (choose from the list).
+
+You must choose from a list of values in section 8 for the following types
+of codes:
+Portrait
+Class
+Turn Status
+Special Status
+Item Type
+Status Effect
+
+You can use any 2 digit hexadecimal number but there are important numbers
+and ranges in section 8 that you should know for the following types of
+codes:
+Experience
+Horizontal Position
+Vertical Position
+Rescue Companion
+Movement Bonus
+Weapon Skill
+Support
+
+There are two ways you can use these codes. The first, which in my opinion
+is risky, is to apply the codes and leave them on. The second is more of a
+hacking type approach. Apply the codes to set the values, suspend the
+chapter, deactivate the codes, and then resume where you left off. That way
+you will have made the changes but you don’t run the risk of, for example,
+setting your third slot to always turn into the dragon. It’s much better to
+change a character into the dragon, suspend so that the changes are saved,
+turn off the cheat, and then continue playing without worrying about any
+other unlikely “victim” who gets mysteriously turned into a dragon because
+of a lingering code.
+
+In this FAQ, I am assuming you are using the latter of the two techniques.
+That doesn’t mean the first technique won’t work. It does, just not as well.
+
+***********************************
+*         4. Enabler Code         *
+***********************************
+
+Before you even think about cheating, you’ll have to know the enabler code.
+
+The one used at http://www.cmgcsss.com (found by Helder and Radical Dreamer)
+and the one used to test these codes is:
+00006777 000A
+10001BE0 0007
+
+
+***********************************
+*       5. Character Codes        *
+***********************************
+
+IMPORTANT!
+============================================================================
+===
+A final warning before you start using these codes: Codes such as the
+portrait, support, and class codes are EXTREMELY RISKY. Even the slightest
+mistake can and most probably will crash your game.
+============================================================================
+===
+
+-= Slot 1=-
+
+Portrait           -  8202BD50 YYZZ
+Class              -  8202BD54 YYZZ
+Level              -  3202BD58 00ZZ
+Experience         -  3202BD59 00ZZ
+Turn Status        -  3202BD5C 00ZZ
+Hidden Status      -  3202BD5D 00ZZ
+Horiz. Position    -  3202BD60 00ZZ
+Vert. Position     -  3202BD61 00ZZ
+Max HP             -  3202BD62 00ZZ
+Current HP         -  3202BD63 00ZZ
+Str                -  3202BD64 00ZZ
+Skl                -  3202BD65 00ZZ
+Spd                -  3202BD66 00ZZ
+Def                -  3202BD67 00ZZ
+Res                -  3202BD68 00ZZ
+Luck               -  3202BD69 00ZZ
+Con bonus          -  3202BD6A 00ZZ
+Rescue             -  3202BD6B 00ZZ
+Move Bonus         -  3202BD6D 00ZZ
+Item 1 Type        -  3202BD6E 00ZZ
+Item 1 Quantity    -  3202BD6F 00ZZ
+Item 2 Type        -  3202BD70 00ZZ
+Item 2 Quantity    -  3202BD71 00ZZ
+Item 3 Type        -  3202BD72 00ZZ
+Item 3 Quantity    -  3202BD73 00ZZ
+Item 4 Type        -  3202BD74 00ZZ
+Item 4 Quantity    -  3202BD75 00ZZ
+Item 5 Type        -  3202BD76 00ZZ
+Item 5 Quantity    -  3202BD77 00ZZ
+Item 1 alternate   -  8202BD6E YYZZ
+Item 2 alternate   -  8202BD70 YYZZ
+Item 3 alternate   -  8202BD72 YYZZ
+Item 4 alternate   -  8202BD74 YYZZ
+Item 5 alternate   -  8202BD76 YYZZ
+Sword Skill        -  3202BD78 00ZZ
+Lance Skill        -  3202BD79 00ZZ
+Axe Skill          -  3202BD7A 00ZZ
+Bow Skill          -  3202BD7B 00ZZ
+Staff Skill        -  3202BD7C 00ZZ
+Anima Skill        -  3202BD7D 00ZZ
+Light Skill        -  3202BD7E 00ZZ
+Dark Skill         -  3202BD7F 00ZZ
+Status Effect      -  3202BD80 00ZZ
+Support #1         -  3202BD82 00ZZ
+Support #2         -  3202BD83 00ZZ
+Support #3         -  3202BD84 00ZZ
+Support #4         -  3202BD85 00ZZ
+Support #5         -  3202BD86 00ZZ
+Support #6         -  3202BD87 00ZZ
+Support #7         -  3202BD88 00ZZ
+
+
+-= Slot 2 =-
+
+Portrait           -  8202BD98 YYZZ
+Class              -  8202BD9C YYZZ
+Level              -  3202BDA0 00ZZ
+Experience         -  3202BDA1 00ZZ
+Turn Status        -  3202BDA4 00ZZ
+Hidden Status      -  3202BDA5 00ZZ
+Horiz. Position    -  3202BDA8 00ZZ
+Vert. Position     -  3202BDA9 00ZZ
+Max HP             -  3202BDAA 00ZZ
+Current HP         -  3202BDAB 00ZZ
+Str                -  3202BDAC 00ZZ
+Skl                -  3202BDAD 00ZZ
+Spd                -  3202BDAE 00ZZ
+Def                -  3202BDAF 00ZZ
+Res                -  3202BDB0 00ZZ
+Luck               -  3202BDB1 00ZZ
+Con bonus          -  3202BDB2 00ZZ
+Rescue             -  3202BDB3 00ZZ
+Move Bonus         -  3202BDB5 00ZZ
+Item 1 Type        -  3202BDB6 00ZZ
+Item 1 Quantity    -  3202BDB7 00ZZ
+Item 2 Type        -  3202BDB8 00ZZ
+Item 2 Quantity    -  3202BDB9 00ZZ
+Item 3 Type        -  3202BDBA 00ZZ
+Item 3 Quantity    -  3202BDBB 00ZZ
+Item 4 Type        -  3202BDBC 00ZZ
+Item 4 Quantity    -  3202BDBD 00ZZ
+Item 5 Type        -  3202BDBE 00ZZ
+Item 5 Quantity    -  3202BDBF 00ZZ
+Item 1 alternate   -  8202BDB6 YYZZ
+Item 2 alternate   -  8202BDB8 YYZZ
+Item 3 alternate   -  8202BDBA YYZZ
+Item 4 alternate   -  8202BDBC YYZZ
+Item 5 alternate   -  8202BDBE YYZZ
+Sword Skill        -  3202BDC0 00ZZ
+Lance Skill        -  3202BDC1 00ZZ
+Axe Skill          -  3202BDC2 00ZZ
+Bow Skill          -  3202BDC3 00ZZ
+Staff Skill        -  3202BDC4 00ZZ
+Anima Skill        -  3202BDC5 00ZZ
+Light Skill        -  3202BDC6 00ZZ
+Dark Skill         -  3202BDC7 00ZZ
+Status Effect      -  3202BDC8 00ZZ
+Support #1         -  3202BDCA 00ZZ
+Support #2         -  3202BDCB 00ZZ
+Support #3         -  3202BDCC 00ZZ
+Support #4         -  3202BDCD 00ZZ
+Support #5         -  3202BDCE 00ZZ
+Support #6         -  3202BDCF 00ZZ
+Support #7         -  3202BDD0 00ZZ
+
+
+-= Slot 3 =-
+
+Portrait           -  8202BDE0 YYZZ
+Class              -  8202BDE4 YYZZ
+Level              -  3202BDE8 00ZZ
+Experience         -  3202BDE9 00ZZ
+Turn Status        -  3202BDEC 00ZZ
+Hidden Status      -  3202BDED 00ZZ
+Horiz. Position    -  3202BDF0 00ZZ
+Vert. Position     -  3202BDF1 00ZZ
+Max HP             -  3202BDF2 00ZZ
+Current HP         -  3202BDF3 00ZZ
+Str                -  3202BDF4 00ZZ
+Skl                -  3202BDF5 00ZZ
+Spd                -  3202BDF6 00ZZ
+Def                -  3202BDF7 00ZZ
+Res                -  3202BDF8 00ZZ
+Luck               -  3202BDF9 00ZZ
+Con bonus          -  3202BDFA 00ZZ
+Rescue             -  3202BDFB 00ZZ
+Move Bonus         -  3202BDFD 00ZZ
+Item 1 Type        -  3202BDFE 00ZZ
+Item 1 Quantity    -  3202BDFF 00ZZ
+Item 2 Type        -  3202BE00 00ZZ
+Item 2 Quantity    -  3202BE01 00ZZ
+Item 3 Type        -  3202BE02 00ZZ
+Item 3 Quantity    -  3202BE03 00ZZ
+Item 4 Type        -  3202BE04 00ZZ
+Item 4 Quantity    -  3202BE05 00ZZ
+Item 5 Type        -  3202BE06 00ZZ
+Item 5 Quantity    -  3202BE07 00ZZ
+Item 1 alternate   -  8202BDFE YYZZ
+Item 2 alternate   -  8202BE00 YYZZ
+Item 3 alternate   -  8202BE02 YYZZ
+Item 4 alternate   -  8202BE04 YYZZ
+Item 5 alternate   -  8202BE06 YYZZ
+Sword Skill        -  3202BE08 00ZZ
+Lance Skill        -  3202BE09 00ZZ
+Axe Skill          -  3202BE0A 00ZZ
+Bow Skill          -  3202BE0B 00ZZ
+Staff Skill        -  3202BE0C 00ZZ
+Anima Skill        -  3202BE0D 00ZZ
+Light Skill        -  3202BE0E 00ZZ
+Dark Skill         -  3202BE0F 00ZZ
+Status Effect      -  3202BE10 00ZZ
+Support #1         -  3202BE12 00ZZ
+Support #2         -  3202BE13 00ZZ
+Support #3         -  3202BE14 00ZZ
+Support #4         -  3202BE15 00ZZ
+Support #5         -  3202BE16 00ZZ
+Support #6         -  3202BE17 00ZZ
+Support #7         -  3202BE18 00ZZ
+
+
+-= Slot 4 =-
+
+Portrait           -  8202BE28 YYZZ
+Class              -  8202BE2C YYZZ
+Level              -  3202BE30 00ZZ
+Experience         -  3202BE31 00ZZ
+Turn Status        -  3202BE34 00ZZ
+Hidden Status      -  3202BE35 00ZZ
+Horiz. Position    -  3202BE38 00ZZ
+Vert. Position     -  3202BE39 00ZZ
+Max HP             -  3202BE3A 00ZZ
+Current HP         -  3202BE3B 00ZZ
+Str                -  3202BE3C 00ZZ
+Skl                -  3202BE3D 00ZZ
+Spd                -  3202BE3E 00ZZ
+Def                -  3202BE3F 00ZZ
+Res                -  3202BE40 00ZZ
+Luck               -  3202BE41 00ZZ
+Con bonus          -  3202BE42 00ZZ
+Rescue             -  3202BE43 00ZZ
+Move Bonus         -  3202BE45 00ZZ
+Item 1 Type        -  3202BE46 00ZZ
+Item 1 Quantity    -  3202BE47 00ZZ
+Item 2 Type        -  3202BE48 00ZZ
+Item 2 Quantity    -  3202BE49 00ZZ
+Item 3 Type        -  3202BE4A 00ZZ
+Item 3 Quantity    -  3202BE4B 00ZZ
+Item 4 Type        -  3202BE4C 00ZZ
+Item 4 Quantity    -  3202BE4D 00ZZ
+Item 5 Type        -  3202BE4E 00ZZ
+Item 5 Quantity    -  3202BE4F 00ZZ
+Item 1 alternate   -  8202BE46 YYZZ
+Item 2 alternate   -  8202BE48 YYZZ
+Item 3 alternate   -  8202BE4A YYZZ
+Item 4 alternate   -  8202BE4C YYZZ
+Item 5 alternate   -  8202BE4E YYZZ
+Sword Skill        -  3202BE50 00ZZ
+Lance Skill        -  3202BE51 00ZZ
+Axe Skill          -  3202BE52 00ZZ
+Bow Skill          -  3202BE53 00ZZ
+Staff Skill        -  3202BE54 00ZZ
+Anima Skill        -  3202BE55 00ZZ
+Light Skill        -  3202BE56 00ZZ
+Dark Skill         -  3202BE57 00ZZ
+Status Effect      -  3202BE58 00ZZ
+Support #1         -  3202BE5A 00ZZ
+Support #2         -  3202BE5B 00ZZ
+Support #3         -  3202BE5C 00ZZ
+Support #4         -  3202BE5D 00ZZ
+Support #5         -  3202BE5E 00ZZ
+Support #6         -  3202BE5F 00ZZ
+Support #7         -  3202BE60 00ZZ
+
+
+-= Slot 5 =-
+
+Portrait           -  8202BE70 YYZZ
+Class              -  8202BE74 YYZZ
+Level              -  3202BE78 00ZZ
+Experience         -  3202BE79 00ZZ
+Turn Status        -  3202BE7C 00ZZ
+Hidden Status      -  3202BE7D 00ZZ
+Horiz. Position    -  3202BE80 00ZZ
+Vert. Position     -  3202BE81 00ZZ
+Max HP             -  3202BE82 00ZZ
+Current HP         -  3202BE83 00ZZ
+Str                -  3202BE84 00ZZ
+Skl                -  3202BE85 00ZZ
+Spd                -  3202BE86 00ZZ
+Def                -  3202BE87 00ZZ
+Res                -  3202BE88 00ZZ
+Luck               -  3202BE89 00ZZ
+Con bonus          -  3202BE8A 00ZZ
+Rescue             -  3202BE8B 00ZZ
+Move Bonus         -  3202BE8D 00ZZ
+Item 1 Type        -  3202BE8E 00ZZ
+Item 1 Quantity    -  3202BE8F 00ZZ
+Item 2 Type        -  3202BE90 00ZZ
+Item 2 Quantity    -  3202BE91 00ZZ
+Item 3 Type        -  3202BE92 00ZZ
+Item 3 Quantity    -  3202BE93 00ZZ
+Item 4 Type        -  3202BE94 00ZZ
+Item 4 Quantity    -  3202BE95 00ZZ
+Item 5 Type        -  3202BE96 00ZZ
+Item 5 Quantity    -  3202BE97 00ZZ
+Item 1 alternate   -  8202BE8E YYZZ
+Item 2 alternate   -  8202BE90 YYZZ
+Item 3 alternate   -  8202BE92 YYZZ
+Item 4 alternate   -  8202BE94 YYZZ
+Item 5 alternate   -  8202BE96 YYZZ
+Sword Skill        -  3202BE98 00ZZ
+Lance Skill        -  3202BE99 00ZZ
+Axe Skill          -  3202BE9A 00ZZ
+Bow Skill          -  3202BE9B 00ZZ
+Staff Skill        -  3202BE9C 00ZZ
+Anima Skill        -  3202BE9D 00ZZ
+Light Skill        -  3202BE9E 00ZZ
+Dark Skill         -  3202BE9F 00ZZ
+Status Effect      -  3202BEA0 00ZZ
+Support #1         -  3202BEA2 00ZZ
+Support #2         -  3202BEA3 00ZZ
+Support #3         -  3202BEA4 00ZZ
+Support #4         -  3202BEA5 00ZZ
+Support #5         -  3202BEA6 00ZZ
+Support #6         -  3202BEA7 00ZZ
+Support #7         -  3202BEA8 00ZZ
+
+
+-= Slot 6 =-
+
+Portrait           -  8202BEB8 YYZZ
+Class              -  8202BEBC YYZZ
+Level              -  3202BEC0 00ZZ
+Experience         -  3202BEC1 00ZZ
+Turn Status        -  3202BEC4 00ZZ
+Hidden Status      -  3202BEC5 00ZZ
+Horiz. Position    -  3202BEC8 00ZZ
+Vert. Position     -  3202BEC9 00ZZ
+Max HP             -  3202BECA 00ZZ
+Current HP         -  3202BECB 00ZZ
+Str                -  3202BECC 00ZZ
+Skl                -  3202BECD 00ZZ
+Spd                -  3202BECE 00ZZ
+Def                -  3202BECF 00ZZ
+Res                -  3202BED0 00ZZ
+Luck               -  3202BED1 00ZZ
+Con bonus          -  3202BED2 00ZZ
+Rescue             -  3202BED3 00ZZ
+Move Bonus         -  3202BED5 00ZZ
+Item 1 Type        -  3202BED6 00ZZ
+Item 1 Quantity    -  3202BED7 00ZZ
+Item 2 Type        -  3202BED8 00ZZ
+Item 2 Quantity    -  3202BED9 00ZZ
+Item 3 Type        -  3202BEDA 00ZZ
+Item 3 Quantity    -  3202BEDB 00ZZ
+Item 4 Type        -  3202BEDC 00ZZ
+Item 4 Quantity    -  3202BEDD 00ZZ
+Item 5 Type        -  3202BEDE 00ZZ
+Item 5 Quantity    -  3202BEDF 00ZZ
+Item 1 alternate   -  8202BED6 YYZZ
+Item 2 alternate   -  8202BED8 YYZZ
+Item 3 alternate   -  8202BEDA YYZZ
+Item 4 alternate   -  8202BEDC YYZZ
+Item 5 alternate   -  8202BEDE YYZZ
+Sword Skill        -  3202BEE0 00ZZ
+Lance Skill        -  3202BEE1 00ZZ
+Axe Skill          -  3202BEE2 00ZZ
+Bow Skill          -  3202BEE3 00ZZ
+Staff Skill        -  3202BEE4 00ZZ
+Anima Skill        -  3202BEE5 00ZZ
+Light Skill        -  3202BEE6 00ZZ
+Dark Skill         -  3202BEE7 00ZZ
+Status Effect      -  3202BEE8 00ZZ
+Support #1         -  3202BEEA 00ZZ
+Support #2         -  3202BEEB 00ZZ
+Support #3         -  3202BEEC 00ZZ
+Support #4         -  3202BEED 00ZZ
+Support #5         -  3202BEEE 00ZZ
+Support #6         -  3202BEEF 00ZZ
+Support #7         -  3202BEF0 00ZZ
+
+
+-= Slot 7 =-
+
+Portrait           -  8202BF00 YYZZ
+Class              -  8202BF04 YYZZ
+Level              -  3202BF08 00ZZ
+Experience         -  3202BF09 00ZZ
+Turn Status        -  3202BF0C 00ZZ
+Hidden Status      -  3202BF0D 00ZZ
+Horiz. Position    -  3202BF10 00ZZ
+Vert. Position     -  3202BF11 00ZZ
+Max HP             -  3202BF12 00ZZ
+Current HP         -  3202BF13 00ZZ
+Str                -  3202BF14 00ZZ
+Skl                -  3202BF15 00ZZ
+Spd                -  3202BF16 00ZZ
+Def                -  3202BF17 00ZZ
+Res                -  3202BF18 00ZZ
+Luck               -  3202BF19 00ZZ
+Con bonus          -  3202BF1A 00ZZ
+Rescue             -  3202BF1B 00ZZ
+Move Bonus         -  3202BF1D 00ZZ
+Item 1 Type        -  3202BF1E 00ZZ
+Item 1 Quantity    -  3202BF1F 00ZZ
+Item 2 Type        -  3202BF20 00ZZ
+Item 2 Quantity    -  3202BF21 00ZZ
+Item 3 Type        -  3202BF22 00ZZ
+Item 3 Quantity    -  3202BF23 00ZZ
+Item 4 Type        -  3202BF24 00ZZ
+Item 4 Quantity    -  3202BF25 00ZZ
+Item 5 Type        -  3202BF26 00ZZ
+Item 5 Quantity    -  3202BF27 00ZZ
+Item 1 alternate   -  8202BF1E YYZZ
+Item 2 alternate   -  8202BF20 YYZZ
+Item 3 alternate   -  8202BF22 YYZZ
+Item 4 alternate   -  8202BF24 YYZZ
+Item 5 alternate   -  8202BF26 YYZZ
+Sword Skill        -  3202BF28 00ZZ
+Lance Skill        -  3202BF29 00ZZ
+Axe Skill          -  3202BF2A 00ZZ
+Bow Skill          -  3202BF2B 00ZZ
+Staff Skill        -  3202BF2C 00ZZ
+Anima Skill        -  3202BF2D 00ZZ
+Light Skill        -  3202BF2E 00ZZ
+Dark Skill         -  3202BF2F 00ZZ
+Status Effect      -  3202BF30 00ZZ
+Support #1         -  3202BF32 00ZZ
+Support #2         -  3202BF33 00ZZ
+Support #3         -  3202BF34 00ZZ
+Support #4         -  3202BF35 00ZZ
+Support #5         -  3202BF36 00ZZ
+Support #6         -  3202BF37 00ZZ
+Support #7         -  3202BF38 00ZZ
+
+
+-= Slot 8 =-
+
+Portrait           -  8202BF48 YYZZ
+Class              -  8202BF4C YYZZ
+Level              -  3202BF50 00ZZ
+Experience         -  3202BF51 00ZZ
+Turn Status        -  3202BF54 00ZZ
+Hidden Status      -  3202BF55 00ZZ
+Horiz. Position    -  3202BF58 00ZZ
+Vert. Position     -  3202BF59 00ZZ
+Max HP             -  3202BF5A 00ZZ
+Current HP         -  3202BF5B 00ZZ
+Str                -  3202BF5C 00ZZ
+Skl                -  3202BF5D 00ZZ
+Spd                -  3202BF5E 00ZZ
+Def                -  3202BF5F 00ZZ
+Res                -  3202BF60 00ZZ
+Luck               -  3202BF61 00ZZ
+Con bonus          -  3202BF62 00ZZ
+Rescue             -  3202BF63 00ZZ
+Move Bonus         -  3202BF65 00ZZ
+Item 1 Type        -  3202BF66 00ZZ
+Item 1 Quantity    -  3202BF67 00ZZ
+Item 2 Type        -  3202BF68 00ZZ
+Item 2 Quantity    -  3202BF69 00ZZ
+Item 3 Type        -  3202BF6A 00ZZ
+Item 3 Quantity    -  3202BF6B 00ZZ
+Item 4 Type        -  3202BF6C 00ZZ
+Item 4 Quantity    -  3202BF6D 00ZZ
+Item 5 Type        -  3202BF6E 00ZZ
+Item 5 Quantity    -  3202BF6F 00ZZ
+Item 1 alternate   -  8202BF66 YYZZ
+Item 2 alternate   -  8202BF68 YYZZ
+Item 3 alternate   -  8202BF6A YYZZ
+Item 4 alternate   -  8202BF6C YYZZ
+Item 5 alternate   -  8202BF6E YYZZ
+Sword Skill        -  3202BF70 00ZZ
+Lance Skill        -  3202BF71 00ZZ
+Axe Skill          -  3202BF72 00ZZ
+Bow Skill          -  3202BF73 00ZZ
+Staff Skill        -  3202BF74 00ZZ
+Anima Skill        -  3202BF75 00ZZ
+Light Skill        -  3202BF76 00ZZ
+Dark Skill         -  3202BF77 00ZZ
+Status Effect      -  3202BF78 00ZZ
+Support #1         -  3202BF7A 00ZZ
+Support #2         -  3202BF7B 00ZZ
+Support #3         -  3202BF7C 00ZZ
+Support #4         -  3202BF7D 00ZZ
+Support #5         -  3202BF7E 00ZZ
+Support #6         -  3202BF7F 00ZZ
+Support #7         -  3202BF80 00ZZ
+
+
+-= Slot 9 =-
+
+Portrait           -  8202BF90 YYZZ
+Class              -  8202BF94 YYZZ
+Level              -  3202BF98 00ZZ
+Experience         -  3202BF99 00ZZ
+Turn Status        -  3202BF9C 00ZZ
+Hidden Status      -  3202BF9D 00ZZ
+Horiz. Position    -  3202BFA0 00ZZ
+Vert. Position     -  3202BFA1 00ZZ
+Max HP             -  3202BFA2 00ZZ
+Current HP         -  3202BFA3 00ZZ
+Str                -  3202BFA4 00ZZ
+Skl                -  3202BFA5 00ZZ
+Spd                -  3202BFA6 00ZZ
+Def                -  3202BFA7 00ZZ
+Res                -  3202BFA8 00ZZ
+Luck               -  3202BFA9 00ZZ
+Con bonus          -  3202BFAA 00ZZ
+Rescue             -  3202BFAB 00ZZ
+Move Bonus         -  3202BFAD 00ZZ
+Item 1 Type        -  3202BFAE 00ZZ
+Item 1 Quantity    -  3202BFAF 00ZZ
+Item 2 Type        -  3202BFB0 00ZZ
+Item 2 Quantity    -  3202BFB1 00ZZ
+Item 3 Type        -  3202BFB2 00ZZ
+Item 3 Quantity    -  3202BFB3 00ZZ
+Item 4 Type        -  3202BFB4 00ZZ
+Item 4 Quantity    -  3202BFB5 00ZZ
+Item 5 Type        -  3202BFB6 00ZZ
+Item 5 Quantity    -  3202BFB7 00ZZ
+Item 1 alternate   -  8202BFAE YYZZ
+Item 2 alternate   -  8202BFB0 YYZZ
+Item 3 alternate   -  8202BFB2 YYZZ
+Item 4 alternate   -  8202BFB4 YYZZ
+Item 5 alternate   -  8202BFB6 YYZZ
+Sword Skill        -  3202BFB8 00ZZ
+Lance Skill        -  3202BFB9 00ZZ
+Axe Skill          -  3202BFBA 00ZZ
+Bow Skill          -  3202BFBB 00ZZ
+Staff Skill        -  3202BFBC 00ZZ
+Anima Skill        -  3202BFBD 00ZZ
+Light Skill        -  3202BFBE 00ZZ
+Dark Skill         -  3202BFBF 00ZZ
+Status Effect      -  3202BFC0 00ZZ
+Support #1         -  3202BFC2 00ZZ
+Support #2         -  3202BFC3 00ZZ
+Support #3         -  3202BFC4 00ZZ
+Support #4         -  3202BFC5 00ZZ
+Support #5         -  3202BFC6 00ZZ
+Support #6         -  3202BFC7 00ZZ
+Support #7         -  3202BFC8 00ZZ
+
+
+-= Slot 10 =-
+
+Portrait           -  8202BFD8 YYZZ
+Class              -  8202BFDC YYZZ
+Level              -  3202BFE0 00ZZ
+Experience         -  3202BFE1 00ZZ
+Turn Status        -  3202BFE4 00ZZ
+Hidden Status      -  3202BFE5 00ZZ
+Horiz. Position    -  3202BFE8 00ZZ
+Vert. Position     -  3202BFE9 00ZZ
+Max HP             -  3202BFEA 00ZZ
+Current HP         -  3202BFEB 00ZZ
+Str                -  3202BFEC 00ZZ
+Skl                -  3202BFED 00ZZ
+Spd                -  3202BFEE 00ZZ
+Def                -  3202BFEF 00ZZ
+Res                -  3202BFF0 00ZZ
+Luck               -  3202BFF1 00ZZ
+Con bonus          -  3202BFF2 00ZZ
+Rescue             -  3202BFF3 00ZZ
+Move Bonus         -  3202BFF5 00ZZ
+Item 1 Type        -  3202BFF6 00ZZ
+Item 1 Quantity    -  3202BFF7 00ZZ
+Item 2 Type        -  3202BFF8 00ZZ
+Item 2 Quantity    -  3202BFF9 00ZZ
+Item 3 Type        -  3202BFFA 00ZZ
+Item 3 Quantity    -  3202BFFB 00ZZ
+Item 4 Type        -  3202BFFC 00ZZ
+Item 4 Quantity    -  3202BFFD 00ZZ
+Item 5 Type        -  3202BFFE 00ZZ
+Item 5 Quantity    -  3202BFFF 00ZZ
+Item 1 alternate   -  8202BFF6 YYZZ
+Item 2 alternate   -  8202BFF8 YYZZ
+Item 3 alternate   -  8202BFFA YYZZ
+Item 4 alternate   -  8202BFFC YYZZ
+Item 5 alternate   -  8202BFFE YYZZ
+Sword Skill        -  3202C000 00ZZ
+Lance Skill        -  3202C001 00ZZ
+Axe Skill          -  3202C002 00ZZ
+Bow Skill          -  3202C003 00ZZ
+Staff Skill        -  3202C004 00ZZ
+Anima Skill        -  3202C005 00ZZ
+Light Skill        -  3202C006 00ZZ
+Dark Skill         -  3202C007 00ZZ
+Status Effect      -  3202C008 00ZZ
+Support #1         -  3202C00A 00ZZ
+Support #2         -  3202C00B 00ZZ
+Support #3         -  3202C00C 00ZZ
+Support #4         -  3202C00D 00ZZ
+Support #5         -  3202C00E 00ZZ
+Support #6         -  3202C00F 00ZZ
+Support #7         -  3202C010 00ZZ
+
+
+-= Slot 11 =-
+
+Portrait           -  8202C020 YYZZ
+Class              -  8202C024 YYZZ
+Level              -  3202C028 00ZZ
+Experience         -  3202C029 00ZZ
+Turn Status        -  3202C02C 00ZZ
+Hidden Status      -  3202C02D 00ZZ
+Horiz. Position    -  3202C030 00ZZ
+Vert. Position     -  3202C031 00ZZ
+Max HP             -  3202C032 00ZZ
+Current HP         -  3202C033 00ZZ
+Str                -  3202C034 00ZZ
+Skl                -  3202C035 00ZZ
+Spd                -  3202C036 00ZZ
+Def                -  3202C037 00ZZ
+Res                -  3202C038 00ZZ
+Luck               -  3202C039 00ZZ
+Con bonus          -  3202C03A 00ZZ
+Rescue             -  3202C03B 00ZZ
+Move Bonus         -  3202C03D 00ZZ
+Item 1 Type        -  3202C03E 00ZZ
+Item 1 Quantity    -  3202C03F 00ZZ
+Item 2 Type        -  3202C040 00ZZ
+Item 2 Quantity    -  3202C041 00ZZ
+Item 3 Type        -  3202C042 00ZZ
+Item 3 Quantity    -  3202C043 00ZZ
+Item 4 Type        -  3202C044 00ZZ
+Item 4 Quantity    -  3202C045 00ZZ
+Item 5 Type        -  3202C046 00ZZ
+Item 5 Quantity    -  3202C047 00ZZ
+Item 1 alternate   -  8202C03E YYZZ
+Item 2 alternate   -  8202C040 YYZZ
+Item 3 alternate   -  8202C042 YYZZ
+Item 4 alternate   -  8202C044 YYZZ
+Item 5 alternate   -  8202C046 YYZZ
+Sword Skill        -  3202C048 00ZZ
+Lance Skill        -  3202C049 00ZZ
+Axe Skill          -  3202C04A 00ZZ
+Bow Skill          -  3202C04B 00ZZ
+Staff Skill        -  3202C04C 00ZZ
+Anima Skill        -  3202C04D 00ZZ
+Light Skill        -  3202C04E 00ZZ
+Dark Skill         -  3202C04F 00ZZ
+Status Effect      -  3202C050 00ZZ
+Support #1         -  3202C052 00ZZ
+Support #2         -  3202C053 00ZZ
+Support #3         -  3202C054 00ZZ
+Support #4         -  3202C055 00ZZ
+Support #5         -  3202C056 00ZZ
+Support #6         -  3202C057 00ZZ
+Support #7         -  3202C058 00ZZ
+
+
+-= Slot 12 =-
+
+Portrait           -  8202C068 YYZZ
+Class              -  8202C06C YYZZ
+Level              -  3202C070 00ZZ
+Experience         -  3202C071 00ZZ
+Turn Status        -  3202C074 00ZZ
+Hidden Status      -  3202C075 00ZZ
+Horiz. Position    -  3202C078 00ZZ
+Vert. Position     -  3202C079 00ZZ
+Max HP             -  3202C07A 00ZZ
+Current HP         -  3202C07B 00ZZ
+Str                -  3202C07C 00ZZ
+Skl                -  3202C07D 00ZZ
+Spd                -  3202C07E 00ZZ
+Def                -  3202C07F 00ZZ
+Res                -  3202C080 00ZZ
+Luck               -  3202C081 00ZZ
+Con bonus          -  3202C082 00ZZ
+Rescue             -  3202C083 00ZZ
+Move Bonus         -  3202C085 00ZZ
+Item 1 Type        -  3202C086 00ZZ
+Item 1 Quantity    -  3202C087 00ZZ
+Item 2 Type        -  3202C088 00ZZ
+Item 2 Quantity    -  3202C089 00ZZ
+Item 3 Type        -  3202C08A 00ZZ
+Item 3 Quantity    -  3202C08B 00ZZ
+Item 4 Type        -  3202C08C 00ZZ
+Item 4 Quantity    -  3202C08D 00ZZ
+Item 5 Type        -  3202C08E 00ZZ
+Item 5 Quantity    -  3202C08F 00ZZ
+Item 1 alternate   -  8202C086 YYZZ
+Item 2 alternate   -  8202C088 YYZZ
+Item 3 alternate   -  8202C08A YYZZ
+Item 4 alternate   -  8202C08C YYZZ
+Item 5 alternate   -  8202C08E YYZZ
+Sword Skill        -  3202C090 00ZZ
+Lance Skill        -  3202C091 00ZZ
+Axe Skill          -  3202C092 00ZZ
+Bow Skill          -  3202C093 00ZZ
+Staff Skill        -  3202C094 00ZZ
+Anima Skill        -  3202C095 00ZZ
+Light Skill        -  3202C096 00ZZ
+Dark Skill         -  3202C097 00ZZ
+Status Effect      -  3202C098 00ZZ
+Support #1         -  3202C09A 00ZZ
+Support #2         -  3202C09B 00ZZ
+Support #3         -  3202C09C 00ZZ
+Support #4         -  3202C09D 00ZZ
+Support #5         -  3202C09E 00ZZ
+Support #6         -  3202C09F 00ZZ
+Support #7         -  3202C0A0 00ZZ
+
+
+-= Slot 13 =-
+
+Portrait           -  8202C0B0 YYZZ
+Class              -  8202C0B4 YYZZ
+Level              -  3202C0B8 00ZZ
+Experience         -  3202C0B9 00ZZ
+Turn Status        -  3202C0BC 00ZZ
+Hidden Status      -  3202C0BD 00ZZ
+Horiz. Position    -  3202C0C0 00ZZ
+Vert. Position     -  3202C0C1 00ZZ
+Max HP             -  3202C0C2 00ZZ
+Current HP         -  3202C0C3 00ZZ
+Str                -  3202C0C4 00ZZ
+Skl                -  3202C0C5 00ZZ
+Spd                -  3202C0C6 00ZZ
+Def                -  3202C0C7 00ZZ
+Res                -  3202C0C8 00ZZ
+Luck               -  3202C0C9 00ZZ
+Con bonus          -  3202C0CA 00ZZ
+Rescue             -  3202C0CB 00ZZ
+Move Bonus         -  3202C0CD 00ZZ
+Item 1 Type        -  3202C0CE 00ZZ
+Item 1 Quantity    -  3202C0CF 00ZZ
+Item 2 Type        -  3202C0D0 00ZZ
+Item 2 Quantity    -  3202C0D1 00ZZ
+Item 3 Type        -  3202C0D2 00ZZ
+Item 3 Quantity    -  3202C0D3 00ZZ
+Item 4 Type        -  3202C0D4 00ZZ
+Item 4 Quantity    -  3202C0D5 00ZZ
+Item 5 Type        -  3202C0D6 00ZZ
+Item 5 Quantity    -  3202C0D7 00ZZ
+Item 1 alternate   -  8202C0CE YYZZ
+Item 2 alternate   -  8202C0D0 YYZZ
+Item 3 alternate   -  8202C0D2 YYZZ
+Item 4 alternate   -  8202C0D4 YYZZ
+Item 5 alternate   -  8202C0D6 YYZZ
+Sword Skill        -  3202C0D8 00ZZ
+Lance Skill        -  3202C0D9 00ZZ
+Axe Skill          -  3202C0DA 00ZZ
+Bow Skill          -  3202C0DB 00ZZ
+Staff Skill        -  3202C0DC 00ZZ
+Anima Skill        -  3202C0DD 00ZZ
+Light Skill        -  3202C0DE 00ZZ
+Dark Skill         -  3202C0DF 00ZZ
+Status Effect      -  3202C0E0 00ZZ
+Support #1         -  3202C0E2 00ZZ
+Support #2         -  3202C0E3 00ZZ
+Support #3         -  3202C0E4 00ZZ
+Support #4         -  3202C0E5 00ZZ
+Support #5         -  3202C0E6 00ZZ
+Support #6         -  3202C0E7 00ZZ
+Support #7         -  3202C0E8 00ZZ
+
+
+-= Slot 14 =-
+
+Portrait           -  8202C0F8 YYZZ
+Class              -  8202C0FC YYZZ
+Level              -  3202C100 00ZZ
+Experience         -  3202C101 00ZZ
+Turn Status        -  3202C104 00ZZ
+Hidden Status      -  3202C105 00ZZ
+Horiz. Position    -  3202C108 00ZZ
+Vert. Position     -  3202C109 00ZZ
+Max HP             -  3202C10A 00ZZ
+Current HP         -  3202C10B 00ZZ
+Str                -  3202C10C 00ZZ
+Skl                -  3202C10D 00ZZ
+Spd                -  3202C10E 00ZZ
+Def                -  3202C10F 00ZZ
+Res                -  3202C110 00ZZ
+Luck               -  3202C111 00ZZ
+Con bonus          -  3202C112 00ZZ
+Rescue             -  3202C113 00ZZ
+Move Bonus         -  3202C115 00ZZ
+Item 1 Type        -  3202C116 00ZZ
+Item 1 Quantity    -  3202C117 00ZZ
+Item 2 Type        -  3202C118 00ZZ
+Item 2 Quantity    -  3202C119 00ZZ
+Item 3 Type        -  3202C11A 00ZZ
+Item 3 Quantity    -  3202C11B 00ZZ
+Item 4 Type        -  3202C11C 00ZZ
+Item 4 Quantity    -  3202C11D 00ZZ
+Item 5 Type        -  3202C11E 00ZZ
+Item 5 Quantity    -  3202C11F 00ZZ
+Item 1 alternate   -  8202C116 YYZZ
+Item 2 alternate   -  8202C118 YYZZ
+Item 3 alternate   -  8202C11A YYZZ
+Item 4 alternate   -  8202C11C YYZZ
+Item 5 alternate   -  8202C11E YYZZ
+Sword Skill        -  3202C120 00ZZ
+Lance Skill        -  3202C121 00ZZ
+Axe Skill          -  3202C122 00ZZ
+Bow Skill          -  3202C123 00ZZ
+Staff Skill        -  3202C124 00ZZ
+Anima Skill        -  3202C125 00ZZ
+Light Skill        -  3202C126 00ZZ
+Dark Skill         -  3202C127 00ZZ
+Status Effect      -  3202C128 00ZZ
+Support #1         -  3202C12A 00ZZ
+Support #2         -  3202C12B 00ZZ
+Support #3         -  3202C12C 00ZZ
+Support #4         -  3202C12D 00ZZ
+Support #5         -  3202C12E 00ZZ
+Support #6         -  3202C12F 00ZZ
+Support #7         -  3202C130 00ZZ
+
+
+-= Slot 15 =-
+
+Portrait           -  8202C140 YYZZ
+Class              -  8202C144 YYZZ
+Level              -  3202C148 00ZZ
+Experience         -  3202C149 00ZZ
+Turn Status        -  3202C14C 00ZZ
+Hidden Status      -  3202C14D 00ZZ
+Horiz. Position    -  3202C150 00ZZ
+Vert. Position     -  3202C151 00ZZ
+Max HP             -  3202C152 00ZZ
+Current HP         -  3202C153 00ZZ
+Str                -  3202C154 00ZZ
+Skl                -  3202C155 00ZZ
+Spd                -  3202C156 00ZZ
+Def                -  3202C157 00ZZ
+Res                -  3202C158 00ZZ
+Luck               -  3202C159 00ZZ
+Con bonus          -  3202C15A 00ZZ
+Rescue             -  3202C15B 00ZZ
+Move Bonus         -  3202C15D 00ZZ
+Item 1 Type        -  3202C15E 00ZZ
+Item 1 Quantity    -  3202C15F 00ZZ
+Item 2 Type        -  3202C160 00ZZ
+Item 2 Quantity    -  3202C161 00ZZ
+Item 3 Type        -  3202C162 00ZZ
+Item 3 Quantity    -  3202C163 00ZZ
+Item 4 Type        -  3202C164 00ZZ
+Item 4 Quantity    -  3202C165 00ZZ
+Item 5 Type        -  3202C166 00ZZ
+Item 5 Quantity    -  3202C167 00ZZ
+Item 1 alternate   -  8202C15E YYZZ
+Item 2 alternate   -  8202C160 YYZZ
+Item 3 alternate   -  8202C162 YYZZ
+Item 4 alternate   -  8202C164 YYZZ
+Item 5 alternate   -  8202C166 YYZZ
+Sword Skill        -  3202C168 00ZZ
+Lance Skill        -  3202C169 00ZZ
+Axe Skill          -  3202C16A 00ZZ
+Bow Skill          -  3202C16B 00ZZ
+Staff Skill        -  3202C16C 00ZZ
+Anima Skill        -  3202C16D 00ZZ
+Light Skill        -  3202C16E 00ZZ
+Dark Skill         -  3202C16F 00ZZ
+Status Effect      -  3202C170 00ZZ
+Support #1         -  3202C172 00ZZ
+Support #2         -  3202C173 00ZZ
+Support #3         -  3202C174 00ZZ
+Support #4         -  3202C175 00ZZ
+Support #5         -  3202C176 00ZZ
+Support #6         -  3202C177 00ZZ
+Support #7         -  3202C178 00ZZ
+
+
+-= Slot 16 =-
+
+Portrait           -  8202C188 YYZZ
+Class              -  8202C18C YYZZ
+Level              -  3202C190 00ZZ
+Experience         -  3202C191 00ZZ
+Turn Status        -  3202C194 00ZZ
+Hidden Status      -  3202C195 00ZZ
+Horiz. Position    -  3202C198 00ZZ
+Vert. Position     -  3202C199 00ZZ
+Max HP             -  3202C19A 00ZZ
+Current HP         -  3202C19B 00ZZ
+Str                -  3202C19C 00ZZ
+Skl                -  3202C19D 00ZZ
+Spd                -  3202C19E 00ZZ
+Def                -  3202C19F 00ZZ
+Res                -  3202C1A0 00ZZ
+Luck               -  3202C1A1 00ZZ
+Con bonus          -  3202C1A2 00ZZ
+Rescue             -  3202C1A3 00ZZ
+Move Bonus         -  3202C1A5 00ZZ
+Item 1 Type        -  3202C1A6 00ZZ
+Item 1 Quantity    -  3202C1A7 00ZZ
+Item 2 Type        -  3202C1A8 00ZZ
+Item 2 Quantity    -  3202C1A9 00ZZ
+Item 3 Type        -  3202C1AA 00ZZ
+Item 3 Quantity    -  3202C1AB 00ZZ
+Item 4 Type        -  3202C1AC 00ZZ
+Item 4 Quantity    -  3202C1AD 00ZZ
+Item 5 Type        -  3202C1AE 00ZZ
+Item 5 Quantity    -  3202C1AF 00ZZ
+Item 1 alternate   -  8202C1A6 YYZZ
+Item 2 alternate   -  8202C1A8 YYZZ
+Item 3 alternate   -  8202C1AA YYZZ
+Item 4 alternate   -  8202C1AC YYZZ
+Item 5 alternate   -  8202C1AE YYZZ
+Sword Skill        -  3202C1B0 00ZZ
+Lance Skill        -  3202C1B1 00ZZ
+Axe Skill          -  3202C1B2 00ZZ
+Bow Skill          -  3202C1B3 00ZZ
+Staff Skill        -  3202C1B4 00ZZ
+Anima Skill        -  3202C1B5 00ZZ
+Light Skill        -  3202C1B6 00ZZ
+Dark Skill         -  3202C1B7 00ZZ
+Status Effect      -  3202C1B8 00ZZ
+Support #1         -  3202C1BA 00ZZ
+Support #2         -  3202C1BB 00ZZ
+Support #3         -  3202C1BC 00ZZ
+Support #4         -  3202C1BD 00ZZ
+Support #5         -  3202C1BE 00ZZ
+Support #6         -  3202C1BF 00ZZ
+Support #7         -  3202C1C0 00ZZ
+
+
+-= Enemy Boss =-
+
+Portrait           -  8202CEC0 YYZZ
+Class              -  8202CEC4 YYZZ
+Level              -  3202CEC8 00ZZ
+Experience         -  3202CEC9 00ZZ
+Turn Status        -  3202CECC 00ZZ
+Hidden Status      -  3202CECD 00ZZ
+Horiz. Position    -  3202CED0 00ZZ
+Vert. Position     -  3202CED1 00ZZ
+Max HP             -  3202CED2 00ZZ
+Current HP         -  3202CED3 00ZZ
+Str                -  3202CED4 00ZZ
+Skl                -  3202CED5 00ZZ
+Spd                -  3202CED6 00ZZ
+Def                -  3202CED7 00ZZ
+Res                -  3202CED8 00ZZ
+Luck               -  3202CED9 00ZZ
+Con bonus          -  3202CEDA 00ZZ
+Rescue             -  3202CEDB 00ZZ
+Move Bonus         -  3202CEDD 00ZZ
+Item 1 Type        -  3202CEDE 00ZZ
+Item 1 Quantity    -  3202CEDF 00ZZ
+Item 2 Type        -  3202CEE0 00ZZ
+Item 2 Quantity    -  3202CEE1 00ZZ
+Item 3 Type        -  3202CEE2 00ZZ
+Item 3 Quantity    -  3202CEE3 00ZZ
+Item 4 Type        -  3202CEE4 00ZZ
+Item 4 Quantity    -  3202CEE5 00ZZ
+Item 5 Type        -  3202CEE6 00ZZ
+Item 5 Quantity    -  3202CEE7 00ZZ
+Item 1 alternate   -  8202CEDE YYZZ
+Item 2 alternate   -  8202CEE0 YYZZ
+Item 3 alternate   -  8202CEE2 YYZZ
+Item 4 alternate   -  8202CEE4 YYZZ
+Item 5 alternate   -  8202CEE6 YYZZ
+Sword Skill        -  3202CEE8 00ZZ
+Lance Skill        -  3202CEE9 00ZZ
+Axe Skill          -  3202CEEA 00ZZ
+Bow Skill          -  3202CEEB 00ZZ
+Staff Skill        -  3202CEEC 00ZZ
+Anima Skill        -  3202CEED 00ZZ
+Light Skill        -  3202CEEE 00ZZ
+Dark Skill         -  3202CEEF 00ZZ
+Status Effect      -  3202CEF0 00ZZ
+Support #1         -  3202CEF2 00ZZ
+Support #2         -  3202CEF3 00ZZ
+Support #3         -  3202CEF4 00ZZ
+Support #4         -  3202CEF5 00ZZ
+Support #5         -  3202CEF6 00ZZ
+Support #6         -  3202CEF7 00ZZ
+Support #7         -  3202CEF8 00ZZ
+
+
+***********************************
+*     6. Miscellaneous Codes      *
+***********************************
+These codes are an exception to the “cheat, suspend, un-cheat, and resume”
+rule. Feel free to activate the money code and keep it there. The turn
+number code is also more useful when kept active, though be careful because
+survival chapters will never end if you keep the code active.
+
+Phase codes are a bit trickier. They should be applied before you resume
+your game. When you’re done with the code, suspend, remove the code, and
+resume.
+
+Tactician Name:
+1st character      -  3202BC18 00ZZ
+2nd character      -  3202BC19 00ZZ
+3rd character      -  3202BC1A 00ZZ
+4th character      -  3202BC1B 00ZZ
+5th character      -  3202BC1C 00ZZ
+6th character      -  3202BC1D 00ZZ
+7th character      -  3202BC1E 00ZZ
+
+Money              -  8202BC00 ZZZZ
+
+Turn Number        -  3202BC08 00ZZ
+      You can use this to speed up defense chapters, raise your tactics
+score,
+      or lock the turn number so that you can meet requirements like beating
+      the chapter in a certain amount of time to get the extra chapter.
+
+
+Phase              -  3202BC07 00ZZ
+      00 = Player Phase
+      40 = Neutral Phase
+      80 = Enemy Phase
+
+Setting the phase gives you control of all units of that faction. This way
+you can take control of enemy and neutral characters much in the same
+fashion that results from the mine trick. When you end your turn, the game
+will skip all other phases and return directly to the one you set through
+the code.
+
+
+***********************************
+*        7. Merchant Codes        *
+***********************************
+These codes will modify your merchant’s inventory. There are 100 slots total.
+It works like any character’s inventory, except it’s twenty times larger and
+there’s no way for you to know which item is in which slot; the items aren’t
+stored in the order in which they’re displayed. The best way is to insert
+items in the 100th slot and work backwards. That way as long as you have the
+empty slots you’ll safely insert items. Just make sure the item codes don’t
+linger because the game will automatically sort the list and accidentally
+duplicate the item.
+
+Item 1 type        -  3203A720 00ZZ
+Item 1 quantity    -  3203A721 00ZZ
+Item 2 type        -  3203A722 00ZZ
+Item 2 quantity    -  3203A723 00ZZ
+Item 3 type        -  3203A724 00ZZ
+Item 3 quantity    -  3203A725 00ZZ
+Item 4 type        -  3203A726 00ZZ
+Item 4 quantity    -  3203A727 00ZZ
+Item 5 type        -  3203A728 00ZZ
+Item 5 quantity    -  3203A729 00ZZ
+Item 6 type        -  3203A72A 00ZZ
+Item 6 quantity    -  3203A72B 00ZZ
+Item 7 type        -  3203A72C 00ZZ
+Item 7 quantity    -  3203A72D 00ZZ
+Item 8 type        -  3203A72E 00ZZ
+Item 8 quantity    -  3203A72F 00ZZ
+Item 9 type        -  3203A730 00ZZ
+Item 9 quantity    -  3203A731 00ZZ
+Item 10 type       -  3203A732 00ZZ
+Item 10 quantity   -  3203A733 00ZZ
+Item 11 type       -  3203A734 00ZZ
+Item 11 quantity   -  3203A735 00ZZ
+Item 12 type       -  3203A736 00ZZ
+Item 12 quantity   -  3203A737 00ZZ
+Item 13 type       -  3203A738 00ZZ
+Item 13 quantity   -  3203A739 00ZZ
+Item 14 type       -  3203A73A 00ZZ
+Item 14 quantity   -  3203A73B 00ZZ
+Item 15 type       -  3203A73C 00ZZ
+Item 15 quantity   -  3203A73D 00ZZ
+Item 16 type       -  3203A73E 00ZZ
+Item 16 quantity   -  3203A73F 00ZZ
+Item 17 type       -  3203A740 00ZZ
+Item 17 quantity   -  3203A741 00ZZ
+Item 18 type       -  3203A742 00ZZ
+Item 18 quantity   -  3203A743 00ZZ
+Item 19 type       -  3203A744 00ZZ
+Item 19 quantity   -  3203A745 00ZZ
+Item 20 type       -  3203A746 00ZZ
+Item 20 quantity   -  3203A747 00ZZ
+Item 21 type       -  3203A748 00ZZ
+Item 21 quantity   -  3203A749 00ZZ
+Item 22 type       -  3203A74A 00ZZ
+Item 22 quantity   -  3203A74B 00ZZ
+Item 23 type       -  3203A74C 00ZZ
+Item 23 quantity   -  3203A74D 00ZZ
+Item 24 type       -  3203A74E 00ZZ
+Item 24 quantity   -  3203A74F 00ZZ
+Item 25 type       -  3203A750 00ZZ
+Item 25 quantity   -  3203A751 00ZZ
+Item 26 type       -  3203A752 00ZZ
+Item 26 quantity   -  3203A753 00ZZ
+Item 27 type       -  3203A754 00ZZ
+Item 27 quantity   -  3203A755 00ZZ
+Item 28 type       -  3203A756 00ZZ
+Item 28 quantity   -  3203A757 00ZZ
+Item 29 type       -  3203A758 00ZZ
+Item 29 quantity   -  3203A759 00ZZ
+Item 30 type       -  3203A75A 00ZZ
+Item 30 quantity   -  3203A75B 00ZZ
+Item 31 type       -  3203A75C 00ZZ
+Item 31 quantity   -  3203A75D 00ZZ
+Item 32 type       -  3203A75E 00ZZ
+Item 32 quantity   -  3203A75F 00ZZ
+Item 33 type       -  3203A760 00ZZ
+Item 33 quantity   -  3203A761 00ZZ
+Item 34 type       -  3203A762 00ZZ
+Item 34 quantity   -  3203A763 00ZZ
+Item 35 type       -  3203A764 00ZZ
+Item 35 quantity   -  3203A765 00ZZ
+Item 36 type       -  3203A766 00ZZ
+Item 36 quantity   -  3203A767 00ZZ
+Item 37 type       -  3203A768 00ZZ
+Item 37 quantity   -  3203A769 00ZZ
+Item 38 type       -  3203A76A 00ZZ
+Item 38 quantity   -  3203A76B 00ZZ
+Item 39 type       -  3203A76C 00ZZ
+Item 39 quantity   -  3203A76D 00ZZ
+Item 40 type       -  3203A76E 00ZZ
+Item 40 quantity   -  3203A76F 00ZZ
+Item 41 type       -  3203A770 00ZZ
+Item 41 quantity   -  3203A771 00ZZ
+Item 42 type       -  3203A772 00ZZ
+Item 42 quantity   -  3203A773 00ZZ
+Item 43 type       -  3203A774 00ZZ
+Item 43 quantity   -  3203A775 00ZZ
+Item 44 type       -  3203A776 00ZZ
+Item 44 quantity   -  3203A777 00ZZ
+Item 45 type       -  3203A778 00ZZ
+Item 45 quantity   -  3203A779 00ZZ
+Item 46 type       -  3203A77A 00ZZ
+Item 46 quantity   -  3203A77B 00ZZ
+Item 47 type       -  3203A77C 00ZZ
+Item 47 quantity   -  3203A77D 00ZZ
+Item 48 type       -  3203A77E 00ZZ
+Item 48 quantity   -  3203A77F 00ZZ
+Item 49 type       -  3203A780 00ZZ
+Item 49 quantity   -  3203A781 00ZZ
+Item 50 type       -  3203A782 00ZZ
+Item 50 quantity   -  3203A783 00ZZ
+Item 51 type       -  3203A784 00ZZ
+Item 51 quantity   -  3203A785 00ZZ
+Item 52 type       -  3203A786 00ZZ
+Item 52 quantity   -  3203A787 00ZZ
+Item 53 type       -  3203A788 00ZZ
+Item 53 quantity   -  3203A789 00ZZ
+Item 54 type       -  3203A78A 00ZZ
+Item 54 quantity   -  3203A78B 00ZZ
+Item 55 type       -  3203A78C 00ZZ
+Item 55 quantity   -  3203A78D 00ZZ
+Item 56 type       -  3203A78E 00ZZ
+Item 56 quantity   -  3203A78F 00ZZ
+Item 57 type       -  3203A790 00ZZ
+Item 57 quantity   -  3203A791 00ZZ
+Item 58 type       -  3203A792 00ZZ
+Item 58 quantity   -  3203A793 00ZZ
+Item 59 type       -  3203A794 00ZZ
+Item 59 quantity   -  3203A795 00ZZ
+Item 60 type       -  3203A796 00ZZ
+Item 60 quantity   -  3203A797 00ZZ
+Item 61 type       -  3203A798 00ZZ
+Item 61 quantity   -  3203A799 00ZZ
+Item 62 type       -  3203A79A 00ZZ
+Item 62 quantity   -  3203A79B 00ZZ
+Item 63 type       -  3203A79C 00ZZ
+Item 63 quantity   -  3203A79D 00ZZ
+Item 64 type       -  3203A79E 00ZZ
+Item 64 quantity   -  3203A79F 00ZZ
+Item 65 type       -  3203A7A0 00ZZ
+Item 65 quantity   -  3203A7A1 00ZZ
+Item 66 type       -  3203A7A2 00ZZ
+Item 66 quantity   -  3203A7A3 00ZZ
+Item 67 type       -  3203A7A4 00ZZ
+Item 67 quantity   -  3203A7A5 00ZZ
+Item 68 type       -  3203A7A6 00ZZ
+Item 68 quantity   -  3203A7A7 00ZZ
+Item 69 type       -  3203A7A8 00ZZ
+Item 69 quantity   -  3203A7A9 00ZZ
+Item 70 type       -  3203A7AA 00ZZ
+Item 70 quantity   -  3203A7AB 00ZZ
+Item 71 type       -  3203A7AC 00ZZ
+Item 71 quantity   -  3203A7AD 00ZZ
+Item 72 type       -  3203A7AE 00ZZ
+Item 72 quantity   -  3203A7AF 00ZZ
+Item 73 type       -  3203A7B0 00ZZ
+Item 73 quantity   -  3203A7B1 00ZZ
+Item 74 type       -  3203A7B2 00ZZ
+Item 74 quantity   -  3203A7B3 00ZZ
+Item 75 type       -  3203A7B4 00ZZ
+Item 75 quantity   -  3203A7B5 00ZZ
+Item 76 type       -  3203A7B6 00ZZ
+Item 76 quantity   -  3203A7B7 00ZZ
+Item 77 type       -  3203A7B8 00ZZ
+Item 77 quantity   -  3203A7B9 00ZZ
+Item 78 type       -  3203A7BA 00ZZ
+Item 78 quantity   -  3203A7BB 00ZZ
+Item 79 type       -  3203A7BC 00ZZ
+Item 79 quantity   -  3203A7BD 00ZZ
+Item 80 type       -  3203A7BE 00ZZ
+Item 80 quantity   -  3203A7BF 00ZZ
+Item 81 type       -  3203A7C0 00ZZ
+Item 81 quantity   -  3203A7C1 00ZZ
+Item 82 type       -  3203A7C2 00ZZ
+Item 82 quantity   -  3203A7C3 00ZZ
+Item 83 type       -  3203A7C4 00ZZ
+Item 83 quantity   -  3203A7C5 00ZZ
+Item 84 type       -  3203A7C6 00ZZ
+Item 84 quantity   -  3203A7C7 00ZZ
+Item 85 type       -  3203A7C8 00ZZ
+Item 85 quantity   -  3203A7C9 00ZZ
+Item 86 type       -  3203A7CA 00ZZ
+Item 86 quantity   -  3203A7CB 00ZZ
+Item 87 type       -  3203A7CC 00ZZ
+Item 87 quantity   -  3203A7CD 00ZZ
+Item 88 type       -  3203A7CE 00ZZ
+Item 88 quantity   -  3203A7CF 00ZZ
+Item 89 type       -  3203A7D0 00ZZ
+Item 89 quantity   -  3203A7D1 00ZZ
+Item 90 type       -  3203A7D2 00ZZ
+Item 90 quantity   -  3203A7D3 00ZZ
+Item 91 type       -  3203A7D4 00ZZ
+Item 91 quantity   -  3203A7D5 00ZZ
+Item 92 type       -  3203A7D6 00ZZ
+Item 92 quantity   -  3203A7D7 00ZZ
+Item 93 type       -  3203A7D8 00ZZ
+Item 93 quantity   -  3203A7D9 00ZZ
+Item 94 type       -  3203A7DA 00ZZ
+Item 94 quantity   -  3203A7DB 00ZZ
+Item 95 type       -  3203A7DC 00ZZ
+Item 95 quantity   -  3203A7DD 00ZZ
+Item 96 type       -  3203A7DE 00ZZ
+Item 96 quantity   -  3203A7DF 00ZZ
+Item 97 type       -  3203A7E0 00ZZ
+Item 97 quantity   -  3203A7E1 00ZZ
+Item 98 type       -  3203A7E2 00ZZ
+Item 98 quantity   -  3203A7E3 00ZZ
+Item 99 type       -  3203A7E4 00ZZ
+Item 99 quantity   -  3203A7E5 00ZZ
+Item 100 type      -  3203A7E6 00ZZ
+Item 100 quantity  -  3203A7E7 00ZZ
+
+
+***********************************
+*         8. Value Lists          *
+***********************************
+
+-= Turn Statuses =-
+
+Replace the “ZZ” with one of the following numbers:
+00 - not moved, like right at the beginning of your turn
+10 - rescued and is carrying someone but not moved
+42 - moved and grayed out
+52 - moved, grayed out, has rescued someone and is carrying him/her
+63 - was rescued and is being carried
+
+For the more mathematical or techie guys out there, this is actually a “bit
+map”. See if you can figure out why those seemingly arbitrary values are
+actually significant.
+
+
+-= Hidden Statuses =-
+
+Replace the “ZZ” with one of the following numbers:
+00 - No effect
+10 - Has Afa’s Drops bonus
+20 - Will drop last item upon death (last item is flashing green)
+30 - Has Afa’s Drops bonus AND drops item upon death
+
+This value is also a bit map.
+
+
+-= Weapon Skills =-
+
+Replace “ZZ” with the value you want. These are the value ranges for each
+skill level.
+00 - weapon disabled
+01 through 1E - Skill level E
+1F through 46 - Skill level D
+47 through 78 - Skill level C
+79 through B4 - Skill level B
+B5 through FA - Skill level A
+FB through FF - Skill level S
+
+
+-= Status Effects =-
+
+Replace “ZZ” with a value determined using the steps below.
+
+Given two digits, AB
+A is the number (base 16) of turns for which the status effect will remain.
+If A is set to 1, the status effect will no longer apply once you regain
+control after ending your current turn. If A is set to anything greater than
+1, the status effect will stay for A turns unless the status effect is
+healed first.
+Note: If A is set to 0 the status effect will stay infinitely unless healed.
+
+B is the type of status effect. Choose from the following values:
+0 - no effect
+1 - Poison
+2 - Sleep
+3 - Silence
+4 - Berserk
+5 - Attack Boost (Fila’s Might)
+6 - Defense Boost (Ninis’s Grace)
+7 - Critical Boost (Thor’s Ire)
+8 - Avoid Boost (Set’s Litany)
+
+Example: Ninis’s Grace defense boost for 2 turns
+A = 2
+B = 6
+So the value I would replace “ZZ” with would be “26”.
+
+
+-= Supports =-
+
+Replace the “ZZ” with the value you want.
+
+Note: Each pair of supports has two values set, one on each character of the
+pair. Although it’s not absolutely necessary, it’s good practice when
+cheating supports to change both relevant values instead of just one so that
+the game remains consistent.
+
+Important values and ranges (hexadecimal):
+00 through 4F - no support
+50            - Level C support conversation is available.
+51 through 9F - Support level C
+A0            - Level B support conversation is available.
+A1 through EF - Support level B
+F0            - Level A support conversation is available.
+F1            - Support level A
+
+
+-= Items =-
+
+00 = Nothing
+01 = Iron Sword
+02 = Slim Sword
+03 = Steel Sword
+04 = Silver Sword
+05 = Iron Blade
+06 = Steel Blade
+07 = Silver Blade
+08 = Poison Sword
+09 = Rapier
+0A = Mani Katti
+0B = Brave Sword
+0C = Wo Dao
+0D = Killing Edge
+0E = Armorslayer
+0F = Wyrmslayer
+10 = Light Brand
+11 = Runesword
+12 = Lancereaver
+13 = Longsword
+14 = Iron Lance
+15 = Slim Lance
+16 = Steel Lance
+17 = Silver Lance
+18 = Poison Lance
+19 = Brave Lance
+1A = Killer Lance
+1B = Horseslayer
+1C = Javelin
+1D = Spear
+1E = Axereaver
+1F = Iron Axe
+20 = Steel Axe
+21 = Silver Axe
+22 = Poison Axe
+23 = Brave Axe
+24 = Killer Axe
+25 = Halberd
+26 = Hammer
+27 = Devil Axe
+28 = Hand Axe
+29 = Tomahawk
+2A = Swordreaver
+2B = Swordslayer
+2C = Iron Bow
+2D = Steel Bow
+2E = Silver Bow
+2F = Poison Bow
+30 = Killer Bow
+31 = Brave Bow
+32 = Short Bow
+33 = Long Bow
+34 = Ballista
+35 = Iron ballista
+36 = Killer ballista
+37 = Fire
+38 = Thunder
+39 = Elfire
+3A = Bolting
+3B = Fimbulvetr
+3C = Forblaze
+3D = Excalibur
+3E = Lightning
+3F = Shine
+40 = Divine
+41 = Purge
+42 = Aura
+43 = Luce
+44 = Flux
+45 = Luna
+46 = Nosferatu
+47 = Eclipse
+48 = Fenrir
+49 = Gespenst
+4A = Heal
+4B = Mend
+4C = Recover
+4D = Physic
+4E = Fortify
+4F = Restore
+50 = Silence
+51 = Sleep
+52 = Berserk
+53 = Warp
+54 = Rescue
+55 = Torch
+56 = Hammerne
+57 = Unlock
+58 = Barrier
+59 = Dragon Axe
+5A = Angelic robe
+5B = Energy ring
+5C = Secret book
+5D = Speedwings
+5E = Goddess icon
+5F = Dragonshield
+60 = Talisman
+61 = Boots
+62 = Body ring
+63 = Hero crest
+64 = Knight crest
+65 = Orion's bolt
+66 = Elysian whip
+67 = Guiding ring
+68 = Chest key
+69 = Door key
+6A = Lockpick
+6B = Vulnerary
+6C = Elixir
+6D = Pure water
+6E = Antitoxin
+6F = Torch
+70 = Delphi Shield
+71 = Member Card
+72 = Silver Card
+73 = White gem
+74 = Blue gem
+75 = Red gem
+77 = Vaida's Spear
+78 = Chest key
+79 = Mine
+7A = Light rune
+7B = Iron rune
+7C = Filla's Might
+7D = Ninis's Grace
+7E = Thor's Ire
+7F = Set's Litany
+80 = Emblem blade
+81 = Emblem lance
+82 = Emblem axe
+83 = Emblem bow
+84 = Durandal
+85 = Armads
+86 = Aureola
+87 = Earth seal
+88 = Afa's Drops
+89 = Heaven seal
+8A = Emblem seal
+8B = Fell contract
+8C = Sol Katti
+8D = Wolf Beil
+8E = Ereshkigal
+8F = Flametongue
+90 = Regal blade
+91 = Rex Hasta
+92 = Basilikos
+93 = Reinfleche
+94 = Heavy spear
+95 = Short spear
+96 = Ocean seal
+99 = Wind Sword
+
+
+-= Portraits =-
+
+Replace the “XXYY” with a four digit number from this list.
+
+CE4C = Eliwood
+CE80 = Hector
+CEB4 = Lyn
+CEE8 = Raven
+CF1C = Geitz
+CF50 = Guy
+CF84 = Karel
+CFB8 = Dorcas
+CFEC = Bartre
+D020 = Citizen
+D054 = Oswin
+D088 = Fargus
+D0BC = Wil
+D0F0 = Rebecca
+D124 = Louise
+D158 = Lucius
+D18C = Serra
+D1C0 = Renault
+D1F4 = Erk
+D228 = Nino
+D25C = Pent
+D290 = Canas
+D2C4 = Kent
+D2F8 = Sain
+D32C = Lowen
+D360 = Marcus
+D394 = Priscilla
+D3C8 = Rath
+D3FC = Florina
+D430 = Fiora
+D464 = Farina
+D498 = Heath
+D4CC = Vaida
+D500 = Hawkeye
+D534 = Matthew
+D568 = Jaffar
+D59C = Ninian
+D5D0 = Nils
+D604 = Athos
+D638 = Merlinus
+D66C = Nils
+D6A0 = Uther (no thumbnail)
+D6D4 = Vaida
+D708 = Wallace
+D73C = Lyn
+D770 = Wil
+D7A4 = Kent
+D7D8 = Sain
+D80C = Florina
+D840 = Rath
+D874 = Dart
+D8A8 = Isadora
+D8DC = Eleanora (no thumbnail)
+D910 = Legault
+D944 = Karla
+D978 = Harken
+D9AC = Leila (no thumbnail)
+D9E0 = Bramimond (no thumbnail)
+DA14 = Kishuna
+DA48 = Groznyi
+DA7C = Wire
+DAB0 = Bandit
+DAE4 = Zagan
+DB18 = Boies
+DB4C = Puzon
+DB80 = Bandit
+DBB4 = Santals (no thumbnail)
+DBE8 = Nergal
+DC1C = Erik
+DC50 = Sealen
+DC84 = Bauker
+DCB8 = Bernard
+DCEC = Damian
+DD20 = Zoldam
+DD54 = Uhai
+DD88 = Aion
+DDBC = Darin
+DDF0 = Cameron
+DE24 = Oleg
+DE58 = Eubans
+DE8C = Ursula
+DEC0 = Black Fang
+DEF4 = Paul
+DF28 = Jasmine
+DF5C = Black Fang
+DF90 = Jerme (morph)
+DFC4 = Pascal
+DFF8 = Kenneth
+E02C = Jerme
+E060 = Maxime
+E094 = Sonia
+E0C8 = Teodor
+E0FC = Georg
+E130 = Kaim
+E164 = Merc
+E198 = Denning
+E1CC = Bern
+E200 = Morph
+E234 = Lloyd
+E268 = Linus
+E29C = Lloyd
+E2D0 = Linus
+E304 = Bandit
+E338 = Bandit
+E36C = Bandit
+E3A0 = Laus
+E3D4 = Laus
+E408 = Pirate
+E43C = Black Fang
+E470 = Black Fang
+E4A4 = Ostia
+E4D8 = Black Fang
+E50C = Guardian
+E540 = Morph
+E574 = Morph
+E5A8 = Morph
+E5DC = Caelin
+E610 = Caelin
+E644 = Caelin
+E678 = Laus
+E6AC = Laus
+E6E0 = Zephiel
+E714 = Elbert (no thumbnail)
+E748 = Black Fang
+E77C = Black Fang
+E7B0 = Black Fang
+E7E4 = Morph
+E818 = Morph
+E84C = Morph
+E880 = Morph
+E8B4 = Black Fang
+E8E8 = Brendan
+E91C = Limstella
+E950 = Dragon
+E984 = Batta
+E9B8 = Bandit
+E9EC = Zugu
+EA20 = Bandit
+EA54 = Bandit
+EA88 = Bandit
+EABC = Glass
+EAF0 = Migal
+EB24 = Bandit
+EB58 = Bandit
+EB8C = Bandit
+EBC0 = Bandit
+EBF4 = Bandit
+EC28 = Carjiga
+EC5C = Bandit
+EC90 = Bandit
+ECC4 = Bandit
+ECF8 = Bandit
+ED2C = Bug
+ED60 = Bandit
+ED94 = Bandit
+EDC8 = Bandit
+EDFC = Bandit
+EE30 = Natalie (thumbnail only)
+EE64 = Bool
+EE98 = Bandit
+EECC = Bandit
+EF00 = Bandit
+EF34 = Bandit
+EF68 = Bandit
+EF9C = Bandit
+EFD0 = Heintz
+F004 = Black Fang
+F038 = Black Fang
+F06C = Black Fang
+F0A0 = Black Fang
+F0D4 = Black Fang
+F108 = Black Fang
+F13C = Beyard
+F170 = Black Fang
+F1A4 = Black Fang
+F1D8 = Black Fang
+F20C = Black Fang
+F240 = Black Fang
+F274 = Black Fang
+F2A8 = Black Fang
+F2DC = Black Fang
+F310 = Yogi
+F344 = Caelin
+F378 = Caelin
+F3AC = Caelin
+F3E0 = Caelin
+F414 = Caelin
+F448 = Caelin
+F47C = Caelin
+F4B0 = Eagler
+F4E4 = Caelin
+F518 = Caelin
+F54C = Caelin
+F580 = Caelin
+F5B4 = Caelin
+F5E8 = Caelin
+F61C = Lundgren
+F650 = Caelin
+F684 = Caelin
+F6B8 = Caelin
+F6EC = Caelin
+F720 = Caelin
+F754 = Caelin
+F788 = Caelin
+F7BC = Tactician
+F7F0 = Citizen
+F824 = Citizen
+F858 = Citizen
+F88C = Citizen
+F8C0 = Citizen
+F8F4 = Citizen
+F928 = Citizen
+F95C = Citizen
+F990 = Citizen
+F9C4 = Merc
+F9F8 = Pirate
+FA2C = Bandit
+FA60 = Citizen
+FA94 = Citizen
+FAC8 = Citizen
+FAFC = Black Fang
+FB30 = Black Fang
+FB64 = Bandit
+FB98 = Black Fang
+FBCC = Morph
+FC00 = Black Fang
+FC34 = Black Fang
+FC68 = Bandit
+FC9C = Ostia
+FCD0 = Rath's unit
+FD04 = Bandit
+FD38 = Bandit
+FD6C = Bern
+FDA0 = Guardian
+FDD4 = Morph
+FE08 = Laus
+FE3C = Bandit
+FE70 = Bandit
+FEA4 = Bern
+FED8 = Guardian
+FF0C = Morph
+FF40 = Guardian
+FF74 = Black Fang
+FFA8 = Lloyd (morph)
+FFDC = Linus (morph)
+
+
+-= Classes =-
+
+Replace the “XXYY” with a four-digit number from this list.
+
+Note: Some of the classes are not meant for common use and could cause
+glitches/crashes if used improperly. However, given the nature of this FAQ I
+cannot leave their values out either. I have marked those classes with an
+asterisk.
+
+01B0 - Lord (Eliwood)
+0204 - Lord (Lyn)
+0258 - Lord (Hector)
+03A8 - Knight Lord
+03FC - Blade Lord
+0450 - Great Lord
+04A4 - Mercenary
+04F8 - Mercenary (from FE6?)*
+054C - Male Hero
+05A0 - Female Hero
+05F4 - Male Myrmidon
+0648 - Female Myrmidon
+069C - Male Swordmaster
+06F0 - Female Swordmaster
+0744 - Fighter
+0798 - Warrior
+07EC - Male Knight
+0840 - Female Knight
+0894 - Male General
+08E8 - Female General
+093C - Male Archer
+0990 - Female Archer
+09E4 - Male Sniper
+0A38 - Female Sniper
+0A8C - Monk
+0AE0 - Cleric
+0B34 - Male Bishop
+0B88 - Female Bishop
+0BDC - Male Mage
+0C30 - Female Mage
+0C84 - Male Sage
+0CD8 - Female Sage
+0D2C - Male Shaman
+0D80 - Female Shaman
+0DD4 - Male Druid
+0E28 - Female Druid
+0E7C - Male Cavalier
+0ED0 - Female Cavalier
+0F24 - Male Paladin
+0F78 - Female Paladin
+0FCC - Troubadour
+1020 - Valkyrie
+1074 - Male Nomad
+10C8 - Female Nomad
+111C - Male Nomad Trooper
+1170 - Female Nomad Trooper
+11C4 - Pegasus Knight
+1218 - Falcoknight
+126C - Male Wyvern Rider
+12C0 - Female Wyvern Rider
+1314 - Male Wyvern Lord
+1368 - Female Wyvern Lord
+13BC - Soldier
+1410 - Brigand
+1464 - Pirate
+14B8 - Berserker
+150C - Male Thief
+1560 - Female Thief
+15B4 - Assassin
+1608 - Dead Civilian*
+165C - Dancer
+16B0 - Bard
+1704 - Archsage
+1758 - Magic Seal
+17AC - Tent (labeled as "Transporter")
+1800 - Dark Druid
+1854 - Fire Dragon
+18A8 - Male Civilian*
+18FC - Female Civilian*
+1950 - Nils (keeled over)*
+19A4 - Bramimond
+19F8 - Male Peer*
+1A4C - Female Peer*
+1AA0 - Prince*
+1AF4 - Queen*
+1B48 - Civilian*
+1B9C - Corsair
+1BF0 - Prince (front of Tactician?)*
+1C44 - Prince (Tactician lying down?)*
+1C98 - Prince (back of Tactician?)*
+1CEC - Child (back of Dancer)*
+1D40 - Fire Dragon (Ninian wounded)*
+1D94 - Dead Warrior*
+1DE8 - Male Child*
+1E3C - Female Child*
+1E90 - Transporter (Cart)
+1EE4 - Female Sage (Limstella?)*
+1F38 - Archer riding Ballista*
+1F8C - Archer riding Iron Ballista*
+1FE0 - Archer riding Killer Ballista*
+2034 - Empty Ballista*
+2088 - Empty Iron Ballista*
+20DC - Empty Killer Ballista*
+
+
+***********************************
+*        9. “Bibliography”        *
+***********************************
+
+I can guarantee the originality of every list and code here. However, saying
+that I found all of these by myself would be a lie. I had help, so I find it
+fitting to devote a whole section to giving credit to the ones who provided
+the base from which I built up this collection of codes.
+
+First of all, I must thank Helder and Radical Dreamer from cmgcsss.com for
+the first Fire Emblem 7 CodeBreaker codes list I saw. From observing their
+codes I correctly guessed that in the special case of Fire Emblem 7, the
+addresses used by the CodeBreaker were identical to those in raw format.
+From their codes I was also able to guess (and confirm) that characters were
+stored as blocks of data (slots) in a contiguous section of the RAM. When I
+began to find codes, I verified my codes against theirs to ensure
+correctness. Thus I would also like to thank them for their item list, which
+provided for me a source of data with which I could compare my own results
+from item searching.
+
+Next, I must thank Dyn from the Fire Emblem Sanctuary of Strategy (FESS)
+forums (http://s7.invisionfree.com/FESS) for providing portrait and class
+value lists. Though the portrait and class value lists here are the results
+of my own searches, Dyn’s lists gave me one critical observation; I
+hypothesized and later confirmed during my own searches that the valid
+portrait and class code values always occurred at regular numerical
+intervals.
+
+I cannot stress enough how much time and effort Helder, Radical Dreamer, and
+Dyn have saved me by having made those codes and lists available. To the
+three of you, thank you!
+
+
+***********************************
+*    10. Credits and Copyright    *
+***********************************
+
+First, I’d like to thank Cyan of Doma and ss100goku from the GameFAQs forums
+for their help in checking these codes.
+
+Thanks to Helder and Radical Dreamer from cmgcsss.com for their code lists
+and the enabler/master code.
+
+Thanks to Dyn from FESS again for his portrait and class lists.
+
+Thanks to GameFAQs for being here to help me in Fire Emblem when I needed it
+and for being here to host Fire Emblem FAQs and guides which I have used all
+too many times.
+
+Last but not least, I’d like to thank Intelligent Systems and Nintendo for
+making this great game.
+
+
+Legalese:
+
+This FAQ may not be reproduced except for personal, private use. It may not
+be displayed on any web site or distributed publicly without advance written
+permission. Use of this guide on any other web site or as part of any public
+display is strictly prohibited, and a violation of copyright.
+
+Straight from Contributor Central.
+
+Restore Page
+
+// Menu
+//
+
+  * Home <https://gamefaqs.gamespot.com/>
+  * Boards <https://gamefaqs.gamespot.com/boards>
+  * News <https://gamefaqs.gamespot.com/news>
+  * Q&A <https://gamefaqs.gamespot.com/answers>
+  * Community <https://gamefaqs.gamespot.com/community>
+  * Contribute <https://gamefaqs.gamespot.com/contribute>
+  * Games <https://gamefaqs.gamespot.com/games>
+
+
+  * 3DS <https://gamefaqs.gamespot.com/3ds>
+  * Android <https://gamefaqs.gamespot.com/android>
+  * Board/Card <https://gamefaqs.gamespot.com/board-card>
+  * iOS <https://gamefaqs.gamespot.com/iphone>
+  * PC <https://gamefaqs.gamespot.com/pc>
+  * PlayStation 3 <https://gamefaqs.gamespot.com/ps3>
+  * PlayStation 4 <https://gamefaqs.gamespot.com/ps4>
+  * PlayStation 5 <https://gamefaqs.gamespot.com/ps5>
+  * Switch <https://gamefaqs.gamespot.com/switch>
+  * Vita <https://gamefaqs.gamespot.com/vita>
+  * Xbox 360 <https://gamefaqs.gamespot.com/xbox360>
+  * Xbox One <https://gamefaqs.gamespot.com/xboxone>
+  * Xbox Series <https://gamefaqs.gamespot.com/xbox-series-x>
+  * More Systems <https://gamefaqs.gamespot.com/games/systems>
+
+PC <https://gamefaqs.gamespot.com/pc>PS4 <https://gamefaqs.gamespot.com/
+ps4>PS5 <https://gamefaqs.gamespot.com/ps5>Switch <https://
+gamefaqs.gamespot.com/switch>Xbox One <https://gamefaqs.gamespot.com/
+xboxone>Xbox Series <https://gamefaqs.gamespot.com/xbox-series-
+x>More Systems //// <https://gamefaqs.gamespot.com/games/systems>
+
+  * 3DS <https://gamefaqs.gamespot.com/3ds>
+  * Android <https://gamefaqs.gamespot.com/android>
+  * Board / Card <https://gamefaqs.gamespot.com/board-card>
+  * DS <https://gamefaqs.gamespot.com/ds>
+  * Game Boy Advance <https://gamefaqs.gamespot.com/gba>
+  * GameCube <https://gamefaqs.gamespot.com/gamecube>
+  * iOS <https://gamefaqs.gamespot.com/iphone>
+  * Nintendo 64 <https://gamefaqs.gamespot.com/n64>
+  * PlayStation <https://gamefaqs.gamespot.com/ps>
+  * PlayStation 2 <https://gamefaqs.gamespot.com/ps2>
+  * PlayStation 3 <https://gamefaqs.gamespot.com/ps3>
+  * PSP <https://gamefaqs.gamespot.com/psp>
+  * Super Nintendo <https://gamefaqs.gamespot.com/snes>
+  * Vita <https://gamefaqs.gamespot.com/vita>
+  * Wii <https://gamefaqs.gamespot.com/wii>
+  * Wii U <https://gamefaqs.gamespot.com/wii-u>
+  * Xbox 360 <https://gamefaqs.gamespot.com/xbox360>
+  * See All 143... <https://gamefaqs.gamespot.com/games/systems>
+
+//Log In <https://gamefaqs.gamespot.com/user/login> Sign Up <https://
+gamefaqs.gamespot.com/user/register>
+GameFAQs <https://gamefaqs.gamespot.com/>
+//
+//
+
+Boards <https://gamefaqs.gamespot.com/boards>News <https://
+gamefaqs.gamespot.com/news>Q&A <https://gamefaqs.gamespot.com/
+answers>Community <https://gamefaqs.gamespot.com/community>Contribute
+<https://gamefaqs.gamespot.com/contribute>Games <https://
+gamefaqs.gamespot.com/games>//
+
+
+  Fire Emblem – Codebreaker Codes
+
+
+      Game Boy Advance
+
+//Log in to add games to your lists
+//Notify me about new:
+// Guides
+// Cheats
+// Reviews
+// Questions
+// News
+// Board Topics
+// Board Messages
+//Add this game to my:
+// Favorite Games
+// Favorite Boards
+
+Guides <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/faqs>
+Q&A <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/answers>
+Board <https://gamefaqs.gamespot.com/boards/468480-fire-emblem>
+More
+
+ 1. Home <https://gamefaqs.gamespot.com/gba/468480-fire-emblem>
+     1. Summary <https://gamefaqs.gamespot.com/gba/468480-fire-emblem>
+     2. Release Data <https://gamefaqs.gamespot.com/gba/468480-fire-
+        emblem/data>
+     3. Game Credits <https://gamefaqs.gamespot.com/gba/468480-fire-
+        emblem/credit>
+     4. Also Playing <https://gamefaqs.gamespot.com/gba/468480-fire-
+        emblem/playing>
+     5. Collection Stats <https://gamefaqs.gamespot.com/gba/468480-fire-
+        emblem/stats>
+     6. Game Trivia <https://gamefaqs.gamespot.com/gba/468480-fire-
+        emblem/trivia>
+ 2. Guides <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/faqs>
+ 3. Q&A <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/answers>
+ 4. Cheats <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/cheats>
+ 5. Saves <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/saves>
+ 6. Reviews <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/reviews>
+ 7. Media <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/media>
+     1. Boxes <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/boxes>
+     2. Images <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/
+        images?pid=468480>
+     3. Videos <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/videos>
+ 8. News <https://gamefaqs.gamespot.com/gba/468480-fire-emblem/news>
+ 9. Board <https://gamefaqs.gamespot.com/boards/468480-fire-emblem>
+
+GameFAQs <https://gamefaqs.gamespot.com/> //
+What do you need help on? Cancel X
+//
+
+//
+BOOKMARK
+Jump to:
+Would you recommend this Guide? Yes No Hide //
+Send Skip Hide //
+//  Message Sent
+Jump to:
+/
+
+/
+
+
+    Codebreaker Codes (GBA) by guru2012 <https://gamefaqs.gamespot.com/
+    community/guru2012>
+
+*Version:* 1.0 | *Updated:* 08/11/2006
+
+View in: Text Mode
+
+GameFAQs <https://gamefaqs.gamespot.com/>//facebook.com/GFAQs <http://
+www.facebook.com/GFAQs>//twitter.com/GameFAQs <http://www.twitter.com/
+GameFAQs>Help / Contact Us <https://gamefaqs.gamespot.com/help>Change
+Colors //
+
+  * Blue (Default)
+  * Blue on Black
+  * Red
+  * Red on Black
+  * Green
+  * Green on Black
+  * Orange
+  * Orange on Black
+  * Purple
+  * Purple on Black
+  * Cloudy Blue
+  * Grayscale
+  * Sepia
+  * Cotton Candy
+
+gamespot.com <https://www.gamespot.com/?
+utm_source=gamefaqs&utm_medium=partner&utm_content=footer&utm_campaign=footer>giantbomb.com <https://www.giantbomb.com/>metacritic.com <https://www.metacritic.com/>fandom.com <https://www.fandom.com/>fanatical.com <https://www.fanatical.com/>
+
+Sitemap <https://gamefaqs.gamespot.com/sitemap>Partnerships <https://
+about.fandom.com/mediakit#contact>Careers <https://about.fandom.com/
+careers>Terms of Use <https://www.fandom.com/terms-of-service-
+pp1>Digital Services Act <https://www.fandom.com/digital-services-act-
+gamefaqs>
+
+Privacy Policy <https://www.fandom.com/privacy-policy-pp1>Do Not Sell My
+Personal InformationReport Ad
+
+© 2025 FANDOM, INC. ALL RIGHTS RESERVED.
+
+Company Logo
+
+
+    Do Not Sell My Personal Information
+
+When you visit our website, we store cookies on your browser to collect
+information. The information collected might relate to you, your
+preferences or your device, and is mostly used to make the site work as
+you expect it to and to provide a more personalized web experience.
+However, you can choose not to allow certain types of cookies, which may
+impact your experience of the site and the services we are able to
+offer. Click on the different category headings to find out more and
+change our default settings according to your preference. You cannot
+opt-out of our First Party Strictly Necessary Cookies as they are
+deployed in order to ensure the proper functioning of our website (such
+as prompting the cookie banner and remembering your settings, to log
+into your account, to redirect you when you log out, etc.). For more
+information about the First and Third Party Cookies used please follow
+this link.
+Privacy Policy <https://www.fandom.com/privacy-policy-pp1>
+Allow All
+
+
+      Manage Consent Preferences
+
+
+        Strictly Necessary Cookies
+
+Always Active
+
+These cookies are necessary for the website to function and cannot be
+switched off in our systems. They are usually only set in response to
+actions made by you which amount to a request for services, such as
+setting your privacy preferences, logging in or filling in forms. You
+can set your browser to block or alert you about these cookies, but some
+parts of the site will not then work. These cookies do not store any
+personally identifiable information.
+
+
+        Functional Cookies
+
+Functional Cookies
+
+These cookies enable the website to provide enhanced functionality and
+personalisation. They may be set by us or by third party providers whose
+services we have added to our pages. If you do not allow these cookies
+then some or all of these services may not function properly.
+
+
+        Performance Cookies
+
+Performance Cookies
+
+These cookies allow us to count visits and traffic sources so we can
+measure and improve the performance of our site. They help us to know
+which pages are the most and least popular and see how visitors move
+around the site. All information these cookies collect is aggregated and
+therefore anonymous. If you do not allow these cookies we will not know
+when you have visited our site, and will not be able to monitor its
+performance.
+
+
+        Targeting Cookies
+
+Targeting Cookies
+
+These cookies may be set through our site by our advertising partners.
+They may be used by those companies to build a profile of your interests
+and show you relevant adverts on other sites. They do not store directly
+personal information, but are based on uniquely identifying your browser
+and internet device. If you do not allow these cookies, you will
+experience less targeted advertising.
+
+
+        Social Media Cookies
+
+Social Media Cookies
+
+These cookies are set by a range of social media services that we have
+added to the site to enable you to share our content with your friends
+and networks. They are capable of tracking your browser across other
+sites and building up a profile of your interests. This may impact the
+content and messages you see on other websites you visit. If you do not
+allow these cookies you may not be able to use or see these sharing tools.
+
+Back Button
+
+
+Cookie List
+
+Search Icon
+
+Filter Icon
+
+Clear
+
+checkbox label label
+Apply Cancel
+Consent Leg.Interest
+checkbox label
+
+label
+checkbox label
+
+label
+checkbox label
+
+label
+
+Confirm My Choices
+Powered by Onetrust <https://www.onetrust.com/products/cookie-consent/>
