@@ -1,0 +1,3 @@
+Exit=$36
+CanCounterCheck=$2C
+AnimeOFF=$34
