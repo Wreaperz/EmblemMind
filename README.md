@@ -28,6 +28,8 @@ This project is a **1-month challenge** to create a functional and interesting A
 
 ## AI Design Summary
 
+The Official AI Documentation Thread: https://feuniverse.us/t/fe7-the-official-ai-documentation-thread/348
+
 The AI reads the current game state from an emulator's memory, simulates possible actions for the player’s units, and selects the best move using a lightweight planning method inspired by Monte Carlo Tree Search.
 
 ### Key Features:
