@@ -59,3 +59,5 @@ Open: D:\Life\School\GWU\AE Spring 25\CSCI 6511 (Artificial Intelligence)\Emblem
 Open: D:\Life\School\GWU\AE Spring 25\CSCI 6511 (Artificial Intelligence)\EmblemMind\GBA Files\Fire Emblem (FE7)  - The Blazing Blade.gba
 Open: D:\Life\School\GWU\AE Spring 25\CSCI 6511 (Artificial Intelligence)\EmblemMind\FEBuilderGBA\test\TEST-FE7_prologue_compressed.bin
 0xC9BDE8@152 0x3644C0@660 0xC9CCE8@4 0xC9CCE8@4 Write:Map Editor  (MapEditorForm) = Final Chapter: Light  20250416124041
+InitSystem: Fire Emblem (FE7)  - The Blazing Blade.gba ver: FE7U length: 1000000 FEBuilderGBA: 20240521.05
+アドレス({0}+{1})は、終端(2)を超えるので表示できません。 0xFFFFFFFF 0x1C 0x01000000
