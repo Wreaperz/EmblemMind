@@ -20,9 +20,7 @@ This project is a **1-month challenge** to create a functional and interesting A
 
 | Game Title        | Code Name  | Region | Notes |
 |-------------------|------------|--------|-------|
-| Fire Emblem 6     | FE6        | JP     | Fan translation required |
 | Fire Emblem 7     | FE7        | NA     | "Blazing Sword" |
-| Fire Emblem 8     | FE8        | NA     | "Sacred Stones" |
 
 ---
 
@@ -74,6 +72,50 @@ emblemmind/
 ```
 
 ---
+
+
+## State Space Description (Apr 18 Project Update)
+Natural Language
+
+The state includes:
+
+    Map terrain grid (e.g., Forest, River, Wall)
+
+    Positions and stats of all player and enemy units
+
+    Turn phase (Player, Enemy, NPC)
+
+    Unit status effects (e.g., Sleep, Poison)
+
+    Inventories and items
+
+    Map changes (e.g., broken walls, open doors)
+
+The environment is turn-based, partially observable (e.g., fog of war), and stochastic due to combat RNG.
+Mathematical
+
+    S: Set of all game states
+
+    A: Set of all actions
+
+    T(s, a, s′): Transition function (stochastic)
+
+    R(s, a): Reward function
+
+    O(s′, o): Observation function (fog of war)
+
+Each state s includes:
+
+    Terrain map: Map ∈ ℕ^{H×W}
+
+    Unit list: position, stats, items, status
+
+    Turn phase ∈ {Player, Enemy, NPC}
+
+    Objective flags ∈ {0,1}
+
+Actions include move, attack, item use, and wait.
+
 
 ## Tech Stack
 
