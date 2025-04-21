@@ -128,17 +128,17 @@ def ensure_directory_exists(directory):
 
 def main():
     # Specify the ROM path
-    rom_path = "Fire Emblem (FE7)  - The Blazing Blade.gba"
+    rom_path = "gba/fe7.gba"
 
     # Create output directories
-    spritemap_dir = "spritemaps"
-    tilemap_dir = "tilemaps"
+    spritemap_dir = "data/spritemaps"
+    tilemap_dir = "data/tilemaps"
     ensure_directory_exists(spritemap_dir)
     ensure_directory_exists(tilemap_dir)
 
     # Load mappings from JSON file
     try:
-        with open("mappings.json", "r") as f:
+        with open("data/mappings.json", "r") as f:
             mappings = json.load(f)
     except Exception as e:
         print(f"Error loading mappings file: {e}")

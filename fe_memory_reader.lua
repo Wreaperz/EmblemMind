@@ -2,7 +2,7 @@
 -- Targets FE7 GBA Game
 -- Uses exact CodeBreaker memory addresses
 
-local output_file_path = "../data/fe_state.txt"
+local output_file_path = "data/fe_state.txt"
 local write_frequency = 60  -- Write only once every N frames (adjust as needed)
 local frame_counter = 0
 local last_state_hash = ""  -- Store hash of last written state to avoid redundant writes

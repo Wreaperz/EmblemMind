@@ -34,9 +34,37 @@ def parse_map_data(chapter_id, data_dir):
         # Format chapter ID as hex string (e.g., 2 -> "02")
         chapter_hex = f"{chapter_id:02X}"
 
+        # Load mappings file to find the correct address references
+        mappings_path = os.path.join(data_dir, "mappings.json")
+        if os.path.exists(mappings_path):
+            try:
+                with open(mappings_path, 'r') as f:
+                    mappings = json.load(f)
+
+                # Check if we have mapping for this chapter
+                if chapter_hex in mappings:
+                    print(f"Found mapping for chapter {chapter_hex}: {mappings[chapter_hex]}")
+                    addresses = mappings[chapter_hex]
+                else:
+                    print(f"No mapping found for chapter {chapter_hex} in mappings.json")
+            except Exception as e:
+                print(f"Error loading mappings file: {e}")
+                mappings = {}
+        else:
+            print(f"Mappings file not found at {mappings_path}")
+            mappings = {}
+
         # Find corresponding spritemap and tilemap files
-        spritemap_pattern = f"spritemap_{chapter_hex.lower()}_"
-        tilemap_pattern = f"tilemap_{chapter_hex.lower()}_"
+        chapter_hex_lower = chapter_hex.lower()
+        chapter_hex_upper = chapter_hex.upper()
+        spritemap_patterns = [
+            f"spritemap_{chapter_hex_lower}_",
+            f"spritemap_{chapter_hex_upper}_"
+        ]
+        tilemap_patterns = [
+            f"tilemap_{chapter_hex_lower}_",
+            f"tilemap_{chapter_hex_upper}_"
+        ]
 
         spritemap_file = None
         tilemap_file = None
@@ -46,23 +74,31 @@ def parse_map_data(chapter_id, data_dir):
         tilemap_dir = os.path.join(data_dir, "tilemaps")
 
         if os.path.exists(spritemap_dir):
-            for file in os.listdir(spritemap_dir):
-                if file.startswith(spritemap_pattern) and file.endswith(".bin"):
+            all_files = os.listdir(spritemap_dir)
+            print(f"Available spritemap files: {all_files}")
+            for file in all_files:
+                # Check both uppercase and lowercase patterns
+                if any(file.startswith(pattern) and file.endswith(".bin") for pattern in spritemap_patterns):
                     spritemap_file = os.path.join(spritemap_dir, file)
+                    print(f"Found spritemap file: {file}")
                     break
 
         if os.path.exists(tilemap_dir):
-            for file in os.listdir(tilemap_dir):
-                if file.startswith(tilemap_pattern) and file.endswith(".bin"):
+            all_files = os.listdir(tilemap_dir)
+            print(f"Available tilemap files: {all_files}")
+            for file in all_files:
+                # Check both uppercase and lowercase patterns
+                if any(file.startswith(pattern) and file.endswith(".bin") for pattern in tilemap_patterns):
                     tilemap_file = os.path.join(tilemap_dir, file)
+                    print(f"Found tilemap file: {file}")
                     break
 
         if not spritemap_file:
-            print(f"Spritemap file for chapter {chapter_id} not found.")
+            print(f"Spritemap file for chapter {chapter_id} (0x{chapter_hex}) not found.")
             return None
 
         if not tilemap_file:
-            print(f"Tilemap file for chapter {chapter_id} not found.")
+            print(f"Tilemap file for chapter {chapter_id} (0x{chapter_hex}) not found.")
             return None
 
         # Load tile definitions

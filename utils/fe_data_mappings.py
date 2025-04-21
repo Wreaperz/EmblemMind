@@ -515,6 +515,75 @@ CLASS_NAMES = {
     0x20DC: "Empty Killer Ballista",
 }
 
+_valid_move_types = ['Foot', 'Armours', 'Knights1', 'Knights2', 'Nomads', 'NomadTroopers', 'Fighters', 'Bandits',
+                     'Pirates', 'Mages', 'Fliers']
+
+_job_movement_type = {
+    'Lord (Eliwood)': "Foot", 'Lord (Lyn)': "Foot", 'Lord (Hector)': "Foot",
+    'Blade Lord': "Foot", 'Knight Lord': 'Knights2', 'Great Lord': 'Armours',
+    'Bard': "Foot", 'Dancer': "Foot", 'Prince': "Foot",
+    'Tent': "Foot", 'Wagon': "Foot", 'Soldier': "Foot",
+    'Male Cavalier': 'Knights1', 'Female Cavalier': 'Knights1',
+    'Male Paladin': 'Knights2', 'Female Paladin': 'Knights2',
+    'Male Knight': 'Armours', 'Female Knight': 'Armours',
+    'Male General': 'Armours', 'Female General': 'Armours',
+    'Mercenary': "Foot",
+    'Male Hero': "Foot", 'Female Hero': "Foot",
+    'Male Myrmidon': "Foot", 'Female Myrmidon': "Foot",
+    'Male Swordmaster': "Foot", 'Female Swordmaster': "Foot",
+    'Male Thief': "Foot", 'Female Thief': "Foot",
+    'Assassin': "Foot",
+    'Male Archer': "Foot", 'Female Archer': "Foot",
+    'Male Sniper': "Foot", 'Female Sniper': "Foot",
+    'Male Nomad': 'Nomads', 'Female Nomad': 'Nomads',
+    'Male Nomad Trooper': 'NomadTroopers', 'Female Nomad Trooper': 'NomadTroopers',
+    'Male Wyvern Rider': 'Fliers', 'Female Wyvern Rider': 'Fliers',
+    'Male Wyvern Lord': 'Fliers', 'Female Wyvern Lord': 'Fliers',
+    'Male Mage': 'Mages', 'Female Mage': 'Mages',
+    'Male Sage': 'Mages', 'Female Sage': 'Mages',
+    'Monk': 'Mages', 'Cleric': 'Mages',
+    'Male Bishop': 'Mages', 'Female Bishop': 'Mages',
+    'Male Shaman': 'Mages', 'Female Shaman': 'Mages',
+    'Male Druid': 'Mages', 'Female Druid': 'Mages',
+    'Fighter': 'Fighters', 'Warrior': 'Fighters', 'Brigand': 'Bandits', 'Pirate': 'Pirates',
+    'Corsair': 'Pirates', 'Berserker': 'Bandits',
+    'Pegasus Knight': 'Fliers', 'Falcoknight': 'Fliers',
+    'Troubadour': 'Knights1', 'Valkyrie': 'Knights2', 'Magic Seal': 'Mages',
+    'Archsage': 'Mages', 'Dark Druid': 'Mages', 'Bramimond': 'Mages', 'Fire Dragon': 'Foot'
+}
+
+_movement_dict = {
+    'Lord (Eliwood)': 5, 'Lord (Lyn)': 5, 'Lord (Hector)': 5,
+    'Blade Lord': 6, 'Knight Lord': 7, 'Great Lord': 5,
+    'Bard': 5, 'Dancer': 5, 'Prince': 5,
+    'Tent': 0, 'Wagon': 5, 'Soldier': 5,
+    'Male Cavalier': 7, 'Female Cavalier': 7,
+    'Male Paladin': 8, 'Female Paladin': 8,
+    'Male Knight': 4, 'Female Knight': 4,
+    'Male General': 5, 'Female General': 5,
+    'Mercenary': 5,
+    'Male Hero': 6, 'Female Hero': 6,
+    'Male Myrmidon': 5, 'Female Myrmidon': 5,
+    'Male Swordmaster': 6, 'Female Swordmaster': 6,
+    'Male Thief': 6, 'Female Thief': 6,
+    'Assassin': 6,
+    'Male Archer': 5, 'Female Archer': 5,
+    'Male Sniper': 6, 'Female Sniper': 6,
+    'Male Nomad': 7, 'Female Nomad': 7,
+    'Male Nomad Trooper': 7, 'Female Nomad Trooper': 7,
+    'Male Wyvern Rider': 7, 'Female Wyvern Rider': 7,
+    'Male Wyvern Lord': 8, 'Female Wyvern Lord': 8,
+    'Male Mage': 5, 'Female Mage': 5,
+    'Male Sage': 6, 'Female Sage': 6,
+    'Monk': 5, 'Cleric': 5,
+    'Male Bishop': 6, 'Female Bishop': 6,
+    'Male Shaman': 5, 'Female Shaman': 5,
+    'Male Druid': 6, 'Female Druid': 6,
+    'Fighter': 5, 'Warrior': 6, 'Brigand': 5, 'Pirate': 5, 'Corsair': 5, 'Berserker': 6,
+    'Pegasus Knight': 7, 'Falcoknight': 8, 'Troubadour': 7, 'Valkyrie': 8, 'Magic Seal': 6,
+    'Archsage': 6, 'Dark Druid': 6, 'Bramimond': 5, 'Fire Dragon': 0
+}
+
 def get_item_name(item_id):
     """Get the name of an item by its ID"""
     return ITEM_NAMES.get(item_id, f"Unknown Item (0x{item_id:02X})")
