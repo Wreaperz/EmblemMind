@@ -2,7 +2,7 @@
 -- Targets FE7 GBA Game
 -- Uses exact CodeBreaker memory addresses
 
-local output_file_path = "../agent/data/fe_state.txt"
+local output_file_path = "../data/fe_state.txt"
 local write_frequency = 60  -- Write only once every N frames (adjust as needed)
 local frame_counter = 0
 local last_state_hash = ""  -- Store hash of last written state to avoid redundant writes
@@ -237,8 +237,8 @@ local function read_character(slot_index)
   local char = {}
 
   -- Basic stats
-  char.character_id = read_byte(base_addr + offsets.character_id)
-  char.class_id = read_byte(base_addr + offsets.class_id)
+  char.character_id = read_word(base_addr + offsets.character_id)
+  char.class_id = read_word(base_addr + offsets.class_id)
   char.level = read_byte(base_addr + offsets.level)
   char.experience = read_byte(base_addr + offsets.experience)
   char.turn_status = read_byte(base_addr + offsets.turn_status)
@@ -323,8 +323,8 @@ local function read_enemy(slot_index)
   local enemy = {}
 
   -- Basic stats
-  enemy.character_id = read_byte(base_addr + offsets.character_id)
-  enemy.class_id = read_byte(base_addr + offsets.class_id)
+  enemy.character_id = read_word(base_addr + offsets.character_id)
+  enemy.class_id = read_word(base_addr + offsets.class_id)
   enemy.level = read_byte(base_addr + offsets.level)
   enemy.experience = read_byte(base_addr + offsets.experience)
   enemy.turn_status = read_byte(base_addr + offsets.turn_status)
@@ -403,6 +403,51 @@ local function read_enemy(slot_index)
   enemy.memory_addr = base_addr
 
   return enemy
+end
+
+-- Convert turn status value to readable text
+local function turn_status_text(val)
+  if val == 0x00 then return "Not moved"
+  elseif val == 0x10 then return "Rescuer, not moved"
+  elseif val == 0x42 then return "Moved"
+  elseif val == 0x52 then return "Rescuer, moved"
+  elseif val == 0x21 then return "Rescued"
+  else return string.format("Unknown (0x%02X)", val)
+  end
+end
+
+-- Convert hidden status value to readable text
+local function hidden_status_text(val)
+  if val == 0x00 then return "None"
+  elseif val == 0x10 then return "Special drop bonus"
+  elseif val == 0x20 then return "Will drop item"
+  elseif val == 0x30 then return "Afa's Drops + Will drop item"
+  else return string.format("Unknown (0x%02X)", val)
+  end
+end
+
+-- Convert status effect value to readable text
+local function status_effect_text(val)
+  if val == 0 then return "None"
+  else
+    local turns = math.floor(val / 16)
+    local effect = val % 16
+
+    local effect_name = "Unknown"
+    if effect == 0 then effect_name = "None"
+    elseif effect == 1 then effect_name = "Poison"
+    elseif effect == 2 then effect_name = "Sleep"
+    elseif effect == 3 then effect_name = "Silence"
+    elseif effect == 4 then effect_name = "Berserk"
+    elseif effect == 5 then effect_name = "Attack Boost"
+    elseif effect == 6 then effect_name = "Defense Boost"
+    elseif effect == 7 then effect_name = "Critical Boost"
+    elseif effect == 8 then effect_name = "Avoid Boost"
+    end
+
+    local turns_text = (turns == 0) and "∞" or tostring(turns)
+    return string.format("%s (%s turns)", effect_name, turns_text)
+  end
 end
 
 -- Export the current game state to a file
@@ -533,8 +578,8 @@ local function export_game_state()
         file:write(string.format("  exp=%d\n", char.experience))
         file:write(string.format("  position=%d,%d\n", char.x_pos, char.y_pos))
         file:write(string.format("  hp=%d,%d\n", char.current_hp, char.max_hp))
-        file:write(string.format("  stats=%d,%d,%d,%d,%d,%d\n",
-          char.strength, char.skill, char.speed, char.defense, char.resistance, char.luck))
+        file:write(string.format("  stats=%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+          char.strength, char.skill, char.speed, char.luck, char.defense, char.resistance, char.movement, char.constitution, char.rescue))
 
         file:write("  items=")
         for j, item in ipairs(char.items) do
@@ -555,6 +600,13 @@ local function export_game_state()
           char.weapon_ranks.axe, char.weapon_ranks.bow,
           char.weapon_ranks.staff, char.weapon_ranks.anima,
           char.weapon_ranks.light, char.weapon_ranks.dark))
+
+        file:write(string.format("  turn_status=%d\n", char.turn_status))
+        file:write(string.format("  turn_status_text=%s\n", turn_status_text(char.turn_status)))
+        file:write(string.format("  hidden_status=%d\n", char.hidden_status))
+        file:write(string.format("  hidden_status_text=%s\n", hidden_status_text(char.hidden_status)))
+        file:write(string.format("  status_effect=%d\n", char.status_effect))
+        file:write(string.format("  status_effect_text=%s\n", status_effect_text(char.status_effect)))
       end
 
       file:write("ENEMIES\n")
@@ -567,8 +619,8 @@ local function export_game_state()
         file:write(string.format("  exp=%d\n", enemy.experience))
         file:write(string.format("  position=%d,%d\n", enemy.x_pos, enemy.y_pos))
         file:write(string.format("  hp=%d,%d\n", enemy.current_hp, enemy.max_hp))
-        file:write(string.format("  stats=%d,%d,%d,%d,%d,%d\n",
-          enemy.strength, enemy.skill, enemy.speed, enemy.defense, enemy.resistance, enemy.luck))
+        file:write(string.format("  stats=%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+          enemy.strength, enemy.skill, enemy.speed, enemy.luck, enemy.defense, enemy.resistance, enemy.movement, enemy.constitution, enemy.rescue))
 
         file:write("  items=")
         for j, item in ipairs(enemy.items) do
@@ -583,6 +635,13 @@ local function export_game_state()
           enemy.weapon_ranks_display.axe, enemy.weapon_ranks_display.bow,
           enemy.weapon_ranks_display.staff, enemy.weapon_ranks_display.anima,
           enemy.weapon_ranks_display.light, enemy.weapon_ranks_display.dark))
+
+        file:write(string.format("  turn_status=%d\n", enemy.turn_status))
+        file:write(string.format("  turn_status_text=%s\n", turn_status_text(enemy.turn_status)))
+        file:write(string.format("  hidden_status=%d\n", enemy.hidden_status))
+        file:write(string.format("  hidden_status_text=%s\n", hidden_status_text(enemy.hidden_status)))
+        file:write(string.format("  status_effect=%d\n", enemy.status_effect))
+        file:write(string.format("  status_effect_text=%s\n", status_effect_text(enemy.status_effect)))
       end
 
       file:close()
