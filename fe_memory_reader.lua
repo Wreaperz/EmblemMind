@@ -408,6 +408,8 @@ end
 -- Convert turn status value to readable text
 local function turn_status_text(val)
   if val == 0x00 then return "Not moved"
+  elseif val == 0x01 then return "Chosen for Level"
+  elseif val == 0x0B then return "Not Chosen for Level"
   elseif val == 0x10 then return "Rescuer, not moved"
   elseif val == 0x42 then return "Moved"
   elseif val == 0x52 then return "Rescuer, moved"
@@ -472,7 +474,7 @@ local function export_game_state()
 
   -- Read character data
   local char_count = 0
-  for i = 0, 15 do  -- 16 character slots
+  for i = 0, 49 do  -- Increased from 16 to 50 character slots
     local char = read_character(i)
     if char.character_id ~= 0 then
       table.insert(state.characters, char)
