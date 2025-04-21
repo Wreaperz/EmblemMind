@@ -1,0 +1,40 @@
+Map size: 17x27
+
+X X # R R R R R R R R R R R # X X 
+X X # R R R R R R R R R R R # X X 
+X X # R R R R R R R R R R R # X X 
+X X # R R R R R R R R R R R # X X 
+X X # # # # # R R R # # # # # X X 
+X X # # # # # # # # # # # # # X X 
+X X # # # # # # # # # # # # # X X 
+X X # # # # # # # # # # # # # X X 
+X X # # # # # . . . # # # # # X X 
+X X X X # # # . . . # # # X X X X 
+X # R R R # . . . . . # R R R # X 
+X # R R R # . . . . . # R R R # X 
+X # R R R # . . . . . # R R R # X 
+X # # # D # . . . . . # D # # # X 
+X # # # . . . . . . . . . # # # X 
+# R R R # . . . . . . . # R R R # 
+# R R R # . . . . . . . # R R R # 
+# R R R # . . . . . . . # R R R # 
+# # # D # . . . . . . . # D # # # 
+# # # . . . . . . . . . . . # # # 
+# # R R R # . . . . . # # # # # # 
+# # R R R # . . . . . # . . . # # 
+X # R R R # . . . . . # . . . # X 
+X # # # D # . . . . . # . # # # X 
+X # # # . . . . . . . . . # # # X 
+X # # # # . . . . . . . # # # # X 
+X # X # # # # . . . # # # # X # X 
+
+Terrain pointer table: 0x0202E3E0
+Row pointers array: 0x0202EBB8
+First row pointer (addr): 0x0202EBB8
+First row data (addr): 0x0202EC52
+First terrain ID at 0x0202EC52: 0x3B
+
+Terrain Legend:
+. = Plains, F = Forest, ^ = Hill, M = Mountain/Peak, ~ = Water
+H = House/Village, C = Castle/Fort, = = Road/Bridge, # = Wall, D = Door/Gate
+R = Floor/Roof, T = Throne, B = Brace, X = Dark terrain
