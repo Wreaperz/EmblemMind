@@ -1,0 +1,8 @@
+SystemID GBA
+02E3E0	d	u	0	EWRAM	terrain_ptr_table
+02EBB8	d	u	0	EWRAM	terrain_row_0_ptr
+02EC52	b	u	0	EWRAM	terrain_row_0
+02EBE8	d	u	0	EWRAM	terrain_row_12_ptr
+02E3D8	w	u	0	EWRAM	map_size_x
+02E3DA	w	u	0	EWRAM	map_size_y
+
