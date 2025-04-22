@@ -10,168 +10,83 @@ from utils.fe_data_mappings import (
     get_weapon_type
 )
 
-def load_tiles_data(json_path):
-    """Load tile data from the tiles.json file"""
-    try:
-        with open(json_path, 'r') as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Error loading tiles data: {e}")
-        return {}
-
-def parse_map_data(chapter_id, data_dir):
+def parse_fe_map_file(map_file_path):
     """
-    Parse map data for the given chapter ID
+    Parse the map terrain data from fe_map.txt created by fe_memory_reader.lua
 
     Args:
-        chapter_id: Chapter ID as an integer
-        data_dir: Directory containing map data
+        map_file_path: Path to fe_map.txt file
 
     Returns:
-        dict: Map data including dimensions, terrain, and tile information
+        dict: Map data including dimensions, terrain grid, and other info
     """
     try:
-        # Format chapter ID as hex string (e.g., 2 -> "02")
-        chapter_hex = f"{chapter_id:02X}"
-
-        # Load mappings file to find the correct address references
-        mappings_path = os.path.join(data_dir, "mappings.json")
-        if os.path.exists(mappings_path):
-            try:
-                with open(mappings_path, 'r') as f:
-                    mappings = json.load(f)
-
-                # Check if we have mapping for this chapter
-                if chapter_hex in mappings:
-                    print(f"Found mapping for chapter {chapter_hex}: {mappings[chapter_hex]}")
-                    addresses = mappings[chapter_hex]
-                else:
-                    print(f"No mapping found for chapter {chapter_hex} in mappings.json")
-            except Exception as e:
-                print(f"Error loading mappings file: {e}")
-                mappings = {}
-        else:
-            print(f"Mappings file not found at {mappings_path}")
-            mappings = {}
-
-        # Find corresponding spritemap and tilemap files
-        chapter_hex_lower = chapter_hex.lower()
-        chapter_hex_upper = chapter_hex.upper()
-        spritemap_patterns = [
-            f"spritemap_{chapter_hex_lower}_",
-            f"spritemap_{chapter_hex_upper}_"
-        ]
-        tilemap_patterns = [
-            f"tilemap_{chapter_hex_lower}_",
-            f"tilemap_{chapter_hex_upper}_"
-        ]
-
-        spritemap_file = None
-        tilemap_file = None
-
-        # Find the right files in the directories
-        spritemap_dir = os.path.join(data_dir, "spritemaps")
-        tilemap_dir = os.path.join(data_dir, "tilemaps")
-
-        if os.path.exists(spritemap_dir):
-            all_files = os.listdir(spritemap_dir)
-            print(f"Available spritemap files: {all_files}")
-            for file in all_files:
-                # Check both uppercase and lowercase patterns
-                if any(file.startswith(pattern) and file.endswith(".bin") for pattern in spritemap_patterns):
-                    spritemap_file = os.path.join(spritemap_dir, file)
-                    print(f"Found spritemap file: {file}")
-                    break
-
-        if os.path.exists(tilemap_dir):
-            all_files = os.listdir(tilemap_dir)
-            print(f"Available tilemap files: {all_files}")
-            for file in all_files:
-                # Check both uppercase and lowercase patterns
-                if any(file.startswith(pattern) and file.endswith(".bin") for pattern in tilemap_patterns):
-                    tilemap_file = os.path.join(tilemap_dir, file)
-                    print(f"Found tilemap file: {file}")
-                    break
-
-        if not spritemap_file:
-            print(f"Spritemap file for chapter {chapter_id} (0x{chapter_hex}) not found.")
+        if not os.path.exists(map_file_path):
+            print(f"Map file not found: {map_file_path}")
             return None
 
-        if not tilemap_file:
-            print(f"Tilemap file for chapter {chapter_id} (0x{chapter_hex}) not found.")
-            return None
-
-        # Load tile definitions
-        tiles_json_path = os.path.join(data_dir, "tiles.json")
-        tiles_data = load_tiles_data(tiles_json_path)
-
-        # Read spritemap file
-        with open(spritemap_file, 'rb') as f:
-            spritemap_data = f.read()
-
-        # Read width and height from the first two bytes
-        width = spritemap_data[0]
-        height = spritemap_data[1]
-
-        # Parse tile IDs (2 bytes each, little-endian)
-        tiles = []
-        for i in range(2, len(spritemap_data), 2):
-            if i + 1 < len(spritemap_data):
-                tile_id = spritemap_data[i] | (spritemap_data[i+1] << 8)
-                tiles.append(tile_id)
-
-        # Reshape tiles into a 2D grid
-        tile_grid = []
-        for y in range(height):
-            row = []
-            for x in range(width):
-                if y * width + x < len(tiles):
-                    row.append(tiles[y * width + x])
-                else:
-                    row.append(0)  # Default tile if out of bounds
-            tile_grid.append(row)
-
-        # Read tilemap file for terrain data
-        with open(tilemap_file, 'rb') as f:
-            tilemap_data = f.read()
-
-        # Create terrain grid based on tile IDs
-        terrain_grid = []
-        for row in tile_grid:
-            terrain_row = []
-            for tile_id in row:
-                # Calculate address in tilemap for terrain
-                address = (tile_id // 4) + 0x2000
-
-                # Make sure the address is within bounds
-                if address < len(tilemap_data):
-                    terrain_id = tilemap_data[address]
-                    # Convert to hex string for lookup in tiles.json
-                    terrain_hex = f"{terrain_id:02X}"
-
-                    # Get terrain info from tiles.json
-                    terrain_info = tiles_data.get(terrain_hex, {"name": "Unknown"})
-                    terrain_row.append({
-                        "id": terrain_id,
-                        "hex": terrain_hex,
-                        "name": terrain_info.get("name", "Unknown"),
-                        "avoid": terrain_info.get("avoid", 0),
-                        "def": terrain_info.get("def", 0),
-                        "res": terrain_info.get("res", 0)
-                    })
-                else:
-                    terrain_row.append({"name": "Out of bounds", "id": 0, "hex": "00"})
-            terrain_grid.append(terrain_row)
-
-        return {
-            "width": width,
-            "height": height,
-            "tile_grid": tile_grid,
-            "terrain_grid": terrain_grid
+        map_data = {
+            "width": 0,
+            "height": 0,
+            "terrain_grid": [],
+            "debug_info": {}
         }
 
+        # Parse the map file
+        with open(map_file_path, 'r') as f:
+            lines = f.readlines()
+
+        # Check if the file is valid
+        if not lines or len(lines) < 3:
+            print(f"Map file is empty or invalid: {map_file_path}")
+            return None
+
+        # First line has dimensions
+        header = lines[0].strip()
+        if header.startswith("Map size:"):
+            dimensions = header.replace("Map size:", "").strip()
+            width, height = map(int, dimensions.split('x'))
+            map_data["width"] = width
+            map_data["height"] = height
+
+        # Skip the blank line
+        terrain_start = 2
+        terrain_end = terrain_start + map_data["height"]
+
+        # Read the terrain grid
+        for y in range(terrain_start, terrain_end):
+            if y < len(lines):
+                row_data = lines[y].strip().split()
+
+                # Store terrain symbols directly
+                terrain_row = []
+                for symbol in row_data:
+                    terrain_row.append(symbol)
+
+                map_data["terrain_grid"].append(terrain_row)
+
+        # Read terrain legend and debug info if available
+        legend_info = {}
+        for i in range(terrain_end, len(lines)):
+            line = lines[i].strip()
+            if line.startswith("Terrain Legend:"):
+                # Next lines contain the legend
+                legend_start = i + 1
+                for j in range(legend_start, len(lines)):
+                    legend_line = lines[j].strip()
+                    if not legend_line or legend_line.startswith("Terrain pointer"):
+                        break
+                    # Store the legend information
+                    legend_info[j - legend_start] = legend_line
+            elif line and ":" in line:
+                key, value = line.split(":", 1)
+                map_data["debug_info"][key.strip()] = value.strip()
+
+        map_data["legend"] = legend_info
+        return map_data
+
     except Exception as e:
-        print(f"Error parsing map data for chapter {chapter_id}: {e}")
+        print(f"Error parsing map file: {e}")
         import traceback
         traceback.print_exc()
         return None
@@ -185,50 +100,31 @@ def display_map(map_data, cursor_x=None, cursor_y=None):
     print("\n=== MAP ===")
     print(f"Dimensions: {map_data['width']}x{map_data['height']}")
 
-    # Create a simplified representation
+    # Create a representation using the exact symbols from the map file
     for y, row in enumerate(terrain_grid):
         line = ""
-        for x, terrain in enumerate(row):
+        for x, symbol in enumerate(row):
             # Mark cursor position
             if cursor_x is not None and cursor_y is not None and x == cursor_x and y == cursor_y:
                 line += "X "
             else:
-                # Use first character of terrain name as marker
-                if terrain["name"] == "Plains":
-                    line += ". "  # Plains
-                elif terrain["name"] == "Forest":
-                    line += "F "  # Forest
-                elif terrain["name"] == "Hill":
-                    line += "^ "  # Hill
-                elif terrain["name"] == "Mountain" or terrain["name"] == "Peak":
-                    line += "M "  # Mountain/Peak
-                elif terrain["name"] == "River" or terrain["name"] == "Lake" or terrain["name"] == "Sea":
-                    line += "~ "  # Water
-                elif terrain["name"] == "Village" or terrain["name"] == "House":
-                    line += "H "  # House/Village
-                elif terrain["name"] == "Fort" or terrain["name"] == "Castle":
-                    line += "C "  # Castle/Fort
-                elif terrain["name"] == "Road" or terrain["name"] == "Bridge":
-                    line += "= "  # Road/Bridge
-                elif terrain["name"] == "Wall":
-                    line += "# "  # Wall
-                elif terrain["name"] == "Door" or terrain["name"] == "Gate":
-                    line += "D "  # Door/Gate
-                else:
-                    line += terrain["name"][0] + " "  # First letter as fallback
+                # Use the symbol directly from the parsed map
+                line += symbol + " "
         print(line)
 
+    # Print the terrain legend from the map file
     print("\nTerrain Legend:")
-    print(". = Plains, F = Forest, ^ = Hill, M = Mountain/Peak, ~ = Water")
-    print("H = House/Village, C = Castle/Fort, = = Road/Bridge, # = Wall, D = Door/Gate")
+    for i, legend_line in map_data.get("legend", {}).items():
+        print(legend_line)
     print("X = Cursor Position (if shown)")
 
-def monitor_fe_state(state_file_path, data_dir, interval=1):
+def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
     """
     Continuously monitor and display Fire Emblem state with human-readable data
 
     Args:
         state_file_path (str): Path to the fe_state.txt file
+        map_file_path (str): Path to the fe_map.txt file
         data_dir (str): Path to the data directory
         interval (float): Polling interval in seconds
     """
@@ -246,11 +142,8 @@ def monitor_fe_state(state_file_path, data_dir, interval=1):
                 time.sleep(interval)
                 continue
 
-            # Get chapter ID
-            chapter_id = state_data['game_state'].get('chapter_id', 0)
-
-            # Parse map data for the current chapter
-            map_data = parse_map_data(chapter_id, data_dir)
+            # Parse map file
+            map_data = parse_fe_map_file(map_file_path)
 
             # Display game state information
             print("\n=== GAME STATE ===")
@@ -378,10 +271,9 @@ def monitor_fe_state(state_file_path, data_dir, interval=1):
 
                 # If we have cursor position and map data, show terrain at cursor
                 if map_data and cursor_x < map_data["width"] and cursor_y < map_data["height"]:
-                    terrain = map_data["terrain_grid"][cursor_y][cursor_x]
+                    terrain_symbol = map_data["terrain_grid"][cursor_y][cursor_x]
                     print(f"\n=== TERRAIN AT CURSOR ({cursor_x}, {cursor_y}) ===")
-                    print(f"Type: {terrain['name']} [ID: 0x{terrain['hex']}]")
-                    print(f"Stats: Avoid +{terrain['avoid']}, Def +{terrain['def']}, Res +{terrain['res']}")
+                    print(f"Symbol: {terrain_symbol}")
 
             # Display map if we have it
             if map_data:
@@ -402,14 +294,15 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(current_dir, 'data')
     state_file_path = os.path.join(data_dir, 'fe_state.txt')
+    map_file_path = os.path.join(data_dir, 'fe_map.txt')
 
-    # Check if the file exists
+    # Check if files exist
     if not os.path.exists(state_file_path):
         print(f"Error: State file not found at {state_file_path}")
         return
 
     # Start monitoring the FE state
-    monitor_fe_state(state_file_path, data_dir)
+    monitor_fe_state(state_file_path, map_file_path, data_dir)
 
 if __name__ == "__main__":
     main()

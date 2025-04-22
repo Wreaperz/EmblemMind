@@ -2,18 +2,66 @@
 -- Targets FE7 GBA Game
 -- Uses exact CodeBreaker memory addresses
 
-local output_file_path = "data/fe_state.txt"
+local output_file_path = "../data/fe_state.txt"
+local map_output_file_path = "../data/fe_map.txt"
 local write_frequency = 60  -- Write only once every N frames (adjust as needed)
 local frame_counter = 0
 local last_state_hash = ""  -- Store hash of last written state to avoid redundant writes
 local previous_state = {}  -- Cache the previous state
 local console_log_frequency = 120  -- Only log to console every N frames (about 2 seconds at 60fps)
 
--- Configuration options
-local CONFIG = {
-  enable_console_logging = true,  -- Set to false to disable console logs
-  enable_gui_overlay = true,      -- Set to false to disable on-screen display
-  enable_file_output = true,      -- Set to false to completely disable file writing
+-- Fixed settings - no config UI needed for background operation
+local enable_console_logging = true
+local enable_gui_overlay = false  -- Disabled for background operation
+local enable_file_output = true
+local enable_map_output = true
+
+-- Constants for map memory locations (EWRAM offsets)
+local MAP_WIDTH_ADDR = 0x0202E3D8
+local MAP_HEIGHT_ADDR = 0x0202E3DA
+local TERRAIN_PTR_TABLE_ADDR = 0x0202E3E0
+
+-- Terrain types with character representation
+local terrain_data = {
+  [0x00] = {char = "-", name = "--"},
+  [0x01] = {char = ".", name = "Plains"},
+  [0x02] = {char = "=", name = "Road"},
+  [0x03] = {char = "V", name = "Village"},
+  [0x04] = {char = "V", name = "Village"},
+  [0x05] = {char = "H", name = "House"},
+  [0x06] = {char = "A", name = "Armory"},
+  [0x07] = {char = "V", name = "Vendor"},
+  [0x08] = {char = "A", name = "Arena"},
+  [0x09] = {char = "C", name = "C Room"},
+  [0x0A] = {char = "C", name = "Fort"},
+  [0x0B] = {char = "G", name = "Gate"},
+  [0x0C] = {char = "F", name = "Forest"},
+  [0x0D] = {char = "F", name = "Thicket"},
+  [0x0E] = {char = "S", name = "Sand"},
+  [0x0F] = {char = "D", name = "Desert"},
+  [0x10] = {char = "~", name = "River"},
+  [0x11] = {char = "^", name = "Hill"},
+  [0x12] = {char = "M", name = "Peak"},
+  [0x13] = {char = "=", name = "Bridge"},
+  [0x14] = {char = "=", name = "Bridge[Draw]"},
+  [0x15] = {char = "~", name = "Sea"},
+  [0x16] = {char = "~", name = "Lake"},
+  [0x17] = {char = ".", name = "Floor"},
+  [0x18] = {char = "H", name = "Floor[Heal]"},
+  [0x19] = {char = "#", name = "Fence"},
+  [0x1A] = {char = "#", name = "Wall"},
+  [0x1B] = {char = "#", name = "Wall[Damaged]"},
+  [0x1C] = {char = "*", name = "Rubble"},
+  [0x1D] = {char = "P", name = "Pillar"},
+  [0x1E] = {char = "D", name = "Door"},
+  [0x1F] = {char = "T", name = "Throne"},
+  [0x20] = {char = "C", name = "Chest[Empty]"},
+  [0x21] = {char = "C", name = "Chest"},
+  [0x22] = {char = "R", name = "Roof"},
+  [0x23] = {char = "G", name = "Gate"},
+  [0x24] = {char = "H", name = "Church"},
+  [0x3B] = {char = "X", name = "Dark"},
+  [0x3F] = {char = "#", name = "Brace"}
 }
 
 local MEMORY = {
@@ -174,6 +222,16 @@ local MEMORY = {
 local function read_byte(addr) return memory.readbyte(addr) end
 local function read_word(addr) return memory.read_u16_le(addr) end
 local function read_dword(addr) return memory.read_u32_le(addr) end
+local function read_pointer(address)
+  -- Create our own 4-byte reader using readbyte (little endian order)
+  local b0 = memory.readbyte(address)
+  local b1 = memory.readbyte(address + 1)
+  local b2 = memory.readbyte(address + 2)
+  local b3 = memory.readbyte(address + 3)
+
+  -- Combine bytes in little-endian format (least significant byte first)
+  return b0 + (b1 * 0x100) + (b2 * 0x10000) + (b3 * 0x1000000)
+end
 
 -- Convert weapon rank value to letter rank
 local function weapon_rank_letter(val)
@@ -454,6 +512,7 @@ end
 
 -- Export the current game state to a file
 local function export_game_state()
+
   local phase_val = read_byte(MEMORY.turn_phase)
   local tactician = read_tactician_name()
 
@@ -504,7 +563,7 @@ local function export_game_state()
     state.enemies[1] and state.enemies[1].x_pos or 0)
 
   -- Log to console if enabled and only on specified frames to reduce spam
-  if CONFIG.enable_console_logging and (frame_counter % console_log_frequency == 0) then
+  if enable_console_logging and (frame_counter % console_log_frequency == 0) then
     console.clear()
     console.log("Fire Emblem 7 Memory Reader")
     console.log("------------------------")
@@ -537,13 +596,13 @@ local function export_game_state()
     end
   end
 
-  -- Only write to file if enabled, on appropriate frames, and if data has changed
-  local should_write = CONFIG.enable_file_output and
-                      (frame_counter % write_frequency == 0) and
-                      (state_hash ~= last_state_hash)
+  -- Always write on the first frame to ensure we have a file
+  local should_write = enable_file_output and
+                      ((frame_counter % write_frequency == 0) or frame_counter == 1) and
+                      (state_hash ~= last_state_hash or frame_counter == 1)
 
   if should_write then
-    if CONFIG.enable_console_logging and (frame_counter % console_log_frequency == 0) then
+    if enable_console_logging and (frame_counter % console_log_frequency == 0) then
       console.log(string.format("\nWriting to: %s (frame: %d)", output_file_path, frame_counter))
     end
 
@@ -649,12 +708,12 @@ local function export_game_state()
       file:close()
       last_state_hash = state_hash
 
-      if CONFIG.enable_console_logging and (frame_counter % console_log_frequency == 0) then
+      if enable_console_logging then
         console.log("Successfully wrote state to file")
       end
     else
-      if CONFIG.enable_console_logging and (frame_counter % console_log_frequency == 0) then
-        console.log("ERROR: Failed to open file for writing")
+      if enable_console_logging then
+        console.log("ERROR: Failed to open file for writing: " .. output_file_path)
       end
     end
   end
@@ -663,83 +722,180 @@ local function export_game_state()
   return state
 end
 
+-- Function to get display character for a terrain ID
+local function getTerrainChar(terrain_id)
+  if terrain_data[terrain_id] then
+    return terrain_data[terrain_id].char
+  else
+    -- Fallback to hex value if terrain type is unknown
+    return string.format("%02X", terrain_id)
+  end
+end
+
+-- Function to build the terrain map and write it to a file
+local function buildTerrainMap()
+
+  -- Read map dimensions with safety checks
+  local width = read_byte(MAP_WIDTH_ADDR)
+  local height = read_byte(MAP_HEIGHT_ADDR)
+
+  -- Verify we have valid dimensions
+  if width == 0 or height == 0 or width > 100 or height > 100 then
+    if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+      console.log(string.format("WARNING: Invalid map dimensions: %dx%d", width, height))
+    end
+    return nil
+  end
+
+  -- Create a map table to hold terrain data
+  local map = {}
+
+  -- Get the pointer to the row pointers array (First level of indirection)
+  local row_pointers_table = read_pointer(TERRAIN_PTR_TABLE_ADDR)
+
+  -- Verify we have a valid pointer
+  if row_pointers_table == 0 or row_pointers_table > 0x10000000 then
+    if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+      console.log(string.format("WARNING: Invalid row pointers table: 0x%08X", row_pointers_table))
+    end
+    return nil
+  end
+
+  -- Debug info
+  local first_row_ptr_addr = row_pointers_table
+  local first_row_ptr = read_pointer(first_row_ptr_addr)
+
+  -- Verify first row pointer
+  if first_row_ptr == 0 or first_row_ptr > 0x10000000 then
+    if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+      console.log(string.format("WARNING: Invalid first row pointer: 0x%08X", first_row_ptr))
+    end
+    return nil
+  end
+
+  local first_terrain_id = read_byte(first_row_ptr)
+
+  -- Read the terrain data correctly through two layers of pointers
+  for y = 0, height-1 do
+    -- Each row pointer is at row_pointers_table + (y * 4)
+    local row_ptr_addr = row_pointers_table + (y * 4)
+
+    -- Get the pointer to the actual row of terrain data (Second level of indirection)
+    local row_data_ptr = read_pointer(row_ptr_addr)
+
+    -- Verify row pointer
+    if row_data_ptr == 0 or row_data_ptr > 0x10000000 then
+      if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+        console.log(string.format("WARNING: Invalid row data pointer at y=%d: 0x%08X", y, row_data_ptr))
+      end
+      return nil
+    end
+
+    map[y] = {}
+
+    -- Read each terrain ID in the row
+    for x = 0, width-1 do
+      local terrain_id = read_byte(row_data_ptr + x)
+      map[y][x] = terrain_id
+    end
+  end
+
+  -- Always write on the first frame to ensure we have a file
+  local should_write = enable_map_output and
+                       ((frame_counter % write_frequency == 0) or frame_counter == 1)
+
+  if should_write then
+    -- Open the output file for writing
+    local file = io.open(map_output_file_path, "w")
+    if file then
+      -- Write map dimensions to the file
+      file:write(string.format("Map size: %dx%d\n\n", width, height))
+
+      -- Write the map
+      for y = 0, height-1 do
+        local line = ""
+        for x = 0, width-1 do
+          local terrain_id = map[y][x]
+          local terrain_char = getTerrainChar(terrain_id)
+          line = line .. terrain_char .. " "
+        end
+        file:write(line .. "\n")
+      end
+
+      -- Write debug info about the pointers
+      file:write(string.format("\nTerrain pointer table: 0x%08X\n", TERRAIN_PTR_TABLE_ADDR))
+      file:write(string.format("Row pointers array: 0x%08X\n", row_pointers_table))
+      file:write(string.format("First row pointer (addr): 0x%08X\n", first_row_ptr_addr))
+      file:write(string.format("First row data (addr): 0x%08X\n", first_row_ptr))
+      file:write(string.format("First terrain ID at 0x%08X: 0x%02X\n", first_row_ptr, first_terrain_id))
+
+      -- Write terrain legend
+      file:write("\nTerrain Legend:\n")
+      file:write(". = Plains, F = Forest, ^ = Hill, M = Mountain/Peak, ~ = Water\n")
+      file:write("H = House/Village, C = Castle/Fort, = = Road/Bridge, # = Wall, D = Door/Gate\n")
+      file:write("R = Floor/Roof, T = Throne, B = Brace, X = Dark terrain\n")
+
+      -- Close the file
+      file:close()
+
+      if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+        console.log(string.format("Map data written to %s", map_output_file_path))
+      end
+    else
+      if enable_console_logging and (frame_counter % console_log_frequency == 0) then
+        console.log("ERROR: Failed to open map file for writing: " .. map_output_file_path)
+      end
+    end
+  end
+
+  -- Return the map data in case we want to use it elsewhere
+  return {width = width, height = height, data = map}
+end
+
 -- Main function that runs every frame
 local function main()
   frame_counter = frame_counter + 1
 
   local state = export_game_state()
 
-  -- Display key info on screen
-  if CONFIG.enable_gui_overlay then
-    gui.text(1, 1, "FE7 Memory Reader", "white", "black")
-    gui.text(1, 15, string.format("Tactician: %s", state.tactician_name.text), "white", "black")
-    gui.text(1, 30, string.format("Turn: %d, Phase: %s", state.current_turn, state.turn_phase_label), "white", "black")
-    gui.text(1, 45, string.format("Gold: %d", state.gold), "white", "black")
-    gui.text(1, 60, string.format("Chapter: %d", state.chapter_id), "white", "black")
-    gui.text(1, 75, string.format("Units: %d | Enemies: %d", #state.characters, #state.enemies), "white", "black")
+  -- Also build and export the terrain map
+  local map_data = buildTerrainMap()
 
-    -- Show cursor position
-    local cursor_x, cursor_y = state.cursor_x, state.cursor_y
-    gui.text(1, 90, string.format("Cursor: (%d, %d)", cursor_x, cursor_y), "white", "black")
-
-    -- Show write frequency and last write frame
-    gui.text(1, 105, string.format("Frame: %d | Write: %d | Log: %d",
-             frame_counter, write_frequency, console_log_frequency), "white", "black")
+  -- Display minimal info on screen if GUI overlay is enabled
+  if enable_gui_overlay then
+    gui.text(1, 1, "FE7 Memory Reader Running", "white", "black")
   end
 end
 
--- Configuration menu for runtime adjustment
-local function create_config_menu()
-  -- Add menu items to allow user to adjust settings at runtime
-  forms.destroyall()
-  local form = forms.newform(300, 280, "FE7 Memory Reader Config")
-
-  -- File writing frequency
-  forms.label(form, "File Write Frequency (frames):", 10, 10, 150, 20)
-  local freq_track = forms.trackbar(form, 15, 10, 35, 150, 15, 1, 60)
-
-  -- Configuration checkboxes
-  local console_check = forms.checkbox(form, "Enable Console Logging", 10, 70)
-  forms.setproperty(console_check, "Checked", CONFIG.enable_console_logging)
-
-  local gui_check = forms.checkbox(form, "Enable GUI Overlay", 10, 100)
-  forms.setproperty(gui_check, "Checked", CONFIG.enable_gui_overlay)
-
-  local file_check = forms.checkbox(form, "Enable File Output", 10, 130)
-  forms.setproperty(file_check, "Checked", CONFIG.enable_file_output)
-
-  -- Apply button
-  local apply_button = forms.button(form, "Apply Settings",
-    function()
-      write_frequency = forms.getproperty(freq_track, "Value")
-      CONFIG.enable_console_logging = forms.getproperty(console_check, "Checked")
-      CONFIG.enable_gui_overlay = forms.getproperty(gui_check, "Checked")
-      CONFIG.enable_file_output = forms.getproperty(file_check, "Checked")
-
-      console.log(string.format("Settings updated: Write freq=%d, Console=%s, GUI=%s, File=%s",
-        write_frequency,
-        CONFIG.enable_console_logging and "ON" or "OFF",
-        CONFIG.enable_gui_overlay and "ON" or "OFF",
-        CONFIG.enable_file_output and "ON" or "OFF"))
-    end,
-    100, 200)
+-- Add global error handler to prevent script crashes
+local function errorHandler(err)
+  console.log("ERROR: " .. tostring(err))
+  print("ERROR: " .. tostring(err))
+  return err
 end
 
-print("Fire Emblem 7 Memory Reader loaded!")
-print("Output file: " .. output_file_path)
-print("Write frequency: Every " .. write_frequency .. " frames")
-print("Console log frequency: Every " .. console_log_frequency .. " frames")
-console.log("Fire Emblem 7 Memory Reader loaded!")
-console.log("Output file: " .. output_file_path)
-console.log("Write frequency: Every " .. write_frequency .. " frames")
-console.log("Console log frequency: Every " .. console_log_frequency .. " frames")
+-- Create a wrapped main function with error handling
+local function safeMain()
+  local status, err = pcall(main)
+  if not status then
+    errorHandler(err)
+  end
+end
 
--- Register main function to run at the end of each frame
-event.onframeend(main)
+-- Initial setup
+print("Fire Emblem 7 Memory Reader loaded!")
+print("State output file: " .. output_file_path)
+print("Map output file: " .. map_output_file_path)
+print("Write frequency: Every " .. write_frequency .. " frames")
+console.log("Fire Emblem 7 Memory Reader loaded!")
+console.log("State output file: " .. output_file_path)
+console.log("Map output file: " .. map_output_file_path)
+console.log("Write frequency: Every " .. write_frequency .. " frames")
+
+-- Register the safe main function to run at the end of each frame
+event.onframeend(safeMain)
 
 -- Print confirmation that the script is properly loaded and running
 console.log("FE7 Memory Reader is now actively running!")
 print("FE7 Memory Reader is now actively running!")
-print("Press F1 to open configuration menu")
-console.log("Press F1 to open configuration menu")
 
