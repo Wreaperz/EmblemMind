@@ -465,13 +465,16 @@ end
 
 -- Convert turn status value to readable text
 local function turn_status_text(val)
-  if val == 0x00 then return "Not moved"
-  elseif val == 0x01 then return "Chosen for Level"
-  elseif val == 0x0B then return "Not Chosen for Level"
-  elseif val == 0x10 then return "Rescuer, not moved"
-  elseif val == 0x42 then return "Moved"
-  elseif val == 0x52 then return "Rescuer, moved"
-  elseif val == 0x21 then return "Rescued"
+  if val == 0x00 then return string.format("Not moved (0x%02X)", val)
+  elseif val == 0x01 then return string.format("Chosen for Level (0x%02X)", val)
+  elseif val == 0x09 then return string.format("Not Chosen for Level (0x%02X)", val)
+  elseif val == 0x0B then return string.format("Chosen for Level (0x%02X)", val)
+  elseif val == 0x0D then return string.format("Dead (0x%02X)", val)
+  elseif val == 0x10 then return string.format("Rescuer, not moved (0x%02X)", val)
+  elseif val == 0x42 then return string.format("Moved (0x%02X)", val)
+  elseif val == 0x52 then return string.format("Rescuer, moved (0x%02X)", val)
+  elseif val == 0x21 then return string.format("Rescued (0x%02X)", val)
+  elseif val == 0x81 then return string.format("Invisible (under roof) (0x%02X)", val)
   else return string.format("Unknown (0x%02X)", val)
   end
 end

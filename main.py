@@ -2,9 +2,7 @@
 
 import os
 import time
-import json
-import struct
-from utils.fe_state_parser import FEStateParser
+from emblemmind_snapshot import TurnSnapshot
 from utils.fe_data_mappings import (
     get_item_name, get_character_name, get_class_name,
     get_weapon_type
@@ -135,149 +133,65 @@ def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
             # Clear console
             os.system('cls' if os.name == 'nt' else 'clear')
 
-            # Parse state file
-            state_data = FEStateParser.parse_state_file(state_file_path)
-            if not state_data:
-                print(f"Failed to read state file: {state_file_path}")
+            # Create snapshot from files
+            try:
+                snapshot = TurnSnapshot.from_files(state_file_path, map_file_path)
+            except ValueError as e:
+                print(f"Failed to create snapshot: {e}")
                 time.sleep(interval)
                 continue
 
-            # Parse map file
-            map_data = parse_fe_map_file(map_file_path)
-
             # Display game state information
             print("\n=== GAME STATE ===")
-            for key, value in state_data['game_state'].items():
-                print(f"{key}: {value}")
+            print(f"Turn: {snapshot.current_turn}")
+            print(f"Chapter: {snapshot.chapter_id}")
+            print(f"Phase: {snapshot.phase}")
+            print(f"Cursor: {snapshot.cursor_position}")
 
             # Display character information
             print("\n=== CHARACTERS ===")
-            for i, char in enumerate(state_data['characters']):
-                char_id = char.get('id', 0)
-                class_id = char.get('class', 0)
-
-                print(f"\nCharacter {i+1}: {get_character_name(char_id)} [ID: 0x{char_id:04X}]")
-                print(f"  Class: {get_class_name(class_id)} [ID: 0x{class_id:04X}]")
-
-                # Display position, level, etc.
-                print(f"  Position: {char.get('position', (0, 0))}")
-                print(f"  Level: {char.get('level', 1)}")
-                print(f"  HP: {char.get('hp', (0, 0))}")
-
-                # Display stats
-                if 'stats' in char:
-                    # Handle all stats values (there are 9 values in the data)
-                    stats = char['stats']
-                    if len(stats) >= 6:
-                        str_val, skl_val, spd_val, lck_val, def_val, res_val, mov_val, con_val, resc_val = stats[:9]
-                        print(f"  Stats: STR {str_val}, SKL {skl_val}, SPD {spd_val}, LCK {lck_val}, DEF {def_val}, RES {res_val}, MOV {mov_val}, CON {con_val}, RESC {resc_val}")
-                    else:
-                        print(f"  Stats: {stats}")
-
-                # Display turn status, hidden status, and status effect
-                if 'turn_status' in char:
-                    print(f"  Turn Status: {char.get('turn_status_text', 'Unknown')}")
-                if 'hidden_status' in char:
-                    print(f"  Hidden Status: {char.get('hidden_status_text', 'None')}")
-                if 'status_effect' in char:
-                    print(f"  Status Effect: {char.get('status_effect_text', 'None')}")
-
-                # Display items with their names
-                if 'items' in char:
-                    print(f"  Items:")
-                    for item_id, uses in char['items']:
-                        item_name = get_item_name(item_id)
-                        item_type = get_weapon_type(item_id)
-                        item_type_str = f" ({item_type})" if item_type else ""
-                        print(f"    - {item_name}{item_type_str}: {uses} uses [ID: 0x{item_id:02X}]")
+            for unit in snapshot.units:
+                print(f"\n{unit.name} ({unit.class_name})")
+                print(f"  Position: {unit.position}")
+                print(f"  Level: {unit.level}")
+                print(f"  HP: {unit.hp[0]}/{unit.hp[1]}")
+                print(f"  Stats: STR {unit.stats[0]}, SKL {unit.stats[1]}, SPD {unit.stats[2]}, LCK {unit.stats[3]}, DEF {unit.stats[4]}, RES {unit.stats[5]}")
+                print(f"  MOV: {unit.movement_range}")
+                print(f"  Status: {unit.turn_status_text}")
+                if unit.items:
+                    print("  Items:")
+                    for item_id, uses in unit.items:
+                        print(f"    - {get_item_name(item_id)}: {uses} uses")
 
             # Display enemy information
             print("\n=== ENEMIES ===")
-            for i, enemy in enumerate(state_data['enemies']):
-                enemy_id = enemy.get('id', 0)
-                class_id = enemy.get('class', 0)
+            for enemy in snapshot.enemies:
+                if enemy.is_alive and enemy.is_visible:  # Only show visible enemies
+                    print(f"\n{enemy.name} ({enemy.class_name})")
+                    print(f"  Position: {enemy.position}")
+                    print(f"  Level: {enemy.level}")
+                    print(f"  HP: {enemy.hp[0]}/{enemy.hp[1]}")
+                    print(f"  Status: {enemy.turn_status_text}")
 
-                print(f"\nEnemy {i+1}: {get_character_name(enemy_id)} [ID: 0x{enemy_id:04X}]")
-                print(f"  Class: {get_class_name(class_id)} [ID: 0x{class_id:04X}]")
-
-                # Display position, level, etc.
-                print(f"  Position: {enemy.get('position', (0, 0))}")
-                print(f"  Level: {enemy.get('level', 1)}")
-                print(f"  HP: {enemy.get('hp', (0, 0))}")
-
-                # Display stats
-                if 'stats' in enemy:
-                    # Handle all stats values (there are 9 values in the data)
-                    stats = enemy['stats']
-                    if len(stats) >= 6:
-                        str_val, skl_val, spd_val, lck_val, def_val, res_val, mov_val, con_val, resc_val = stats[:9]
-                        print(f"  Stats: STR {str_val}, SKL {skl_val}, SPD {spd_val}, LCK {lck_val}, DEF {def_val}, RES {res_val}, MOV {mov_val}, CON {con_val}, RESC {resc_val}")
+            # Display map
+            print("\n=== MAP ===")
+            print(f"Dimensions: {snapshot.map.width}x{snapshot.map.height}")
+            for y in range(snapshot.map.height):
+                line = ""
+                for x in range(snapshot.map.width):
+                    terrain = snapshot.map.get_terrain_at(x, y)
+                    unit = snapshot.get_unit_at(x, y)
+                    if unit:
+                        if unit.is_enemy:
+                            if unit.is_visible:  # Only show visible enemies
+                                line += "! "
+                            else:
+                                line += terrain + " "  # Hide invisible enemies
+                        else:
+                            line += "P "
                     else:
-                        print(f"  Stats: {stats}")
-
-                # Display turn status, hidden status, and status effect
-                if 'turn_status' in enemy:
-                    print(f"  Turn Status: {enemy.get('turn_status_text', 'Unknown')}")
-                if 'hidden_status' in enemy:
-                    print(f"  Hidden Status: {enemy.get('hidden_status_text', 'None')}")
-                if 'status_effect' in enemy:
-                    print(f"  Status Effect: {enemy.get('status_effect_text', 'None')}")
-
-                # Display items with their names
-                if 'items' in enemy:
-                    print(f"  Items:")
-                    for item_id, uses in enemy['items']:
-                        item_name = get_item_name(item_id)
-                        item_type = get_weapon_type(item_id)
-                        item_type_str = f" ({item_type})" if item_type else ""
-                        print(f"    - {item_name}{item_type_str}: {uses} uses [ID: 0x{item_id:02X}]")
-
-            # Get cursor position and check for unit at that position
-            cursor_x = state_data['game_state'].get('cursor_x')
-            cursor_y = state_data['game_state'].get('cursor_y')
-
-            if cursor_x is not None and cursor_y is not None:
-                # Check if there's a unit at cursor position
-                unit, unit_type = FEStateParser.get_unit_at_position(
-                    state_data, cursor_x, cursor_y
-                )
-
-                if unit:
-                    unit_id = unit.get('id', 0)
-                    class_id = unit.get('class', 0)
-
-                    print(f"\n=== UNIT AT CURSOR ({cursor_x}, {cursor_y}) ===")
-                    print(f"Type: {unit_type}")
-                    print(f"Character: {get_character_name(unit_id)} [ID: 0x{unit_id:04X}]")
-                    print(f"Class: {get_class_name(class_id)} [ID: 0x{class_id:04X}]")
-                    print(f"HP: {unit.get('hp', (0, 0))}")
-
-                    # Display turn status, hidden status, and status effect
-                    if 'turn_status' in unit:
-                        print(f"Turn Status: {unit.get('turn_status_text', 'Unknown')}")
-                    if 'hidden_status' in unit:
-                        print(f"Hidden Status: {unit.get('hidden_status_text', 'None')}")
-                    if 'status_effect' in unit:
-                        print(f"Status Effect: {unit.get('status_effect_text', 'None')}")
-
-                    # Display items with their names
-                    if 'items' in unit:
-                        print(f"Items:")
-                        for item_id, uses in unit['items']:
-                            item_name = get_item_name(item_id)
-                            item_type = get_weapon_type(item_id)
-                            item_type_str = f" ({item_type})" if item_type else ""
-                            print(f"  - {item_name}{item_type_str}: {uses} uses [ID: 0x{item_id:02X}]")
-
-                # If we have cursor position and map data, show terrain at cursor
-                if map_data and cursor_x < map_data["width"] and cursor_y < map_data["height"]:
-                    terrain_symbol = map_data["terrain_grid"][cursor_y][cursor_x]
-                    print(f"\n=== TERRAIN AT CURSOR ({cursor_x}, {cursor_y}) ===")
-                    print(f"Symbol: {terrain_symbol}")
-
-            # Display map if we have it
-            if map_data:
-                display_map(map_data, cursor_x, cursor_y)
+                        line += terrain + " " if terrain else "? "
+                print(line)
 
             # Wait before polling again
             time.sleep(interval)
@@ -299,6 +213,9 @@ def main():
     # Check if files exist
     if not os.path.exists(state_file_path):
         print(f"Error: State file not found at {state_file_path}")
+        return
+    if not os.path.exists(map_file_path):
+        print(f"Error: Map file not found at {map_file_path}")
         return
 
     # Start monitoring the FE state
