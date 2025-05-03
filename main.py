@@ -145,7 +145,7 @@ def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
             print("\n=== GAME STATE ===")
             print(f"Turn: {snapshot.current_turn}")
             print(f"Chapter: {snapshot.chapter_id}")
-            print(f"Phase: {snapshot.phase}")
+            print(f"Phase: {snapshot.phase_text}")
             print(f"Cursor: {snapshot.cursor_position}")
 
             # Display character information
@@ -183,10 +183,8 @@ def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
                     unit = snapshot.get_unit_at(x, y)
                     if unit:
                         if unit.is_enemy:
-                            if unit.is_visible:  # Only show visible enemies
-                                line += "! "
-                            else:
-                                line += terrain + " "  # Hide invisible enemies
+                            # THIS LOGIC DOESNT HIDE ANY ENEMIES
+                            line += "! "
                         else:
                             line += "P "
                     else:

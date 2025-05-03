@@ -170,11 +170,21 @@ class TurnSnapshot:
     """Represents the complete game state at a given turn"""
     current_turn: int
     chapter_id: int
-    phase: str  # "Player", "Enemy", "Other"
+    turn_phase: int  # 0x00 = Player, 0x40 = Neutral, 0x80 = Enemy
     cursor_position: Tuple[int, int]
     map: TerrainMap
     units: List[Unit]
     enemies: List[Unit]
+
+    @property
+    def phase_text(self) -> str:
+        """Get human-readable text for the current turn phase"""
+        phase_map = {
+            0x00: "Player",
+            0x40: "Neutral",
+            0x80: "Enemy"
+        }
+        return phase_map.get(self.turn_phase, f"Unknown (0x{self.turn_phase:02X})")
 
     @classmethod
     def from_files(cls, state_file_path: str, map_file_path: str) -> 'TurnSnapshot':
@@ -211,7 +221,8 @@ class TurnSnapshot:
         # Process enemies
         for enemy_data in state_data['enemies']:
             unit = cls._create_unit(enemy_data, is_enemy=True)
-            if unit and unit.is_alive and unit.is_visible:  # Only include alive and visible enemies
+            # IMPORTANT - THIS CONTROLS WHETHER ENEMIES ARE MARKED OR NOT (SEEN AND UNSEEN)
+            if unit and unit.is_alive:# and unit.is_visible:  # Only include alive and visible enemies
                 enemies.append(unit)
 
         # Create terrain map
@@ -222,11 +233,19 @@ class TurnSnapshot:
             legend=map_data['legend']
         )
 
+        # Get turn_phase from turn_phase_raw
+        turn_phase = state_data['game_state'].get('turn_phase_raw', 0)
+        if isinstance(turn_phase, str):
+            if turn_phase.startswith('0x'):
+                turn_phase = int(turn_phase, 16)
+            else:
+                turn_phase = int(turn_phase)
+
         # Create snapshot
         return cls(
             current_turn=state_data['game_state'].get('current_turn', 0),
             chapter_id=state_data['game_state'].get('chapter_id', 0),
-            phase=state_data['game_state'].get('phase', 'Unknown'),
+            turn_phase=turn_phase,
             cursor_position=(
                 state_data['game_state'].get('cursor_x', 0),
                 state_data['game_state'].get('cursor_y', 0)
