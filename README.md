@@ -44,8 +44,6 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 ---
 
 [![Watch the video](https://img.youtube.com/vi/bAnNI3luRTs/hqdefault.jpg)](https://www.youtube.com/embed/bAnNI3luRTs)
-[<img src="https://img.youtube.com/vi/bAnNI3luRTs/hqdefault.jpg" width="600" height="300"/>](https://www.youtube.com/embed/bAnNI3luRTs)
-
 
 ## Software and Hardware Requirements
 
