@@ -65,10 +65,10 @@ def find_empty_tile(snapshot):
     return (0, 0)
 
 def end_turn_in_bizhawk(cursor_pos, snapshot):
-    # Only allow ending turn if all units have can_act == False and has_acted == True
+    # Only block ending turn if the unit with id==1 (Eliwood) can still act or hasn't acted
     for unit in snapshot.units:
-        if unit.can_act or not unit.has_acted:
-            print(f"[END TURN BLOCKED] Unit {unit.name} can still act (can_act={unit.can_act}, has_acted={unit.has_acted}, turn_status=0x{unit.turn_status:02X}).")
+        if unit.id == 1 and (unit.can_act or not unit.has_acted):
+            print(f"[END TURN BLOCKED] Eliwood (id=1) can still act (can_act={unit.can_act}, has_acted={unit.has_acted}, turn_status=0x{unit.turn_status:02X}).")
             return cursor_pos
     # Find a MOVED unit (turn_status == 0x02) to end turn on
     moved_unit = next((u for u in snapshot.units if u.turn_status == 0x02), None)
@@ -848,12 +848,21 @@ def trial_run():
                             for u in actionable_units:
                                 if u.id == unit.id:
                                     u.turn_status = 0x02
+                        # Update the acting unit's position after any action
                         for u in actionable_units:
                             if u.id == unit.id:
                                 u.position = chosen_action.target_position
                         # Remove enemy if killed (use battle struct info)
                         if chosen_action.action_type == 'attack' and chosen_action.target_unit is not None and chosen_will_kill:
                             internal_enemies = [e for e in internal_enemies if e.id != chosen_action.target_unit.id]
+                        # --- NEW: After a non-lethal attack, update the acting unit's position to match the new snapshot ---
+                        if chosen_action.action_type == 'attack' and (not chosen_will_kill):
+                            # Find the latest position of the acting unit in the new snapshot
+                            updated_unit = next((u for u in snapshot.units if u.id == unit.id), None)
+                            if updated_unit:
+                                for u in actionable_units:
+                                    if u.id == unit.id:
+                                        u.position = updated_unit.position
                     replay_buffer.append((prev_snapshot, chosen_action, reward, snapshot))
                     episode_experience.append((prev_snapshot, chosen_action, reward, snapshot))
                     if is_player_dead(snapshot):

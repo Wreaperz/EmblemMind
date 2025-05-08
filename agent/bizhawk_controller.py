@@ -60,4 +60,8 @@ def press_keys(keys, duration=0.1):
         time.sleep(0.05)
 
 def press_reset():
+    press_key('1')
+    time.sleep(0.1)
+    press_key('P')
+    time.sleep(0.1)
     press_key(GBA_KEY_MAP['RESET'])
