@@ -1,771 +1,251 @@
-Spritemap file for chapter 46 not found.
-
 === GAME STATE ===
-game_id: FE7
-tactician: Axe
-tactician_raw: 41,78,65,00,00,00,00
-turn_phase: NPC
-turn_phase_raw: 64
-current_turn: 0
-chapter_id: 46
-gold: 15579
-cursor_x: 0
-cursor_y: 0
-camera_x: 1776
-camera_y: 13696
+Turn: 4
+Chapter: 2
+Phase: Player
+Cursor: (1, 4)
+
+=== REALTIME DATA ===
+Cursor (realtime) X: 1
+Cursor (realtime) Y: 4
+Move destination X: 6
+Move destination Y: 6
+Deployment ID: 130
+
+=== BATTLE STRUCTS (0x48-0x7D) ===
+Attacker: [180, 206, 189, 8, 4, 2, 190, 8, 3, 97, 0, 1, 1, 0, 0, 0, 1, 4, 18, 18, 6, 9, 10, 2, 1, 6, 5, 0, 0, 5, 1, 29, 107, 2, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 29, 1, 31, 1, 0, 0, 0, 0, 0, 1, 15, 1, 12, 1, 20, 0, 0, 12, 0, 3, 0, 10, 0, 126, 0, 46, 0, 100, 0, 4, 0, 6, 0, 4, 0, 0, 0, 23, 255, 3, 74, 18, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0]
+Attacker (hex): B4 CE BD 08 04 02 BE 08 03 61 00 01 01 00 00 00 01 04 12 12 06 09 0A 02 01 06 05 00 00 05 01 1D 6B 02 00 00 00 00 00 00 33 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 01 1D 01 1F 01 00 00 00 00 00 01 0F 01 0C 01 14 00 00 0C 00 03 00 0A 00 7E 00 2E 00 64 00 04 00 06 00 04 00 00 00 17 FF 03 4A 12 00 00 00 00 00 00 00 00 03 01 00
+Attacker (parsed):
+  level: 3
+  exp: 97
+  ai_flags: 0
+  deployment: 1
+  unit_state: 1
+  x: 1
+  y: 4
+  max_hp: 18
+  cur_hp: 18
+  str: 6
+  skl: 9
+  spd: 10
+  def: 2
+  res: 1
+  lck: 6
+  con_bonus: 5
+  mov_bonus: 5
+  items: [(7425, 27421), (619, 2), (0, 0), (0, 0), (0, 13056)]
+  sword_rank: 51
+  lance_rank: 0
+  axe_rank: 0
+  bow_rank: 0
+  staff_rank: 0
+  anima_rank: 0
+  light_rank: 0
+  dark_rank: 0
+  status: 0
+  status_duration: 0
+  equipped_item_after: 7425
+  equipped_item_before: 7937
+  weapon_ability_word: 1
+  weapon_type: 0
+  weapon_slot: 0
+  can_counter: 1
+  wtriangle_hit: 15
+  wtriangle_dmg: 1
+  terrain_id: 12
+  terrain_def: 1
+  terrain_avo: 20
+  terrain_res: 0
+  attack: 12
+  defense: 3
+  attack_speed: 10
+  hit: 126
+  avoid: 46
+  battle_hit: 100
+  crit: 4
+  crit_avoid: 6
+  battle_crit: 4
+  lethality: 0
+  exp_gain: 23
+  status_to_write: 255
+  level_pre_battle: 3
+  exp_pre_battle: 74
+  cur_hp_battle: 18
+  hp_change: 0
+  str_change: 0
+  skl_change: 0
+  spd_change: 0
+  def_change: 0
+  res_change: 0
+  luk_change: 0
+  con_change: 0
+  wexp_multiplier: 3
+  nonzero_damage: 1
+  weapon_broke: 0
+Defender: [32, 234, 189, 8, 16, 20, 190, 8, 1, 255, 0, 130, 0, 0, 64, 0, 2, 4, 20, 0, 3, 1, 4, 3, 0, 0, 12, 0, 0, 5, 31, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 141, 0, 0, 0, 76, 159, 3, 2, 1, 0, 8, 1, 0, 1, 0, 0, 31, 45, 31, 45, 1, 0, 0, 0, 2, 0, 1, 241, 255, 1, 0, 0, 0, 0, 10, 0, 3, 0, 4, 0, 62, 0, 8, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 1, 255, 11, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+Defender (hex): 20 EA BD 08 10 14 BE 08 01 FF 00 82 00 00 40 00 02 04 14 00 03 01 04 03 00 00 0C 00 00 05 1F 2D 00 00 00 00 00 00 00 00 00 00 1F 00 00 00 00 00 00 00 00 00 00 00 00 00 8D 00 00 00 4C 9F 03 02 01 00 08 01 00 01 00 00 1F 2D 1F 2D 01 00 00 00 02 00 01 F1 FF 01 00 00 00 00 0A 00 03 00 04 00 3E 00 08 00 10 00 00 00 00 00 00 00 00 00 00 FF 01 FF 0B 00 00 00 00 00 00 00 00 01 00 00
+Defender (parsed):
+  level: 1
+  exp: 255
+  ai_flags: 0
+  deployment: 130
+  unit_state: 4194304
+  x: 2
+  y: 4
+  max_hp: 20
+  cur_hp: 0
+  str: 3
+  skl: 1
+  spd: 4
+  def: 3
+  res: 0
+  lck: 0
+  con_bonus: 12
+  mov_bonus: 5
+  items: [(11551, 45), (0, 0), (0, 0), (0, 0), (0, 0)]
+  sword_rank: 0
+  lance_rank: 0
+  axe_rank: 31
+  bow_rank: 0
+  staff_rank: 0
+  anima_rank: 0
+  light_rank: 0
+  dark_rank: 0
+  status: 0
+  status_duration: 0
+  equipped_item_after: 11551
+  equipped_item_before: 11551
+  weapon_ability_word: 1
+  weapon_type: 2
+  weapon_slot: 0
+  can_counter: 1
+  wtriangle_hit: 241
+  wtriangle_dmg: 255
+  terrain_id: 1
+  terrain_def: 0
+  terrain_avo: 0
+  terrain_res: 0
+  attack: 10
+  defense: 3
+  attack_speed: 4
+  hit: 62
+  avoid: 8
+  battle_hit: 16
+  crit: 0
+  crit_avoid: 0
+  battle_crit: 0
+  lethality: 0
+  exp_gain: 0
+  status_to_write: 255
+  level_pre_battle: 1
+  exp_pre_battle: 255
+  cur_hp_battle: 11
+  hp_change: 0
+  str_change: 0
+  skl_change: 0
+  spd_change: 0
+  def_change: 0
+  res_change: 0
+  luk_change: 0
+  con_change: 0
+  wexp_multiplier: 1
+  nonzero_damage: 0
+  weapon_broke: 0
 
 === CHARACTERS ===
 
-Character 1: Hector [ID: 0xCE80]
-  Class: Great Lord [ID: 0x0450]
-  Position: (8, 19)
-  Level: 20
-  HP: (60, 60)
-  Stats: STR 30, SKL 24, SPD 24, LCK 16, DEF 29, RES 18, MOV 2, CON 2, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: Will drop item
-  Status Effect: None
+Lyn (Lord (Lyn))
+  Position: (1, 4)
+  Level: 3
+  Exp: 97
+  HP: 18/18
+  Stats: STR 6, SKL 9, SPD 10, LCK 6, DEF 2, RES 1
+  MOV: 0
+  Status: Not moved
   Items:
-    - Armads (Item): 25 uses [ID: 0x85]
-    - Wolf Beil (Item): 30 uses [ID: 0x8D]
-    - Silver Axe (Axe): 20 uses [ID: 0x21]
-    - Killer Axe (Axe): 20 uses [ID: 0x24]
+    - Iron Sword: 29 uses
+    - Vulnerary: 2 uses
 
-Character 2: Eliwood [ID: 0xCE4C]
-  Class: Knight Lord [ID: 0x03A8]
-  Position: (7, 20)
-  Level: 4
-  HP: (34, 34)
-  Stats: STR 15, SKL 16, SPD 14, LCK 18, DEF 13, RES 11, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Durandal (Item): 20 uses [ID: 0x84]
-    - Rapier (Sword): 8 uses [ID: 0x09]
-    - Silver Sword (Sword): 20 uses [ID: 0x04]
-    - Killing Edge (Sword): 17 uses [ID: 0x0D]
-
-Character 3: Lyn [ID: 0xD73C]
-  Class: Blade Lord [ID: 0x03FC]
-  Position: (9, 20)
-  Level: 4
-  HP: (32, 32)
-  Stats: STR 14, SKL 22, SPD 17, LCK 11, DEF 9, RES 8, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Sol Katti (Item): 30 uses [ID: 0x8C]
-    - Mani Katti (Sword): 17 uses [ID: 0x0A]
-    - Killing Edge (Sword): 18 uses [ID: 0x0D]
-    - Silver Sword (Sword): 9 uses [ID: 0x04]
-
-Character 4: Nils [ID: 0xD5D0]
-  Class: Bard [ID: 0x16B0]
-  Position: (9, 19)
-  Level: 4
-  HP: (16, 16)
-  Stats: STR 0, SKL 0, SPD 14, LCK 13, DEF 5, RES 5, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Ninis's Grace (Item): 15 uses [ID: 0x7D]
-    - Thor's Ire (Item): 15 uses [ID: 0x7E]
-    - Iron Rune (Item): 0 uses [ID: 0x7B]
-
-Character 5: Athos [ID: 0xD604]
-  Class: Archsage [ID: 0x1704]
-  Position: (8, 20)
-  Level: 20
-  HP: (40, 40)
-  Stats: STR 30, SKL 24, SPD 20, LCK 25, DEF 20, RES 28, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Forblaze (Anima): 20 uses [ID: 0x3C]
-    - Aureola (Item): 20 uses [ID: 0x86]
-
-Character 6: Guy [ID: 0xCF50]
-  Class: Swordmaster (M) [ID: 0x069C]
-  Position: (6, 21)
-  Level: 14
-  HP: (53, 53)
-  Stats: STR 18, SKL 22, SPD 30, LCK 20, DEF 11, RES 13, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Runesword (Sword): 11 uses [ID: 0x11]
-    - Silver Sword (Sword): 20 uses [ID: 0x04]
-    - Killing Edge (Sword): 6 uses [ID: 0x0D]
-
-Character 7: Jaffar [ID: 0xD568]
-  Class: Assassin [ID: 0x15B4]
-  Position: (8, 21)
-  Level: 20
-  HP: (39, 39)
-  Stats: STR 20, SKL 30, SPD 27, LCK 13, DEF 17, RES 13, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Killing Edge (Sword): 11 uses [ID: 0x0D]
-    - Runesword (Sword): 13 uses [ID: 0x11]
-    - Silver Sword (Sword): 13 uses [ID: 0x04]
-
-Character 8: Karel [ID: 0xCF84]
-  Class: Swordmaster (M) [ID: 0x069C]
-  Position: (8, 23)
-  Level: 15
-  HP: (36, 36)
-  Stats: STR 20, SKL 26, SPD 25, LCK 16, DEF 13, RES 12, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Killing Edge (Sword): 13 uses [ID: 0x0D]
-    - Silver Sword (Sword): 20 uses [ID: 0x04]
-    - Wo Dao (Sword): 20 uses [ID: 0x0C]
-
-Character 9: Karla [ID: 0xD944]
-  Class: Swordmaster (F) [ID: 0x06F0]
-  Position: (10, 21)
-  Level: 6
-  HP: (30, 30)
-  Stats: STR 14, SKL 22, SPD 18, LCK 17, DEF 11, RES 12, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Killing Edge (Sword): 8 uses [ID: 0x0D]
-    - Silver Sword (Sword): 20 uses [ID: 0x04]
-    - Wo Dao (Sword): 11 uses [ID: 0x0C]
-
-Character 10: Pent [ID: 0xD25C]
-  Class: Sage (M) [ID: 0x0C84]
-  Position: (7, 22)
-  Level: 20
-  HP: (40, 40)
-  Stats: STR 25, SKL 24, SPD 26, LCK 17, DEF 15, RES 22, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Thunder (Anima): 12 uses [ID: 0x38]
-    - Fimbulvetr (Anima): 20 uses [ID: 0x3B]
-    - Thunder (Anima): 35 uses [ID: 0x38]
-    - Elfire (Anima): 30 uses [ID: 0x39]
-    - Bolting (Anima): 5 uses [ID: 0x3A]
-
-Character 11: Renault [ID: 0xD1C0]
-  Class: Bishop (M) [ID: 0x0B34]
-  Position: (9, 22)
-  Level: 17
-  HP: (44, 44)
-  Stats: STR 13, SKL 23, SPD 20, LCK 10, DEF 15, RES 18, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Divine (Light): 15 uses [ID: 0x40]
-    - Fortify (Staff): 8 uses [ID: 0x4E]
-    - Silence (Staff): 3 uses [ID: 0x50]
-    - Rescue (Staff): 3 uses [ID: 0x54]
-
-Character 12: Hawkeye [ID: 0xD500]
-  Class: Berserker [ID: 0x14B8]
-  Position: (6, 23)
-  Level: 12
-  HP: (52, 52)
-  Stats: STR 21, SKL 18, SPD 14, LCK 15, DEF 14, RES 15, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x01)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Brave Axe (Axe): 26 uses [ID: 0x23]
-    - Killer Axe (Axe): 20 uses [ID: 0x24]
-    - Swordslayer (Axe): 20 uses [ID: 0x2B]
-    - Silver Axe (Axe): 18 uses [ID: 0x21]
-
-Character 13: Marcus [ID: 0xD360]
-  Class: Paladin (M) [ID: 0x0F24]
-  Position: (255, 22)
-  Level: 20
-  HP: (47, 47)
-  Stats: STR 18, SKL 24, SPD 16, LCK 12, DEF 14, RES 12, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Sword (Sword): 15 uses [ID: 0x04]
-    - Silver Lance (Lance): 15 uses [ID: 0x17]
-    - Silver Axe (Axe): 4 uses [ID: 0x21]
-    - Killer Axe (Axe): 8 uses [ID: 0x24]
-
-Character 14: Isadora [ID: 0xD8A8]
-  Class: Paladin (F) [ID: 0x0F78]
-  Position: (255, 21)
-  Level: 12
-  HP: (37, 37)
-  Stats: STR 17, SKL 16, SPD 23, LCK 18, DEF 11, RES 8, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Killer Axe (Axe): 19 uses [ID: 0x24]
-    - Silver Sword (Sword): 18 uses [ID: 0x04]
-    - Killer Lance (Lance): 19 uses [ID: 0x1A]
-
-Character 15: Lowen [ID: 0xD32C]
-  Class: Paladin (M) [ID: 0x0F24]
-  Position: (255, 22)
-  Level: 18
-  HP: (48, 48)
-  Stats: STR 17, SKL 14, SPD 14, LCK 16, DEF 19, RES 7, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Javelin (Lance): 10 uses [ID: 0x1C]
-    - Killer Lance (Lance): 2 uses [ID: 0x1A]
-    - Silver Lance (Lance): 18 uses [ID: 0x17]
-
-Character 16: Legault [ID: 0xD910]
-  Class: Assassin [ID: 0x15B4]
-  Position: (255, 23)
+Sain (Cavalier (M))
+  Position: (3, 5)
   Level: 1
-  HP: (36, 36)
-  Stats: STR 13, SKL 16, SPD 20, LCK 16, DEF 11, RES 6, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
+  Exp: 35
+  HP: 19/19
+  Stats: STR 8, SKL 4, SPD 6, LCK 4, DEF 6, RES 0
+  MOV: 0
+  Status: Not moved
   Items:
-    - Killing Edge (Sword): 6 uses [ID: 0x0D]
-    - Member Card (Item): 1 uses [ID: 0x71]
+    - Iron Sword: 45 uses
+    - Iron Lance: 45 uses
+    - Vulnerary: 1 uses
 
-Character 17: Merlinus [ID: 0xD638]
-  Class: Transporter (Cart) [ID: 0x1E90]
-  Position: (255, 15)
-  Level: 8
-  HP: (44, 44)
-  Stats: STR 0, SKL 20, SPD 20, LCK 30, DEF 13, RES 7, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x08)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 18: Priscilla [ID: 0xD394]
-  Class: Troubadour [ID: 0x0FCC]
-  Position: (255, 22)
-  Level: 7
-  HP: (17, 17)
-  Stats: STR 8, SKL 9, SPD 12, LCK 10, DEF 4, RES 9, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Mend (Staff): 5 uses [ID: 0x4B]
-    - Restore (Staff): 7 uses [ID: 0x4F]
-    - Vulnerary (Item): 3 uses [ID: 0x6B]
-    - Sleep (Staff): 2 uses [ID: 0x51]
-    - Guiding Ring (Item): 1 uses [ID: 0x67]
-
-Character 19: Louise [ID: 0xD124]
-  Class: Sniper (F) [ID: 0x0A38]
-  Position: (255, 20)
-  Level: 4
-  HP: (28, 28)
-  Stats: STR 12, SKL 14, SPD 17, LCK 16, DEF 9, RES 12, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 20: Vaida [ID: 0xD4CC]
-  Class: Wyvern Lord (F) [ID: 0x1368]
-  Position: (255, 29)
-  Level: 11
-  HP: (45, 45)
-  Stats: STR 21, SKL 19, SPD 14, LCK 11, DEF 21, RES 6, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Lance (Lance): 19 uses [ID: 0x17]
-    - Killer Lance (Lance): 20 uses [ID: 0x1A]
-    - Delphi Shield (Item): 0 uses [ID: 0x70]
-
-Character 21: Heath [ID: 0xD498]
-  Class: Wyvern Rider (M) [ID: 0x126C]
-  Position: (255, 29)
-  Level: 14
-  HP: (35, 35)
-  Stats: STR 14, SKL 13, SPD 13, LCK 8, DEF 10, RES 3, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Steel Lance (Lance): 18 uses [ID: 0x16]
-    - Javelin (Lance): 19 uses [ID: 0x1C]
-    - Axereaver (Lance): 6 uses [ID: 0x1E]
-    - Killer Lance (Lance): 20 uses [ID: 0x1A]
-
-Character 22: Bartre [ID: 0xCFEC]
-  Class: Warrior [ID: 0x0798]
-  Position: (255, 27)
-  Level: 5
-  HP: (44, 44)
-  Stats: STR 19, SKL 12, SPD 8, LCK 6, DEF 13, RES 8, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Devil Axe (Axe): 16 uses [ID: 0x27]
-    - Iron Bow (Bow): 34 uses [ID: 0x2C]
-    - Hand Axe (Axe): 15 uses [ID: 0x28]
-
-Character 23: Matthew [ID: 0xD534]
-  Class: Thief (M) [ID: 0x150C]
-  Position: (255, 29)
-  Level: 16
-  HP: (28, 28)
-  Stats: STR 6, SKL 10, SPD 19, LCK 10, DEF 5, RES 2, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Steel Sword (Sword): 28 uses [ID: 0x03]
-    - Iron Sword (Sword): 44 uses [ID: 0x01]
-    - Lockpick (Item): 5 uses [ID: 0x6A]
-    - Lockpick (Item): 5 uses [ID: 0x6A]
-
-Character 24: Serra [ID: 0xD18C]
-  Class: Cleric [ID: 0x0AE0]
-  Position: (255, 29)
-  Level: 4
-  HP: (19, 19)
-  Stats: STR 2, SKL 6, SPD 8, LCK 9, DEF 3, RES 6, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Mend (Staff): 18 uses [ID: 0x4B]
-    - Heal (Staff): 2 uses [ID: 0x4A]
-    - Vulnerary (Item): 3 uses [ID: 0x6B]
-
-Character 25: Nino [ID: 0xD228]
-  Class: Mage (F) [ID: 0x0C30]
-  Position: (255, 13)
-  Level: 5
-  HP: (19, 19)
-  Stats: STR 7, SKL 8, SPD 11, LCK 10, DEF 4, RES 7, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Elixir (Item): 3 uses [ID: 0x6C]
-    - Elixir (Item): 3 uses [ID: 0x6C]
-    - Elixir (Item): 3 uses [ID: 0x6C]
-
-Character 26: Ninian [ID: 0xD59C]
-  Class: Dancer [ID: 0x165C]
-  Position: (255, 13)
+Kent (Cavalier (M))
+  Position: (2, 5)
   Level: 1
-  HP: (14, 14)
-  Stats: STR 0, SKL 0, SPD 12, LCK 10, DEF 5, RES 4, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x09)
-  Hidden Status: None
-  Status Effect: None
+  Exp: 91
+  HP: 20/20
+  Stats: STR 6, SKL 6, SPD 7, LCK 2, DEF 5, RES 1
+  MOV: 0
+  Status: Not moved
   Items:
-    - Vulnerary (Item): 3 uses [ID: 0x6B]
-
-Character 27: Lucius [ID: 0xD158]
-  Class: Bishop (M) [ID: 0x0B34]
-  Position: (255, 17)
-  Level: 3
-  HP: (30, 30)
-  Stats: STR 21, SKL 15, SPD 16, LCK 9, DEF 6, RES 18, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0D)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Shine (Light): 12 uses [ID: 0x3F]
-    - Heal (Staff): 27 uses [ID: 0x4A]
-    - Divine (Light): 25 uses [ID: 0x40]
-    - Aura (Light): 20 uses [ID: 0x42]
-    - Vulnerary (Item): 3 uses [ID: 0x6B]
-
-Character 28: Rath [ID: 0xD840]
-  Class: Nomad (M) [ID: 0x1074]
-  Position: (255, 22)
-  Level: 11
-  HP: (29, 29)
-  Stats: STR 10, SKL 10, SPD 13, LCK 6, DEF 8, RES 2, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0D)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Short Bow (Bow): 11 uses [ID: 0x32]
-    - Long Bow (Bow): 9 uses [ID: 0x33]
-    - Light Rune (Item): 1 uses [ID: 0x7A]
-
-Character 29: Wil [ID: 0xD770]
-  Class: Archer (M) [ID: 0x093C]
-  Position: (255, 15)
-  Level: 5
-  HP: (21, 21)
-  Stats: STR 6, SKL 5, SPD 6, LCK 8, DEF 5, RES 2, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 30: Rebecca [ID: 0xD0F0]
-  Class: Archer (F) [ID: 0x0990]
-  Position: (255, 17)
-  Level: 2
-  HP: (17, 17)
-  Stats: STR 4, SKL 5, SPD 7, LCK 5, DEF 3, RES 1, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 31: Florina [ID: 0xD80C]
-  Class: Pegasus Knight [ID: 0x11C4]
-  Position: (255, 5)
-  Level: 3
-  HP: (18, 18)
-  Stats: STR 6, SKL 8, SPD 9, LCK 8, DEF 4, RES 5, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 32: Dorcas [ID: 0xCFB8]
-  Class: Fighter [ID: 0x0744]
-  Position: (255, 6)
-  Level: 3
-  HP: (30, 30)
-  Stats: STR 7, SKL 7, SPD 6, LCK 3, DEF 3, RES 0, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 33: Erk [ID: 0xD1F4]
-  Class: Mage (M) [ID: 0x0BDC]
-  Position: (255, 20)
-  Level: 5
-  HP: (21, 21)
-  Stats: STR 8, SKL 10, SPD 8, LCK 4, DEF 2, RES 5, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Pure Water (Item): 3 uses [ID: 0x6D]
-    - Pure Water (Item): 3 uses [ID: 0x6D]
-    - Pure Water (Item): 3 uses [ID: 0x6D]
-    - Antitoxin (Item): 3 uses [ID: 0x6E]
-
-Character 34: Oswin [ID: 0xD054]
-  Class: Knight (M) [ID: 0x07EC]
-  Position: (255, 4)
-  Level: 11
-  HP: (30, 30)
-  Stats: STR 14, SKL 10, SPD 5, LCK 4, DEF 14, RES 4, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 35: Kent [ID: 0xD7A4]
-  Class: Cavalier (M) [ID: 0x0E7C]
-  Position: (255, 5)
-  Level: 5
-  HP: (23, 23)
-  Stats: STR 8, SKL 7, SPD 8, LCK 4, DEF 6, RES 1, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 36: Sain [ID: 0xD7D8]
-  Class: Cavalier (M) [ID: 0x0E7C]
-  Position: (255, 21)
-  Level: 4
-  HP: (22, 22)
-  Stats: STR 9, SKL 5, SPD 7, LCK 5, DEF 7, RES 0, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 37: Raven [ID: 0xCEE8]
-  Class: Mercenary [ID: 0x04A4]
-  Position: (255, 9)
-  Level: 6
-  HP: (26, 26)
-  Stats: STR 8, SKL 11, SPD 13, LCK 2, DEF 5, RES 1, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 38: Canas [ID: 0xD290]
-  Class: Shaman (M) [ID: 0x0D2C]
-  Position: (255, 18)
-  Level: 8
-  HP: (21, 21)
-  Stats: STR 10, SKL 9, SPD 8, LCK 7, DEF 5, RES 8, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Mine (Item): 1 uses [ID: 0x79]
-    - Mine (Item): 1 uses [ID: 0x79]
-    - Light Rune (Item): 1 uses [ID: 0x7A]
-    - Light Rune (Item): 1 uses [ID: 0x7A]
-
-Character 39: Dart [ID: 0xD874]
-  Class: Pirate [ID: 0x1464]
-  Position: (255, 13)
-  Level: 8
-  HP: (34, 34)
-  Stats: STR 12, SKL 8, SPD 8, LCK 3, DEF 6, RES 1, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-
-Character 40: Fiora [ID: 0xD430]
-  Class: Pegasus Knight [ID: 0x11C4]
-  Position: (255, 4)
-  Level: 8
-  HP: (21, 21)
-  Stats: STR 9, SKL 11, SPD 14, LCK 6, DEF 6, RES 8, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x0B)
-  Hidden Status: None
-  Status Effect: None
-  Items:
+    - Iron Sword: 39 uses
+    - Iron Lance: 45 uses
+    - Vulnerary: 2 uses
 
 === ENEMIES ===
 
-Enemy 1: Nergal [ID: 0xDBE8]
-  Class: Dark Druid [ID: 0x1800]
-  Position: (8, 2)
-  Level: 20
-  HP: (75, 75)
-  Stats: STR 30, SKL 18, SPD 15, LCK 20, DEF 28, RES 30, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Ereshkigal (Item): 0 uses [ID: 0x8E]
+Glass (Mercenary)
+  Position: (11, 1)
+  Level: 3
+  HP: 20/20
+  Status: Not moved
 
-Enemy 2: Morph [ID: 0xE540]
-  Class: Sage (M) [ID: 0x0C84]
-  Position: (7, 3)
-  Level: 18
-  HP: (31, 31)
-  Stats: STR 17, SKL 12, SPD 11, LCK 0, DEF 8, RES 15, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Fimbulvetr (Anima): 20 uses [ID: 0x3B]
-    - Fortify (Staff): 8 uses [ID: 0x4E]
+Bandit (Brigand)
+  Position: (11, 3)
+  Level: 2
+  HP: 21/21
+  Status: Not moved
 
-Enemy 3: Morph [ID: 0xE540]
-  Class: Druid (M) [ID: 0x0DD4]
-  Position: (9, 3)
-  Level: 19
-  HP: (31, 31)
-  Stats: STR 22, SKL 11, SPD 12, LCK 0, DEF 7, RES 16, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Nosferatu (Dark): 20 uses [ID: 0x46]
-    - Berserk (Staff): 3 uses [ID: 0x52]
-    - Eclipse (Dark): 5 uses [ID: 0x47]
+Bandit (Brigand)
+  Position: (4, 4)
+  Level: 1
+  HP: 20/20
+  Status: Not moved
 
-Enemy 4: Morph [ID: 0xFF0C]
-  Class: Druid (M) [ID: 0x0DD4]
-  Position: (2, 12)
-  Level: 17
-  HP: (30, 30)
-  Stats: STR 19, SKL 10, SPD 11, LCK 0, DEF 7, RES 15, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Gespenst (Dark): 25 uses [ID: 0x49]
+Bandit (Brigand)
+  Position: (6, 6)
+  Level: 1
+  HP: 20/20
+  Status: Not moved
 
-Enemy 5: Kenneth (morph) [ID: 0x00AC]
-  Class: Bishop (M) [ID: 0x0B34]
-  Position: (3, 11)
-  Level: 20
-  HP: (56, 56)
-  Stats: STR 23, SKL 19, SPD 18, LCK 0, DEF 14, RES 29, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Luce (Light): 25 uses [ID: 0x43]
+Bandit (Brigand)
+  Position: (13, 8)
+  Level: 2
+  HP: 21/21
+  Status: Not moved
 
-Enemy 6: Morph [ID: 0xE540]
-  Class: Sage (M) [ID: 0x0C84]
-  Position: (4, 12)
-  Level: 18
-  HP: (33, 33)
-  Stats: STR 18, SKL 12, SPD 11, LCK 0, DEF 7, RES 15, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Fimbulvetr (Anima): 20 uses [ID: 0x3B]
-    - Bolting (Anima): 5 uses [ID: 0x3A]
-    - Physic (Staff): 15 uses [ID: 0x4D]
+=== MAP ===
+Dimensions: 15x10
+. . . . F F . . # # # # # D #
+. . . . . F F . # . . ! . . #
+. . C C . . . F # . . . . . #
+. . . . . F . . # . P ! P . #
+. P . . ! . F . # . . . . . #
+. . P P . # . . # . . . . . #
+. . . F . # ! . # # # . # # #
+H H . . # # . ^ # # # . # # #
+. . F . # . ^ ^ F . . . F ! F
+H . . . # . ^ . . F . . . F .
 
-Enemy 7: Lloyd (morph) [ID: 0xFFA8]
-  Class: Swordmaster (M) [ID: 0x069C]
-  Position: (12, 11)
-  Level: 20
-  HP: (52, 52)
-  Stats: STR 21, SKL 26, SPD 27, LCK 0, DEF 18, RES 22, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Regal Blade (Item): 25 uses [ID: 0x90]
+=== MOVEMENT/RANGE MAP (Selected Unit) ===
+* * * * * M M M M M M M M M M
+* * * * * * * M M M M ! M M M
+* * * * * * * * M M M M M M M
+* * * * * * * * M M M ! M M M
+* X * * ! * * M M M M M M M M
+* * P P * * M M M M M M M M M
+* * * * * * ! M M M M M M M M
+* * * * * M M M M M M M M M M
+* * * * * M M M M M M M M ! M
+* * * * * M M M M M M M M M M
 
-Enemy 8: Linus (morph) [ID: 0xFFDC]
-  Class: Hero (M) [ID: 0x054C]
-  Position: (14, 11)
-  Level: 20
-  HP: (60, 60)
-  Stats: STR 24, SKL 23, SPD 19, LCK 0, DEF 21, RES 19, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Brave Sword (Sword): 30 uses [ID: 0x0B]
-    - Tomahawk (Axe): 15 uses [ID: 0x29]
-
-Enemy 9: Morph [ID: 0xE540]
-  Class: Warrior [ID: 0x0798]
-  Position: (1, 17)
-  Level: 19
-  HP: (51, 51)
-  Stats: STR 21, SKL 11, SPD 12, LCK 0, DEF 10, RES 4, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Axe (Axe): 20 uses [ID: 0x21]
-    - Silver Bow (Bow): 20 uses [ID: 0x2E]
-
-Enemy 10: Brendan (morph) [ID: 0x0010]
-  Class: Warrior [ID: 0x0798]
-  Position: (2, 16)
-  Level: 20
-  HP: (65, 65)
-  Stats: STR 29, SKL 20, SPD 17, LCK 0, DEF 19, RES 17, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Basilikos (Item): 25 uses [ID: 0x92]
-
-Enemy 11: Morph [ID: 0xE540]
-  Class: General (M) [ID: 0x0894]
-  Position: (15, 17)
-  Level: 18
-  HP: (41, 41)
-  Stats: STR 16, SKL 9, SPD 5, LCK 0, DEF 20, RES 10, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Axe (Axe): 20 uses [ID: 0x21]
-    - Silver Lance (Lance): 20 uses [ID: 0x17]
-
-Enemy 12: Darin (morph) [ID: 0x00E0]
-  Class: General (M) [ID: 0x0894]
-  Position: (14, 16)
-  Level: 20
-  HP: (62, 62)
-  Stats: STR 23, SKL 18, SPD 15, LCK 0, DEF 29, RES 15, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Rex Hasta (Item): 25 uses [ID: 0x91]
-
-Enemy 13: Ursula (morph) [ID: 0x0078]
-  Class: Valkyrie [ID: 0x1020]
-  Position: (3, 21)
-  Level: 20
-  HP: (48, 48)
-  Stats: STR 24, SKL 22, SPD 22, LCK 0, DEF 16, RES 25, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Excalibur (Anima): 25 uses [ID: 0x3D]
-
-Enemy 14: Morph [ID: 0xFDD4]
-  Class: Sniper (M) [ID: 0x09E4]
-  Position: (12, 21)
-  Level: 17
-  HP: (38, 38)
-  Stats: STR 16, SKL 14, SPD 10, LCK 0, DEF 9, RES 7, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Bow (Bow): 20 uses [ID: 0x2E]
-    - Long Bow (Bow): 20 uses [ID: 0x33]
-
-Enemy 15: Uhai (morph) [ID: 0x0044]
-  Class: Nomad Trooper (M) [ID: 0x111C]
-  Position: (13, 22)
-  Level: 20
-  HP: (55, 55)
-  Stats: STR 22, SKL 26, SPD 25, LCK 0, DEF 18, RES 18, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: Special drop bonus
-  Status Effect: None
-  Items:
-    - Reinfleche (Item): 25 uses [ID: 0x93]
-
-Enemy 16: Jerme (morph) [ID: 0xDF90]
-  Class: Assassin [ID: 0x15B4]
-  Position: (2, 22)
-  Level: 20
-  HP: (53, 53)
-  Stats: STR 19, SKL 28, SPD 23, LCK 0, DEF 19, RES 16, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Runesword (Sword): 15 uses [ID: 0x11]
-
-Enemy 17: Morph [ID: 0xFDD4]
-  Class: Sniper (M) [ID: 0x09E4]
-  Position: (14, 21)
-  Level: 18
-  HP: (38, 38)
-  Stats: STR 14, SKL 14, SPD 10, LCK 0, DEF 9, RES 7, MOV 0, CON 0, RESC 0
-  Turn Status: Unknown (0x81)
-  Hidden Status: None
-  Status Effect: None
-  Items:
-    - Silver Bow (Bow): 20 uses [ID: 0x2E]
-    - Long Bow (Bow): 20 uses [ID: 0x33]
-
-Exiting...
+Exiting..

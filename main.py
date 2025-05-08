@@ -184,6 +184,15 @@ def parse_battle_struct(state_file_path, struct='attacker'):
         return data[offset] | (data[offset+1] << 8)
     def get_byte(offset):
         return data[offset]
+
+    # Fix item parsing - in FE GBA games, items are stored as:
+    # Lower byte (offset+0) = Item ID
+    # Upper byte (offset+1) = Number of uses
+    def get_item(offset):
+        item_id = data[offset]
+        uses = data[offset+1]
+        return (item_id, uses)
+
     battle_struct = {
         'level': get_byte(0x08),
         'exp': get_byte(0x09),
@@ -202,12 +211,13 @@ def parse_battle_struct(state_file_path, struct='attacker'):
         'lck': get_byte(0x19),
         'con_bonus': get_byte(0x1A),
         'mov_bonus': get_byte(0x1D),
+        # Fix item parsing - get_item instead of get_short for both ID and uses
         'items': [
-            (get_short(0x1E), get_short(0x1F)),
-            (get_short(0x20), get_short(0x21)),
-            (get_short(0x22), get_short(0x23)),
-            (get_short(0x24), get_short(0x25)),
-            (get_short(0x26), get_short(0x27)),
+            get_item(0x1E),
+            get_item(0x20),
+            get_item(0x22),
+            get_item(0x24),
+            get_item(0x26),
         ],
         'sword_rank': get_byte(0x28),
         'lance_rank': get_byte(0x29),
@@ -220,8 +230,11 @@ def parse_battle_struct(state_file_path, struct='attacker'):
         'status': get_byte(0x30),
         'status_duration': get_byte(0x31),
         # Battle-only fields:
-        'equipped_item_after': get_short(0x48),
-        'equipped_item_before': get_short(0x4A),
+        # For equipped items, also use get_byte for both ID and uses
+        'equipped_item_after': get_byte(0x48),
+        'equipped_item_after_uses': get_byte(0x49),
+        'equipped_item_before': get_byte(0x4A),
+        'equipped_item_before_uses': get_byte(0x4B),
         'weapon_ability_word': get_word(0x4C),
         'weapon_type': get_byte(0x50),
         'weapon_slot': get_byte(0x51),
@@ -260,6 +273,228 @@ def parse_battle_struct(state_file_path, struct='attacker'):
         'weapon_broke': get_byte(0x7D),
     }
     return battle_struct
+
+def format_battle_struct(battle_struct, struct_name="Unit"):
+    """Format battle struct into more readable sections with labels using RAM offset notes"""
+    if not battle_struct:
+        return "None"
+
+    weapon_types = {
+        0: "Sword", 1: "Lance", 2: "Axe", 3: "Bow",
+        4: "Staff", 5: "Anima", 6: "Light", 7: "Dark"
+    }
+
+    # Unit state flags (0x0C-0x0F)
+    unit_state_flags = {
+        # Lower byte (0x0C)
+        0x00000001: "Undeployed",
+        0x00000002: "Dead",
+        0x00000004: "Deployed",
+        0x00000008: "Not Movable",
+        0x00000010: "Has Moved",
+        0x00000020: "Has Acted",
+        0x00000040: "Grayed Out",
+        0x00000080: "Hidden",
+        0x00000100: "Rescuing",
+        0x00000200: "Being Rescued",
+        0x00000400: "Has Dropped",
+        0x00000800: "Under Roof",
+        # Byte 0x0D
+        0x00001000: "Inside Ballista",
+        0x00002000: "Drop Last Item",
+        0x00004000: "Afa's Drops/Metis Tome",
+        0x00008000: "Solo Animation 1",
+        0x00010000: "Solo Animation 2",
+        # Byte 0x0E
+        0x00020000: "REMU'd (Not Drawn)",
+        0x00040000: "Store Battle Turn Word",
+        0x00080000: "Store Battle Turn Word 2",
+        0x00100000: "Super-Arena Mode",
+        0x00200000: "Not Deployed Previous Chapter",
+        0x00400000: "Cutscene Unit (Deletable)",
+        0x00800000: "Increase Portrait Index by 1",
+        # Byte 0x0F
+        0x01000000: "Shaking Map Sprite",
+        0x02000000: "Cannot Take Part in Chapter",
+        0x04000000: "REMU'd",
+        0x08000000: "Link Arena Palette/Alt Palette",
+        0x40000000: "Capture"
+    }
+
+    # Status effect descriptions (0x30)
+    status_effect_map = {
+        0: "None",
+        1: "Poison",
+        2: "Sleep",
+        3: "Silence",
+        4: "Berserk",
+        5: "Attack Boost",
+        6: "Defense Boost",
+        7: "Critical Boost",
+        8: "Avoid Boost"
+    }
+
+    # Format items with names - items are now correctly parsed
+    item_list = []
+    for item_id, uses in battle_struct['items']:
+        if item_id > 0:
+            try:
+                name = get_item_name(item_id)
+                item_list.append(f"{name} ({uses} uses)")
+            except:
+                item_list.append(f"ID:0x{item_id:02X} ({uses} uses)")
+
+    # Format weapon ranks
+    weapon_ranks = []
+    rank_letters = {0: "-", 1: "E", 31: "D", 71: "C", 121: "B", 181: "A", 251: "S"}
+
+    for weapon, rank_value in [
+        ("Sword", battle_struct['sword_rank']),
+        ("Lance", battle_struct['lance_rank']),
+        ("Axe", battle_struct['axe_rank']),
+        ("Bow", battle_struct['bow_rank']),
+        ("Staff", battle_struct['staff_rank']),
+        ("Anima", battle_struct['anima_rank']),
+        ("Light", battle_struct['light_rank']),
+        ("Dark", battle_struct['dark_rank'])
+    ]:
+        # Only include ranks that are not 0
+        if rank_value > 0:
+            # Find the closest rank letter
+            rank_letter = "-"
+            for threshold, letter in sorted(rank_letters.items()):
+                if rank_value >= threshold:
+                    rank_letter = letter
+            weapon_ranks.append(f"{weapon}: {rank_letter} ({rank_value})")
+
+    # Decode unit state flags
+    state_flags = []
+    for flag, description in unit_state_flags.items():
+        if battle_struct['unit_state'] & flag:
+            state_flags.append(description)
+
+    # Format equipped item - now using the correct bytes for ID and uses
+    equipped_before = "None"
+    equipped_after = "None"
+
+    if battle_struct['equipped_item_before'] > 0:
+        try:
+            name = get_item_name(battle_struct['equipped_item_before'])
+            uses = battle_struct['equipped_item_before_uses']
+            equipped_before = f"{name} ({uses} uses)"
+        except:
+            equipped_before = f"ID:0x{battle_struct['equipped_item_before']:02X} ({battle_struct['equipped_item_before_uses']} uses)"
+
+    if battle_struct['equipped_item_after'] > 0:
+        try:
+            name = get_item_name(battle_struct['equipped_item_after'])
+            uses = battle_struct['equipped_item_after_uses']
+            equipped_after = f"{name} ({uses} uses)"
+        except:
+            equipped_after = f"ID:0x{battle_struct['equipped_item_after']:02X} ({battle_struct['equipped_item_after_uses']} uses)"
+
+    # Format weapon type
+    weapon_type = weapon_types.get(battle_struct['weapon_type'], f"Unknown ({battle_struct['weapon_type']})")
+
+    # Format status effect
+    status = battle_struct['status'] & 0x0F
+    status_duration = battle_struct['status'] >> 4
+    status_text = status_effect_map.get(status, f"Unknown ({status})")
+
+    # Prepare all sections
+    sections = {
+        "Unit Info": [
+            f"Position: ({battle_struct['x']}, {battle_struct['y']})",
+            f"Level: {battle_struct['level']} (Exp: {battle_struct['exp']})",
+            f"HP: {battle_struct['cur_hp']}/{battle_struct['max_hp']}",
+            f"Deployment ID: {battle_struct['deployment']} (AI Flags: 0x{battle_struct['ai_flags']:02X})"
+        ],
+
+        "Unit State Bitfield (0x0C-0x0F)": [
+            f"Raw Value: 0x{battle_struct['unit_state']:08X}",
+            "Active Flags:"
+        ] + ([f"  • {flag}" for flag in state_flags] if state_flags else ["  • None"]),
+
+        "Stats": [
+            f"STR: {battle_struct['str']}",
+            f"SKL: {battle_struct['skl']}",
+            f"SPD: {battle_struct['spd']}",
+            f"DEF: {battle_struct['def']}",
+            f"RES: {battle_struct['res']}",
+            f"LCK: {battle_struct['lck']}",
+            f"CON: {battle_struct['con_bonus']} (bonus)",
+            f"MOV: {battle_struct['mov_bonus']} (bonus)"
+        ],
+
+        "Items (0x1E-0x27)": item_list if item_list else ["None"],
+
+        "Weapon Ranks (0x28-0x2F)": weapon_ranks if weapon_ranks else ["None"],
+
+        "Status Effect (0x30)": [
+            f"Type: {status_text}",
+            f"Duration: {status_duration} turns"
+        ],
+
+        "Battle Equipment (0x48-0x51)": [
+            f"Equipped After Battle: {equipped_after} (0x48-0x49)",
+            f"Equipped Before Battle: {equipped_before} (0x4A-0x4B)",
+            f"Weapon Ability Word: 0x{battle_struct['weapon_ability_word']:08X} (0x4C)",
+            f"Weapon Type: {weapon_type} (0x50)",
+            f"Inventory Slot: {battle_struct['weapon_slot']} (0x51)"
+        ],
+
+        "Weapon Triangle & Terrain (0x52-0x58)": [
+            f"Can Counter: {'Yes' if battle_struct['can_counter'] else 'No'} (0x52)",
+            f"WTA Hit Bonus: {battle_struct['wtriangle_hit']} (0x53)",
+            f"WTA Damage Bonus: {battle_struct['wtriangle_dmg']} (0x54)",
+            f"Terrain ID: {battle_struct['terrain_id']} (0x55)",
+            f"Terrain DEF Bonus: {battle_struct['terrain_def']} (0x56)",
+            f"Terrain AVO Bonus: {battle_struct['terrain_avo']} (0x57)",
+            f"Terrain RES Bonus: {battle_struct['terrain_res']} (0x58)"
+        ],
+
+        "Combat Stats (0x5A-0x6C)": [
+            f"Attack: {battle_struct['attack']} (0x5A)",
+            f"Defense: {battle_struct['defense']} (0x5C)",
+            f"Attack Speed: {battle_struct['attack_speed']} (0x5E)",
+            f"Hit: {battle_struct['hit']} (0x60)",
+            f"Avoid: {battle_struct['avoid']} (0x62)",
+            f"Battle Hit: {battle_struct['battle_hit']}% (Hit - Chance of Landing Hit) (0x64)",
+            f"Crit: {battle_struct['crit']} (0x66)",
+            f"Crit Avoid: {battle_struct['crit_avoid']} (0x68)",
+            f"Battle Crit: {battle_struct['battle_crit']}% (Crit - Chance of Crit Striking) (0x6A)",
+            f"Lethality: {battle_struct['lethality']}% (0x6C)"
+        ],
+
+        "Battle Results & Changes (0x6E-0x7D)": [
+            f"EXP Gain: {battle_struct['exp_gain']} (0x6E)",
+            f"Status to Write: {battle_struct['status_to_write']} (0x6F)",
+            f"Pre-Battle Level: {battle_struct['level_pre_battle']} (0x70)",
+            f"Pre-Battle EXP: {battle_struct['exp_pre_battle']} (0x71)",
+            f"HP in Battle: {battle_struct['cur_hp_battle']} (0x72)",
+            f"Stat Changes:",
+            f"  • HP: {'+' if battle_struct['hp_change'] > 0 else ''}{battle_struct['hp_change']} (0x73)",
+            f"  • STR: {'+' if battle_struct['str_change'] > 0 else ''}{battle_struct['str_change']} (0x74)",
+            f"  • SKL: {'+' if battle_struct['skl_change'] > 0 else ''}{battle_struct['skl_change']} (0x75)",
+            f"  • SPD: {'+' if battle_struct['spd_change'] > 0 else ''}{battle_struct['spd_change']} (0x76)",
+            f"  • DEF: {'+' if battle_struct['def_change'] > 0 else ''}{battle_struct['def_change']} (0x77)",
+            f"  • RES: {'+' if battle_struct['res_change'] > 0 else ''}{battle_struct['res_change']} (0x78)",
+            f"  • LCK: {'+' if battle_struct['luk_change'] > 0 else ''}{battle_struct['luk_change']} (0x79)",
+            f"Weapon EXP Multiplier: {battle_struct['wexp_multiplier']} (0x7B)",
+            f"Damage Dealt: {'Yes' if battle_struct['nonzero_damage'] else 'No'} (0x7C)",
+            f"Weapon Broke: {'Yes' if battle_struct['weapon_broke'] else 'No'} (0x7D)"
+        ]
+    }
+
+    # Build the formatted output
+    output = [f"\n=== {struct_name} Battle Data ==="]
+
+    for section, items in sections.items():
+        output.append(f"\n{section}:")
+        for item in items:
+            output.append(f"  {item}")
+
+    return "\n".join(output)
 
 def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
     """
@@ -302,27 +537,24 @@ def monitor_fe_state(state_file_path, map_file_path, data_dir, interval=1):
             print(f"Move destination Y: {realtime['move_dest_y']}")
             print(f"Deployment ID: {realtime['deployment_id']}")
 
-            # Display battle struct bytes
+            # Display battle struct info in a more human-readable format
             attacker, defender = parse_battle_structs_from_state_file(state_file_path)
-            print("\n=== BATTLE STRUCTS (0x48-0x7D) ===")
+            print("\n=== BATTLE DATA ===")
             if attacker:
-                print(f"Attacker: {attacker}")
-                print(f"Attacker (hex): {' '.join(f'{b:02X}' for b in attacker)}")
                 parsed_attacker = parse_battle_struct(state_file_path, 'attacker')
                 if parsed_attacker:
-                    print("Attacker (parsed):")
-                    for k, v in parsed_attacker.items():
-                        print(f"  {k}: {v}")
+                    print(format_battle_struct(parsed_attacker, "Attacker"))
+                else:
+                    print("Attacker: None")
             else:
                 print("Attacker: None")
+
             if defender:
-                print(f"Defender: {defender}")
-                print(f"Defender (hex): {' '.join(f'{b:02X}' for b in defender)}")
                 parsed_defender = parse_battle_struct(state_file_path, 'defender')
                 if parsed_defender:
-                    print("Defender (parsed):")
-                    for k, v in parsed_defender.items():
-                        print(f"  {k}: {v}")
+                    print(format_battle_struct(parsed_defender, "Defender"))
+                else:
+                    print("Defender: None")
             else:
                 print("Defender: None")
 
