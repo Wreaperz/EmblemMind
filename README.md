@@ -20,6 +20,11 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 - **Reinforcement learning loop** with experience replay and reward shaping.
 - **Robust error handling and recovery** for emulator state inconsistencies.
 
+## What WASN'T Accomplished
+- **Full-scale operational gameplay** of maps and levels; AI lacks complex decision-making and long-term strategizing capabilities
+- **Detailed item-usage and tactical character movement**
+- **That being said...** there's lots of room for improvement and this project is one that will hopefully (since it's public) be picked up by members of the FEUniverse community to be able to continue development and innovation.
+
 ---
 
 <video src="videos/FE7-Demo1.mp4" autoplay loop muted playsinline style="max-width: 100%; height: auto;"></video>
