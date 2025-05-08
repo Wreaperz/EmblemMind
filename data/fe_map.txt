@@ -1,38 +1,21 @@
-Map size: 17x27
+Map size: 15x10
 
-X X # R R R R R R R R R R R # X X 
-X X # R R R R R R R R R R R # X X 
-X X # R R R R R R R R R R R # X X 
-X X # R R R R R R R R R R R # X X 
-X X # # # # # R R R # # # # # X X 
-X X # # # # # # # # # # # # # X X 
-X X # # # # # # # # # # # # # X X 
-X X # # # # # # # # # # # # # X X 
-X X # # # # # . . . # # # # # X X 
-X X X X # # # . . . # # # X X X X 
-X # R R R # . . . . . # R R R # X 
-X # R R R # . . . . . # R R R # X 
-X # R R R # . . . . . # R R R # X 
-X # # # D # . . . . . # D # # # X 
-X # # # . . . . . . . . . # # # X 
-# R R R # . . . . . . . # R R R # 
-# R R R # . . . . . . . # R R R # 
-# R R R # . . . . . . . # R R R # 
-# # # D # . . . . . . . # D # # # 
-# # # . . . . . . . . . . . # # # 
-# # R R R # . . . . . # # # # # # 
-# # R R R # . . . . . # . . . # # 
-X # R R R # . . . . . # . . . # X 
-X # # # D # . . . . . # . # # # X 
-X # # # . . . . . . . . . # # # X 
-X # # # # . . . . . . . # # # # X 
-X # X # # # # . . . # # # # X # X 
+. . . . F F . . # # # # # D # 
+. . . . . F F . # . . T . . # 
+. . C C . . . F # . . . . . # 
+. . . . . F . . # . P . P . # 
+. F . . . . F . # . . . . . # 
+. . . F . # . . # . . . . . # 
+. . . F . # . . # # # . # # # 
+H H . . # # . ^ # # # . # # # 
+. . F . # . ^ ^ F . . . F . F 
+H . . . # . ^ . . F . . . F . 
 
 Terrain pointer table: 0x0202E3E0
 Row pointers array: 0x0202EBB8
 First row pointer (addr): 0x0202EBB8
-First row data (addr): 0x0202EC52
-First terrain ID at 0x0202EC52: 0x3B
+First row data (addr): 0x0202EC0A
+First terrain ID at 0x0202EC0A: 0x01
 
 Terrain Legend:
 . = Plains, F = Forest, ^ = Hill, M = Mountain/Peak, ~ = Water

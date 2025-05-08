@@ -5,4 +5,5 @@ SystemID GBA
 02EBE8	d	u	0	EWRAM	terrain_row_12_ptr
 02E3D8	w	u	0	EWRAM	map_size_x
 02E3DA	w	u	0	EWRAM	map_size_y
+02E3E4	d	u	0	EWRAM	ptr to movement map
 

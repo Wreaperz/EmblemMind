@@ -4,7 +4,7 @@
 
 local output_file_path = "../data/fe_state.txt"
 local map_output_file_path = "../data/fe_map.txt"
-local write_frequency = 60  -- Write only once every N frames (adjust as needed)
+local write_frequency = 5  -- Write only once every N frames (adjust as needed)
 local frame_counter = 0
 local last_state_hash = ""  -- Store hash of last written state to avoid redundant writes
 local previous_state = {}  -- Cache the previous state
@@ -471,7 +471,7 @@ local function turn_status_text(val)
   elseif val == 0x0B then return string.format("Chosen for Level (0x%02X)", val)
   elseif val == 0x0D then return string.format("Dead (0x%02X)", val)
   elseif val == 0x10 then return string.format("Rescuer, not moved (0x%02X)", val)
-  elseif val == 0x42 then return string.format("Moved (0x%02X)", val)
+  elseif val == 0x02 then return string.format("Moved (0x%02X)", val)
   elseif val == 0x52 then return string.format("Rescuer, moved (0x%02X)", val)
   elseif val == 0x21 then return string.format("Rescued (0x%02X)", val)
   elseif val == 0x81 then return string.format("Invisible (under roof) (0x%02X)", val)
@@ -609,6 +609,13 @@ local function export_game_state()
       console.log(string.format("\nWriting to: %s (frame: %d)", output_file_path, frame_counter))
     end
 
+    -- Read 'realtime' data (only updates at certain events)
+    local cursor_rt_x = read_byte(0x0203A8A1) -- x location of cursor (after selecting a unit)
+    local cursor_rt_y = read_byte(0x0203A8A2) -- y location of cursor (after selecting a unit)
+    local move_dest_x = read_byte(0x0203A86A) -- x location to move to (after clicking tile)
+    local move_dest_y = read_byte(0x0203A86B) -- y location to move to (after clicking tile)
+    local deployment_id = read_byte(0x0203A868) -- deployment ID (after selecting a unit)
+
     -- Write state to file
     local file = io.open(output_file_path, "w")
     if file then
@@ -632,6 +639,75 @@ local function export_game_state()
       file:write(string.format("cursor_y=%d\n", state.cursor_y))
       file:write(string.format("camera_x=%d\n", state.camera_x))
       file:write(string.format("camera_y=%d\n", state.camera_y))
+
+      -- Add REALTIME_DATA section
+      file:write("REALTIME_DATA\n")
+      file:write(string.format("cursor_rt_x=%d\n", cursor_rt_x))
+      file:write(string.format("cursor_rt_y=%d\n", cursor_rt_y))
+      file:write(string.format("move_dest_x=%d\n", move_dest_x))
+      file:write(string.format("move_dest_y=%d\n", move_dest_y))
+      file:write(string.format("deployment_id=%d\n", deployment_id))
+
+      -- === MOVEMENT AND RANGE MAPS ===
+      local function dump_pointer_table_map(ptr_addr, width, height)
+        local map = {}
+        local row_pointers_table = read_pointer(ptr_addr)
+        for y = 0, height-1 do
+          local row_ptr_addr = row_pointers_table + (y * 4)
+          local row_data_ptr = read_pointer(row_ptr_addr)
+          local row = {}
+          for x = 0, width-1 do
+            table.insert(row, string.format("%02X", read_byte(row_data_ptr + x)))
+          end
+          table.insert(map, table.concat(row, " "))
+        end
+        return map
+      end
+      local width = read_byte(MAP_WIDTH_ADDR)
+      local height = read_byte(MAP_HEIGHT_ADDR)
+      file:write("MOVEMENT_MAP\n")
+      for _, line in ipairs(dump_pointer_table_map(0x0202E3E4, width, height)) do
+        file:write(line .. "\n")
+      end
+      file:write("RANGE_MAP\n")
+      for _, line in ipairs(dump_pointer_table_map(0x0202E3E8, width, height)) do
+        file:write(line .. "\n")
+      end
+
+      -- === CHARACTER AND BATTLE STRUCTS (RAW) ===
+      local function read_bytes(addr, length)
+        local bytes = {}
+        for i = 0, length-1 do
+          table.insert(bytes, memory.readbyte(addr + i))
+        end
+        return bytes
+      end
+      local function bytes_to_hexstr(bytes)
+        local hex = {}
+        for _, b in ipairs(bytes) do
+          table.insert(hex, string.format("%02X", b))
+        end
+        return table.concat(hex, " ")
+      end
+      file:write("CHARACTER_STRUCTS\n")
+      for i = 1, #state.characters do
+        local addr = 0x0202BD50 + (i-1)*0x48
+        local bytes = read_bytes(addr, 0x48)
+        file:write(string.format("character=%d struct=", i))
+        file:write(bytes_to_hexstr(bytes))
+        file:write("\n")
+        -- Output the unit state bitfield (0x0C)
+        local unit_state = memory.readbyte(addr + 0x0C)
+        file:write(string.format("  unit_state=%d\n", unit_state))
+      end
+      file:write("BATTLE_STRUCTS\n")
+      local function read_battle_only_bytes(base_addr)
+        return read_bytes(base_addr, 0x7D + 1)
+      end
+      local attacker_battle = read_battle_only_bytes(0x0203A3F0)
+      file:write("attacker_battle=", bytes_to_hexstr(attacker_battle), "\n")
+      local defender_battle = read_battle_only_bytes(0x0203A470)
+      file:write("defender_battle=", bytes_to_hexstr(defender_battle), "\n")
 
       file:write("CHARACTERS\n")
       for i, char in ipairs(state.characters) do

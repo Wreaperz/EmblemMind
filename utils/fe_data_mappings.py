@@ -164,6 +164,61 @@ ITEM_NAMES = {
     0x99: "Wind Sword",
 }
 
+# Item attack ranges for weapons (min_range, max_range)
+# Swords, Axes, Lances: 1
+# Javelin, Hand Axe, Tomahawk, Spear, Short Spear: 1-2
+# Bows: 2 (Long Bow: 2-3)
+# Magic: 1-2 (Bolting, Purge, Eclipse: 3-10 or more)
+ITEM_ATTACK_RANGES = {
+    # Swords
+    0x01: (1, 1), 0x02: (1, 1), 0x03: (1, 1), 0x04: (1, 1), 0x05: (1, 1), 0x06: (1, 1), 0x07: (1, 1), 0x08: (1, 1),
+    0x09: (1, 1), 0x0A: (1, 1), 0x0B: (1, 1), 0x0C: (1, 1), 0x0D: (1, 1), 0x0E: (1, 1), 0x0F: (1, 1),
+    0x10: (1, 2),  # Light Brand (melee: 1, ranged: 2, but only magic at range)
+    0x11: (1, 2),  # Runesword (same as above)
+    0x12: (1, 1), 0x13: (1, 1),
+    # Lances
+    0x14: (1, 1), 0x15: (1, 1), 0x16: (1, 1), 0x17: (1, 1), 0x18: (1, 1),
+    0x19: (1, 1), 0x1A: (1, 1), 0x1B: (1, 1),
+    0x1C: (1, 2),  # Javelin
+    0x1D: (1, 2),  # Spear
+    0x1E: (1, 1),
+    # Axes
+    0x1F: (1, 1), 0x20: (1, 1), 0x21: (1, 1), 0x22: (1, 1),
+    0x23: (1, 1), 0x24: (1, 1), 0x25: (1, 1), 0x26: (1, 1), 0x27: (1, 1),
+    0x28: (1, 2),  # Hand Axe
+    0x29: (1, 2),  # Tomahawk
+    0x2A: (1, 1), 0x2B: (1, 1),
+    # Bows
+    0x2C: (2, 2), 0x2D: (2, 2), 0x2E: (2, 2), 0x2F: (2, 2), 0x30: (2, 2), 0x31: (2, 2),
+    0x32: (2, 2),
+    0x33: (2, 3),  # Long Bow
+    # Ballistae
+    0x34: (3, 10), 0x35: (3, 10), 0x36: (3, 10),
+    # Anima magic
+    0x37: (1, 2), 0x38: (1, 2), 0x39: (1, 2),
+    0x3A: (3, 10),  # Bolting
+    0x3B: (1, 2), 0x3C: (1, 2), 0x3D: (1, 2),
+    # Light magic
+    0x3E: (1, 2), 0x3F: (1, 2), 0x40: (1, 2),
+    0x41: (3, 10),  # Purge
+    0x42: (1, 2), 0x43: (1, 2),
+    # Dark magic
+    0x44: (1, 2), 0x45: (1, 2), 0x46: (1, 2),
+    0x47: (3, 10),  # Eclipse
+    0x48: (1, 2), 0x49: (1, 2),
+    # Special/legendary weapons (examples)
+    0x84: (1, 1),  # Durandal
+    0x85: (1, 1),  # Armads
+    0x86: (1, 2),  # Aureola
+    0x8C: (1, 1),  # Sol Katti
+    0x8D: (1, 1),  # Wolf Beil
+    0x91: (1, 1),  # Rex Hasta
+    0x92: (1, 1),  # Basilikos
+    0x93: (2, 2),  # Reinfleche (bow)
+    0x99: (1, 2),  # Wind Sword
+    # Add more as needed
+}
+
 # Portrait IDs
 PORTRAIT_IDS = {
     0xCE4C: "Eliwood",

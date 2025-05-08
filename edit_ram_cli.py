@@ -92,7 +92,17 @@ def main():
             print("1. Set HP/Max HP to 80 for all player characters")
             print("2. Set all items to 50 uses for all player characters")
             print("3. Add 10 to move stat for all player characters")
-            print("4. Back")
+            print("4. Add 15 to HP for all player characters")
+            print("5. Add 15 to Max HP for all player characters")
+            print("6. Add 15 to STR for all player characters")
+            print("7. Add 15 to SKL for all player characters")
+            print("8. Add 15 to SPD for all player characters")
+            print("9. Add 15 to DEF for all player characters")
+            print("10. Add 15 to RES for all player characters")
+            print("11. Add 15 to LCK for all player characters")
+            print("12. Add 15 to MOV for all player characters")
+            print("13. Max all weapon ranks for all player characters")
+            print("14. Back")
             cheat_choice = input("Select cheat: ").strip()
             if cheat_choice == '1':
                 for idx, unit in enumerate(data['characters']):
@@ -116,7 +126,78 @@ def main():
                     command = f"set_stat character {idx+1} mov {new_move}"
                     write_command(command)
                 print("Added 10 to move stat for all player characters.")
-            elif cheat_choice == '4':
+            elif cheat_choice == '4':  # +15 HP
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    hp = unit.get('hp', (0, 0))[0]
+                    new_hp = hp + 15
+                    command = f"set_stat character {idx+1} hp {new_hp}"
+                    write_command(command)
+                print("Added 15 to HP for all player characters.")
+            elif cheat_choice == '5':  # +15 Max HP
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    max_hp = unit.get('hp', (0, 0))[1]
+                    new_max_hp = max_hp + 15
+                    command = f"set_stat character {idx+1} max_hp {new_max_hp}"
+                    write_command(command)
+                print("Added 15 to Max HP for all player characters.")
+            elif cheat_choice == '6':  # +15 STR
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_str = stats[0] + 15 if len(stats) > 0 else 15
+                    command = f"set_stat character {idx+1} str {new_str}"
+                    write_command(command)
+                print("Added 15 to STR for all player characters.")
+            elif cheat_choice == '7':  # +15 SKL
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_skl = stats[1] + 15 if len(stats) > 1 else 15
+                    command = f"set_stat character {idx+1} skl {new_skl}"
+                    write_command(command)
+                print("Added 15 to SKL for all player characters.")
+            elif cheat_choice == '8':  # +15 SPD
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_spd = stats[2] + 15 if len(stats) > 2 else 15
+                    command = f"set_stat character {idx+1} spd {new_spd}"
+                    write_command(command)
+                print("Added 15 to SPD for all player characters.")
+            elif cheat_choice == '9':  # +15 DEF
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_def = stats[4] + 15 if len(stats) > 4 else 15
+                    command = f"set_stat character {idx+1} def {new_def}"
+                    write_command(command)
+                print("Added 15 to DEF for all player characters.")
+            elif cheat_choice == '10':  # +15 RES
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_res = stats[5] + 15 if len(stats) > 5 else 15
+                    command = f"set_stat character {idx+1} res {new_res}"
+                    write_command(command)
+                print("Added 15 to RES for all player characters.")
+            elif cheat_choice == '11':  # +15 LCK
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_lck = stats[3] + 15 if len(stats) > 3 else 15
+                    command = f"set_stat character {idx+1} lck {new_lck}"
+                    write_command(command)
+                print("Added 15 to LCK for all player characters.")
+            elif cheat_choice == '12':  # +15 MOV
+                for idx, unit in enumerate(data['characters']):
+                    stats = unit.get('stats', [0]*9)
+                    new_mov = stats[6] + 15 if len(stats) > 6 else 15
+                    command = f"set_stat character {idx+1} mov {new_mov}"
+                    write_command(command)
+                print("Added 15 to MOV for all player characters.")
+            elif cheat_choice == '13':  # Max weapon ranks
+                for idx, unit in enumerate(data['characters']):
+                    for rank in ['sword','lance','axe','bow','staff','anima','light','dark']:
+                        command = f"set_rank character {idx+1} {rank} 251"
+                        write_command(command)
+                print("Maxed all weapon ranks for all player characters.")
+            elif cheat_choice == '14':
                 continue
             else:
                 print("Invalid cheat option.")
