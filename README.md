@@ -19,6 +19,7 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 - **Automated input control** to play the game via BizHawk, including cursor movement, menu navigation, and action execution.
 - **Reinforcement learning loop** with experience replay and reward shaping.
 - **Robust error handling and recovery** for emulator state inconsistencies.
+- **Memory manipulation tools** for debugging and testing gameplay scenarios.
 
 ## What WASN'T Accomplished
 - **Full-scale operational gameplay** of maps and levels; AI lacks complex decision-making and long-term strategizing capabilities
@@ -27,7 +28,133 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 
 ---
 
+## Running the AI Agent
 
+To run the AI agent, follow these steps:
+
+1. **Set Up BizHawk and FE7**
+   - Load the Fire Emblem 7 ROM (`gba/fe7.gba`) in BizHawk
+   - Navigate to a battle map in-game (Lyn or Eliwood/Hector mode)
+
+2. **Load the Lua Scripts**
+   - In BizHawk, open the Lua Console (`Tools > Lua Console`)
+   - Load and run these two scripts:
+     - `fe_memory_reader.lua`: Extracts game state to text files
+     - `listen_input.lua`: Enables the AI to control the game
+
+3. **Run the AI**
+   - Execute the main AI script:
+   ```
+   python trial_run_agent.py
+   ```
+   - The AI will begin analyzing the game state, generating possible actions, and controlling units
+
+4. **Monitoring AI Behavior**
+   - Check the console output to see the AI's decision-making process
+   - The AI first probes unit movement ranges, then evaluates combat options
+   - Watch as it controls units and engages enemies based on its tactical evaluation
+
+## Demo GIF of the AI in Action
+
+![](https://github.com/Wreaperz/EmblemMind/blob/main/videos/FE7-Demo1.gif)
+
+As shown in the GIF:
+- The AI gathers data on unit movement ranges by selecting units and moving the cursor
+- It analyzes battle outcomes by navigating to the combat forecast screen
+- Based on this data, it executes the actions it evaluates as optimal
+
+---
+
+## Technical Architecture
+
+### Core AI Components
+
+The AI agent operates through several coordinated systems:
+
+1. **State Extraction** (`fe_memory_reader.lua`)
+   - Reads FE7's memory structures directly from BizHawk
+   - Outputs structured data to `data/fe_state.txt` and `data/fe_map.txt`
+
+2. **Game State Modeling** (`emblemmind_snapshot.py`)
+   - Parses text files into Python objects representing the game state
+   - Provides interface for querying unit stats, terrain, and other game data
+
+3. **Action Generation** (`agent/action_generator.py`)
+   - Creates all possible actions for player units
+   - Includes movement, attacks, item usage, and waiting
+
+4. **Action Evaluation** (`agent/state_evaluator.py`, `neural_network.py`)
+   - Scores actions based on heuristics and neural network predictions
+   - Considers factors like terrain advantages, weapon effectiveness, and unit safety
+
+5. **Action Execution** (`agent/bizhawk_controller.py`)
+   - Translates high-level actions into input sequences
+   - Controls BizHawk through the Lua interface
+
+### Memory Reading & Game State Extraction
+
+The core of EmblemMind is its ability to read the game's memory state directly from the BizHawk emulator:
+
+1. **Memory Mapping**: Uses exact CodeBreaker memory addresses to locate game data structures.
+2. **Memory Structure Access**:
+   - Character data (0x0202BD50): Stats, position, items, weapon ranks
+   - Enemy units (0x0202CEC0): Same structure as character data
+   - Map terrain (0x0202E3D8): Width, height, and terrain grid
+   - Battle structs (0x0203A3F0): Combat stats and calculations
+   - Turn phase (0x0202BC07): Player (0x00), Neutral (0x40), or Enemy (0x80) phase
+
+### Input Control System
+
+The AI controls the game through:
+
+1. **listen_input.lua**: Script running in BizHawk that executes joypad inputs
+2. **Keyboard Automation**: Alternative input method using the `keyboard` Python package
+3. **Action Coordination**: Manages input timing and sequences for complex game actions
+
+---
+
+## Complete Project Structure
+
+```
+EmblemMind/
+├── agent/                    # AI agent components
+│   ├── action_coordinator.py # Coordinates action generation and evaluation
+│   ├── action_generator.py   # Generates possible actions for units
+│   ├── bizhawk_controller.py # Manages input to BizHawk
+│   ├── neural_network.py     # Neural network for action evaluation
+│   └── state_evaluator.py    # Heuristic state evaluation
+├── BizHawk/                  # BizHawk emulator files
+├── data/                     # Data files generated/used by the system
+│   ├── fe_map.txt            # Current map terrain data
+│   ├── fe_state.txt          # Current game state data
+│   ├── fe_output.txt         # Debug output
+│   ├── ram_edit_command.txt  # Commands for memory editing
+│   ├── spritemaps/           # Sprite mapping data
+│   └── tilemaps/             # Tilemap data
+├── documentation/            # Documentation files
+│   ├── RAM Offset Notes.txt  # Memory address documentation
+│   └── previous work/        # Reference documentation
+├── gba/                      # Game ROM files
+│   ├── fe7.gba               # Fire Emblem 7 ROM (primary)
+│   └── saves/                # Save files
+├── utils/                    # Utility functions
+│   ├── fe_data_mappings.py   # Maps numeric IDs to game objects
+│   ├── fe_state_parser.py    # Parses fe_state.txt
+│   └── send_input.py         # Utility for sending inputs
+├── videos/                   # Demo videos and GIFs
+├── action_coordinator.py     # Main action coordination (root version)
+├── emblemmind_snapshot.py    # Game state representation
+├── fe_memory_reader.lua      # Lua script for memory reading
+├── fe_memory_writer.lua      # Lua script for memory writing
+├── listen_input.lua          # Lua script for input handling
+├── main.py                   # State monitoring script
+├── neural_network.py         # Neural network definition (root version)
+├── test_control.py           # Test script for input control
+├── train_agent.py            # Training script for the AI
+└── trial_run_agent.py        # Main entry point for running the AI
+```
+
+---
 
 ## Measuring Success
 
@@ -43,128 +170,34 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 
 ---
 
-## Demo GIF of probing and basic attack structuring
+## Additional Tools and Capabilities
 
-![](https://github.com/Wreaperz/EmblemMind/blob/main/videos/FE7-Demo1.gif)
+Beyond the core AI functionality, this project includes several supplementary tools for game state analysis and manipulation:
 
-## As seen in the GIF above...
-- **The AI has to gather data on where characters can move**. This happens by clicking on the character and then moving the cursor, so that EWRAM updates the memory structs that contain character data
-- **The AI has to gather battle data**. This happens when the AI clicks a unit to attack with, chooses a weapon, and clicks to the "stat page". This forces a RAM update so that the "battle struct" is updated.
+### Real-time Memory Monitoring (`main.py`)
 
-## Software and Hardware Requirements
+Run `python main.py` to view a real-time display of:
+- Current game state and unit statistics
+- Map terrain and unit positions
+- Movement and attack ranges
+- Battle predictions and calculations
 
-- **Operating System:** Windows 10/11 (required for BizHawk and pywinauto)
-- **Emulator:** [BizHawk 2.9+](https://tasvideos.org/BizHawk/ReleaseHistory) (tested on 2.9.1)
-- **Game ROM:** Fire Emblem 7 (Blazing Sword) US GBA ROM (not included)
-- **Python:** 3.8+
-- **Hardware:**
-  - CPU: Any modern x86_64 processor
-  - RAM: 4GB minimum
-  - Disk: <100MB for code and data
+This tool is invaluable for understanding the game's internal state and debugging AI behavior.
 
-### Python Dependencies
+### RAM Editing Tools (`edit_ram_cli.py` and `fe_memory_writer.lua`)
 
-Install all dependencies with:
+For testing scenarios or manipulating the game state, you can use:
 
 ```
-pip install -r requirements.txt
+python edit_ram_cli.py
 ```
 
-**requirements.txt** includes:
-- numpy
-- torch
-- matplotlib
-- pytest
-- pywinauto
-- pyautogui
-- keyboard
+This CLI tool allows you to:
+- Edit unit stats (HP, STR, SKL, etc.)
+- Modify inventory items and uses
+- Apply various "cheats" for testing purposes
 
----
-
-## Data Sources
-
-- **Game Data:** Extracted live from FE7 running in BizHawk using custom Lua scripts.
-- **No external datasets** are required; all data is generated from emulator memory.
-- **Official AI Documentation:** https://feuniverse.us/t/fe7-the-official-ai-documentation-thread/348
-
----
-
-## Project Structure (Key Files)
-
-```
-EmblemMind/
-├── agent/
-│   ├── action_coordinator.py
-│   ├── action_generator.py
-│   ├── bizhawk_controller.py
-│   ├── neural_network.py
-│   └── state_evaluator.py
-├── utils/
-│   ├── fe_data_mappings.py
-│   ├── fe_state_parser.py
-│   └── send_input.py
-├── fe_memory_reader.lua      # Lua script for BizHawk: dumps game state to data/fe_state.txt
-├── listen_input.lua          # Lua script for BizHawk: listens for input commands
-├── trial_run_agent.py        # Main Python entry point for running the AI
-├── requirements.txt
-└── README.md
-```
-
----
-
-## How to Reproduce (Step-by-Step)
-
-### 1. Set Up BizHawk and FE7
-- Download and extract [BizHawk](https://tasvideos.org/BizHawk/ReleaseHistory) (2.9+ recommended).
-- Obtain a US version of the Fire Emblem 7 GBA ROM (included in /gba).
-- Launch BizHawk, open the FE7 ROM (gba/fe7.gba).
-
-### 2. Load Lua Scripts in BizHawk
-- In BizHawk, go to `Tools > Lua Console`.
-- In the Lua Console, load and run both scripts:
-  1. `fe_memory_reader.lua` (outputs game state to `data/fe_state.txt` and `data/fe_map.txt`)
-  2. `listen_input.lua` (enables external input control)
-- Both scripts must be running for the AI to function.
-
-### 3. Install Python Dependencies
-- Open a terminal in the project root directory.
-- Run:
-  ```
-  pip install -r requirements.txt
-  ```
-
-### 4. Run the AI Agent
-- With BizHawk and the Lua scripts running, start the agent:
-  ```
-  python trial_run_agent.py
-  ```
-- The agent will read the game state, plan actions, and control the game automatically.
-
----
-
-## State Space Description
-
-The state includes:
-- Map terrain grid (e.g., Forest, River, Wall)
-- Positions and stats of all player and enemy units
-- Turn phase (Player, Enemy, NPC)
-- Unit status effects (e.g., Sleep, Poison)
-- Inventories and items
-- Map changes (e.g., broken walls, open doors)
-
-The environment is turn-based, partially observable (e.g., fog of war), and stochastic due to combat RNG.
-
----
-
-## Tech Stack
-
-| Component        | Tool/Language           | Notes |
-|------------------|------------------------|-------|
-| Emulator         | BizHawk (Lua scripting)| Memory extraction, input control |
-| Core AI          | Python 3.8+            | Planning, heuristics, simulation |
-| Neural Network   | PyTorch                | Action evaluation |
-| Automation       | pywinauto, pyautogui   | Window focus, input scripting |
-| Data Handling    | numpy                  | State representation |
+Commands are sent to the game via `fe_memory_writer.lua`, which monitors `data/ram_edit_command.txt` and writes to BizHawk's memory.
 
 ---
 
@@ -173,6 +206,9 @@ The environment is turn-based, partially observable (e.g., fog of war), and stoc
 - **Lua scripts must be running** at all times during agent operation.
 - If the agent gets stuck, try resetting BizHawk and reloading the Lua scripts.
 - For best results, use the US version of FE7 and BizHawk 2.9+.
+- **Common Issues**:
+  - If memory reading fails, check that the correct ROM version is loaded
+  - Input issues often relate to window focus - ensure BizHawk remains the active window
 
 ---
 
