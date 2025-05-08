@@ -43,11 +43,13 @@ Fire Emblem 7 (FE7) is a classic tactical RPG for the Game Boy Advance. The goal
 
 ---
 
-## Demo Video
+## Demo GIF of probing and basic attack structuring
 
 ![](https://github.com/Wreaperz/EmblemMind/blob/main/videos/FE7-Demo1.gif)
 
-*Click the image above to watch the demo video on YouTube.*
+## As seen in the GIF above...
+- **The AI has to gather data on where characters can move**. This happens by clicking on the character and then moving the cursor, so that EWRAM updates the memory structs that contain character data
+- **The AI has to gather battle data**. This happens when the AI clicks a unit to attack with, chooses a weapon, and clicks to the "stat page". This forces a RAM update so that the "battle struct" is updated.
 
 ## Software and Hardware Requirements
 
