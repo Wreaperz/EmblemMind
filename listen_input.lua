@@ -20,6 +20,10 @@ while true do
         joypad.set({ Right = true })
     elseif action == "LEFT" then
         joypad.set({ Left = true })
+    elseif action == "A" then
+        joypad.set({ A = true })
+    elseif action == "B" then
+        joypad.set({ B = true })
     end
     emu.frameadvance()
 end

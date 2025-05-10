@@ -39,19 +39,33 @@ def focus_bizhawk():
         return False
 
 def press_key(key, duration=0.05):
-    time.sleep(0.02)
-    """Press a single key for the given duration (in seconds). Arrow keys use file-based input, others use keyboard lib."""
-    if key in ['UP', 'DOWN', 'LEFT', 'RIGHT']:
-        # Write to file for Lua script to pick up
-        input_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/emblemmind_input.txt')
+    time.sleep(0.01)
+    """Write a single keypress to the Lua input file."""
+    PHYSICAL_TO_GBA = {
+        'x': 'A',
+        'z': 'B',
+        'w': 'L',
+        'e': 'R',
+        'enter': 'START',
+        'up': 'UP',
+        'down': 'DOWN',
+        'left': 'LEFT',
+        'right': 'RIGHT',
+        'p': 'RESET'
+    }
+
+    gba_button = PHYSICAL_TO_GBA.get(key.lower())
+    if gba_button:
+        input_file = os.path.join(os.getcwd(), 'data', 'emblemmind_input.txt')  # Rel to working dir
+        os.makedirs(os.path.dirname(input_file), exist_ok=True)  # Ensure 'data/' exists
         with open(input_file, 'w') as f:
-            f.write(key)
+            f.write(gba_button)
         time.sleep(duration)
-    else:
+    elif key == 'p':
         keyboard.press(key)
         time.sleep(duration)
         keyboard.release(key)
-    time.sleep(0.02)
+    time.sleep(0.01)
 
 def press_keys(keys, duration=0.1):
     """Press multiple keys in sequence for the given duration each."""

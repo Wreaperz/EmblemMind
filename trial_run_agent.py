@@ -77,11 +77,11 @@ def end_turn_in_bizhawk(cursor_pos, snapshot):
         return cursor_pos
     cursor_pos = move_cursor_to(moved_unit.position, cursor_pos)
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)  # Select MOVED unit
+    press_key('x', duration=0.05)  # Select MOVED unit
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['UP'], duration=0.05)  # Move to 'End' in menu
+    press_key('UP', duration=0.05)  # Move to 'End' in menu
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)  # Confirm 'End'
+    press_key('x', duration=0.05)  # Confirm 'End'
     time.sleep(0.1)
     # Wait for enemy phase to start by detecting cursor movability
     for _ in range(100):  # Up to 10 seconds
@@ -89,7 +89,7 @@ def end_turn_in_bizhawk(cursor_pos, snapshot):
         pos = get_cursor_position()
         if pos is not None:
             # Try moving cursor to see if it's movable (should not be during enemy phase)
-            press_key(GBA_KEY_MAP['LEFT'], duration=0.05)
+            press_key('LEFT', duration=0.05)
             time.sleep(0.1)
             new_pos = get_cursor_position()
             if new_pos != pos:
@@ -101,7 +101,7 @@ def end_turn_in_bizhawk(cursor_pos, snapshot):
 def return_to_map():
     # Press 'B' several times to ensure we're back on the map
     for _ in range(5):
-        press_key(GBA_KEY_MAP['B'], duration=0.01)  # 'B' button
+        press_key('z', duration=0.01)  # 'B' button
     # After returning, check map state resumed
     x, y = get_cursor_xy_from_state(STATE_FILE)
     if x is None or y is None:
@@ -134,9 +134,9 @@ def move_cursor_to(target_pos, current_pos, max_attempts=3):
         dx = target_pos[0] - current_pos[0]
         dy = target_pos[1] - current_pos[1]
         for _ in range(abs(dx)):
-            press_key(GBA_KEY_MAP['RIGHT'] if dx > 0 else GBA_KEY_MAP['LEFT'], duration=0.05)
+            press_key('RIGHT' if dx > 0 else GBA_KEY_MAP['LEFT'], duration=0.05)
         for _ in range(abs(dy)):
-            press_key(GBA_KEY_MAP['DOWN'] if dy > 0 else GBA_KEY_MAP['UP'], duration=0.05)
+            press_key('DOWN' if dy > 0 else GBA_KEY_MAP['UP'], duration=0.05)
         time.sleep(0.1)
         pos = get_cursor_position()
         print(f"[CURSOR] After move, at {pos}")
@@ -180,7 +180,7 @@ def is_menu_open_via_cursor(state_file, press_key_fn):
 def is_menu_open():
     # Heuristic: if cursor position doesn't change after pressing 'B', likely in menu
     # pos1 = get_cursor_position()
-    # press_key(GBA_KEY_MAP['B'], duration=0.01)
+    # press_key('z', duration=0.01)
     # time.sleep(0.1)
     # pos2 = get_cursor_position()
     # return pos1 == pos2
@@ -230,9 +230,9 @@ def get_realtime_move_dest(state_file):
 
 def confirm_move_possible(target_x, target_y, state_file, press_key_fn):
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['B'], duration=0.01)
+    press_key('z', duration=0.01)
     time.sleep(0.05)
-    press_key(GBA_KEY_MAP['B'], duration=0.01)
+    press_key('z', duration=0.01)
     time.sleep(0.05)
     move_dest_x, move_dest_y = get_realtime_move_dest(state_file)
     if move_dest_x is None or move_dest_y is None:
@@ -242,16 +242,16 @@ def confirm_move_possible(target_x, target_y, state_file, press_key_fn):
 def discard_last_item_sequence():
     # Press DOWN 5 times to select the last item
     for _ in range(5):
-        press_key(GBA_KEY_MAP['DOWN'], duration=0.05)
+        press_key('DOWN', duration=0.05)
         time.sleep(0.05)
     # Press A to select the item
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.05)
     # Press LEFT to select "discard"
-    press_key(GBA_KEY_MAP['LEFT'], duration=0.05)
+    press_key('LEFT', duration=0.05)
     time.sleep(0.05)
     # Press A to confirm discard
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.5)  # Wait for the animation/game to update
 
 def perform_attack_action(action, cursor_pos, probe=False):
@@ -269,7 +269,7 @@ def perform_attack_action(action, cursor_pos, probe=False):
             return cursor_pos if probe else (cursor_pos, None)
     # Select unit
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.05)
     # Move cursor to target
     cursor_pos = move_cursor_to(action.target_position, cursor_pos)
@@ -285,28 +285,28 @@ def perform_attack_action(action, cursor_pos, probe=False):
             print(f"[FATAL] Still not on expected target after recovery. Skipping action.")
             return cursor_pos if probe else (cursor_pos, None)
     # Confirm move
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.2 + 0.15 * dist)
     # 1. Select 'Attack' (A)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.05)
     # 2. Select weapon (A)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.25)
     if probe:
         # Return to map (B x4)
         for _ in range(4):
-            press_key(GBA_KEY_MAP['B'], duration=0.05)
+            press_key('z', duration=0.05)
             time.sleep(0.05)
-        press_key(GBA_KEY_MAP['UP'])
+        press_key('UP')
         time.sleep(0.05)
-        press_key(GBA_KEY_MAP['DOWN'])
+        press_key('DOWN')
         # Do NOT press the final A, just return the battle struct
         battle_struct = TurnSnapshot.parse_battle_struct(STATE_FILE, struct='attacker')
         cursor_pos = get_cursor_position() or cursor_pos
         return cursor_pos, battle_struct
     # 3. Confirm attack (A)
-    press_key(GBA_KEY_MAP['A'], duration=0.05)
+    press_key('x', duration=0.05)
     time.sleep(0.1)
     print(f"[ACTION] {action.unit.name} initiated attack at {action.target_position}. Waiting for battle to finish...")
     # Wait for battle to finish: cursor becomes movable again
@@ -315,7 +315,7 @@ def perform_attack_action(action, cursor_pos, probe=False):
         pos = get_cursor_position()
         if pos is not None:
             # Try moving cursor to see if it's movable
-            press_key(GBA_KEY_MAP['LEFT'], duration=0.05)
+            press_key('LEFT', duration=0.05)
             time.sleep(0.1)
             new_pos = get_cursor_position()
             if new_pos != pos:
@@ -339,7 +339,7 @@ def execute_action_in_bizhawk(action, cursor_pos, prev_snapshot):
             if pos_check != action.unit.position:
                 print(f"[FATAL] Still not on expected unit after recovery. Skipping action.")
                 return cursor_pos, prev_snapshot
-        press_key(GBA_KEY_MAP['A'], duration=0.05)
+        press_key('x', duration=0.05)
         time.sleep(0.1)
         cursor_pos = move_cursor_to(action.target_position, cursor_pos)
         pos_check = get_cursor_position()
@@ -351,13 +351,13 @@ def execute_action_in_bizhawk(action, cursor_pos, prev_snapshot):
             if pos_check != action.target_position:
                 print(f"[FATAL] Still not on expected target after recovery. Skipping action.")
                 return cursor_pos, prev_snapshot
-        press_key(GBA_KEY_MAP['A'], duration=0.05)  # Confirm move
+        press_key('x', duration=0.05)  # Confirm move
         time.sleep(0.3)
         # Wait is always at the bottom, so just press up and A/x
         time.sleep(0.2)
-        press_key(GBA_KEY_MAP['UP'])
+        press_key('UP')
         time.sleep(0.05)
-        press_key(GBA_KEY_MAP['A'])
+        press_key('x')
     else:
         print(f"[ACTION] {action.unit.name} performing {action.action_type} at {action.target_position}")
         # Implement other action types as needed
@@ -672,11 +672,11 @@ def trial_run():
                 if pos_check != unit.position:
                     print(f"[ERROR] Cursor not on expected unit {unit.name} at {unit.position}, but at {pos_check}. Skipping unit.")
                     continue
-                press_key(GBA_KEY_MAP['A'], duration=0.05)
+                press_key('x', duration=0.05)
                 time.sleep(0.05)
-                press_key(GBA_KEY_MAP['UP'], duration=0.05)
+                press_key('UP', duration=0.05)
                 time.sleep(0.05)
-                press_key(GBA_KEY_MAP['DOWN'], duration=0.05)
+                press_key('DOWN', duration=0.05)
                 time.sleep(0.05)
                 movement_map = parse_map_section('MOVEMENT_MAP')
                 range_map = parse_map_section('RANGE_MAP')
