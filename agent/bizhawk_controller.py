@@ -51,7 +51,6 @@ def press_key(key, duration=0.05):
         'down': 'DOWN',
         'left': 'LEFT',
         'right': 'RIGHT',
-        'p': 'RESET'
     }
 
     gba_button = PHYSICAL_TO_GBA.get(key.lower())
@@ -61,7 +60,7 @@ def press_key(key, duration=0.05):
         with open(input_file, 'w') as f:
             f.write(gba_button)
         time.sleep(duration)
-    elif key == 'p':
+    else:
         keyboard.press(key)
         time.sleep(duration)
         keyboard.release(key)
@@ -78,4 +77,3 @@ def press_reset():
     time.sleep(0.1)
     press_key('P')
     time.sleep(0.1)
-    press_key(GBA_KEY_MAP['RESET'])
