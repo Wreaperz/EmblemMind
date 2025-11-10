@@ -639,6 +639,28 @@ _movement_dict = {
     'Archsage': 6, 'Dark Druid': 6, 'Bramimond': 5, 'Fire Dragon': 0
 }
 
+# Weapon triangle advantage mapping
+WEAPON_TRIANGLE_ADVANTAGE = {
+    'Sword': 'Axe',  # Swords are strong against Axes
+    'Axe': 'Lance',  # Axes are strong against Lances
+    'Lance': 'Sword', # Lances are strong against Swords
+    'Anima': 'Light',  # Anima magic is strong against Light magic
+    'Light': 'Dark',   # Light magic is strong against Dark magic
+    'Dark': 'Anima'    # Dark magic is strong against Anima magic
+}
+
+# Terrain characteristics mapping based on tiles.json
+TERRAIN_CHARACTERISTICS = {
+    'Forest': {'avoid': 20, 'def': 1, 'res': 1},
+    'Thicket': {'avoid': 30, 'def': 2, 'res': 2},
+    'Hill': {'avoid': 30, 'def': 1, 'res': 1},
+    'Fort': {'avoid': 20, 'def': 2, 'res': 2},
+    'Gate': {'avoid': 20, 'def': 2, 'res': 2},
+    'Throne': {'avoid': 20, 'def': 2, 'res': 2},
+    'Peak': {'avoid': 40, 'def': 2, 'res': 2},
+    # Add more as needed
+}
+
 def get_item_name(item_id):
     """Get the name of an item by its ID"""
     return ITEM_NAMES.get(item_id, f"Unknown Item (0x{item_id:02X})")
@@ -698,3 +720,13 @@ def parse_weapon_rank(rank_value):
         return "E"
     else:
         return "?"
+
+# Function to get terrain characteristics
+def get_terrain_characteristics(terrain_name):
+    return TERRAIN_CHARACTERISTICS.get(terrain_name, {'avoid': 0, 'def': 0, 'res': 0})
+
+# Function to check weapon triangle advantage
+def has_weapon_triangle_advantage(attacker_weapon, defender_weapon):
+    attacker_type = get_weapon_type(attacker_weapon)
+    defender_type = get_weapon_type(defender_weapon)
+    return WEAPON_TRIANGLE_ADVANTAGE.get(attacker_type) == defender_type

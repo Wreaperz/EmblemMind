@@ -8,7 +8,8 @@ from emblemmind_snapshot import TurnSnapshot
 from agent.action_coordinator import ActionCoordinator
 from agent.action_generator import Action
 from agent.bizhawk_controller import press_key, press_reset, GBA_KEY_MAP, focus_bizhawk
-from utils.fe_data_mappings import ITEM_ATTACK_RANGES
+from utils.fe_data_mappings import ITEM_ATTACK_RANGES, has_weapon_triangle_advantage, get_terrain_characteristics
+from data_gatherer import DataGatherer
 
 # Paths
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
@@ -28,6 +29,9 @@ SIMULATION_MODE = False  # Set to True to use fast simulation for RL, False for 
 GOOD_TERRAIN_SYMBOLS = {'F', '^', '0C', '0D', '11', '0A', '0B', '1F', 'C', 'T'}  # Forest, Thicket, Hill, Fort, Gate, Throne, etc.
 GOOD_TERRAIN_MIN_DEF = 1  # Minimum defense bonus to consider a tile 'good' (for struct-based fallback)
 GOOD_TERRAIN_MAX_PROBES = 2  # Only probe up to this many 'good' tiles per enemy
+
+# Initialize the data gatherer
+data_gatherer = DataGatherer()
 
 # --- Helper Functions ---
 def wait_for_state_update(prev_snapshot, timeout=3):
@@ -268,7 +272,7 @@ def perform_attack_action(action, cursor_pos, probe=False):
             print(f"[FATAL] Still not on expected unit after recovery. Skipping action.")
             return cursor_pos if probe else (cursor_pos, None)
     # Select unit
-    time.sleep(0.1)
+    time.sleep(0.05)
     press_key('x', duration=0.05)
     time.sleep(0.05)
     # Move cursor to target
@@ -633,7 +637,7 @@ def trial_run():
             press_reset()
             time.sleep(0.5)
         try:
-            snapshot = TurnSnapshot.from_files(STATE_FILE, MAP_FILE)
+            snapshot = data_gatherer.get_snapshot()
         except Exception as e:
             print(f"Error loading state: {e}")
             time.sleep(0.1)
@@ -720,15 +724,17 @@ def trial_run():
                     filtered_actions = []
                     for a in actions:
                         if a.action_type == 'attack' and a.target_unit is not None:
-                            if not any(e.id == a.target_unit.id for e in internal_enemies):
-                                continue  # Target already dead
+                            if not any(e.id == a.target_unit.id and e.is_alive for e in snapshot.enemies):
+                                continue  # Skip actions targeting dead enemies
                         filtered_actions.append(a)
-                    if any(a.action_type == 'attack' for a in filtered_actions):
+                    # Update the actions list with filtered actions
+                    actions[:] = filtered_actions
+                    if any(a.action_type == 'attack' for a in actions):
                         attack_first_units.append(unit)
-                        attack_first_actions.append(filtered_actions)
+                        attack_first_actions.append(actions)
                     else:
                         other_units.append(unit)
-                        other_actions.append(filtered_actions)
+                        other_actions.append(actions)
                 acted = False
                 # Use attack-first, then others
                 for idx, (unit, actions) in enumerate(list(zip(attack_first_units + other_units, attack_first_actions + other_actions))):
@@ -753,10 +759,19 @@ def trial_run():
                                 # Only probe good tiles
                                 if not is_good_terrain(snapshot, a.target_position[0], a.target_position[1]):
                                     continue  # Skip bad tiles
+                            # Check tile occupancy before probing
+                            occupied_tiles = {u.position for u in snapshot.units if u.is_alive}
+                            if a.target_position in occupied_tiles:
+                                continue  # Skip occupied tiles
                             # Probe all weapons for this attack action
                             weapon_results = probe_all_weapons_battle_structs(unit, a.target_unit, a.target_position, STATE_FILE, move_cursor_to, press_key, get_cursor_position)
                             for battle_struct, item_id, slot_idx in weapon_results:
-                                if battle_struct:
+                                if battle_struct is not None:
+                                    # Navigate to the correct weapon slot
+                                    for _ in range(slot_idx):
+                                        press_key('DOWN', duration=0.05)
+                                        time.sleep(0.05)
+                                    # Proceed with probing logic
                                     will_kill = battle_struct['attack'] >= a.target_unit.hp[0] or battle_struct.get('cur_hp', 1) <= 0
                                     will_die = battle_struct['cur_hp'] <= 0 or battle_struct['attack'] >= unit.hp[0]
                                     score = 0
@@ -770,6 +785,14 @@ def trial_run():
                                         terrain_bonus = 10 + terrain_def * 2 + terrain_avo + terrain_res
                                     score += terrain_bonus
                                     # --- End terrain bonus ---
+                                    # Check weapon triangle advantage
+                                    if has_weapon_triangle_advantage(item_id, a.target_unit.items[0][0]):
+                                        # Prioritize actions with weapon triangle advantage
+                                        score += 20
+                                    # Check terrain characteristics
+                                    terrain = snapshot.map.get_terrain_at(a.target_position[0], a.target_position[1])
+                                    terrain_bonus = get_terrain_characteristics(terrain)
+                                    score += terrain_bonus['avoid'] + terrain_bonus['def'] * 2 + terrain_bonus['res']
                                     if will_kill:
                                         score += 100
                                     if will_die:
@@ -913,3 +936,5 @@ if __name__ == "__main__":
             print("Model saved to saved_model.pt.")
         else:
             print("Coordinator not defined, model not saved.")
+    finally:
+        data_gatherer.stop()  # Ensure the data gatherer is stopped when the program ends

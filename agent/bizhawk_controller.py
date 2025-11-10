@@ -39,7 +39,7 @@ def focus_bizhawk():
         return False
 
 def press_key(key, duration=0.05):
-    time.sleep(0.01)
+    time.sleep(0.02)
     """Write a single keypress to the Lua input file."""
     PHYSICAL_TO_GBA = {
         'x': 'A',
@@ -64,7 +64,7 @@ def press_key(key, duration=0.05):
         keyboard.press(key)
         time.sleep(duration)
         keyboard.release(key)
-    time.sleep(0.01)
+    time.sleep(0.02)
 
 def press_keys(keys, duration=0.1):
     """Press multiple keys in sequence for the given duration each."""
