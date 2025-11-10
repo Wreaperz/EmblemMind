@@ -37,6 +37,7 @@ import json
 import logging
 import os
 import time
+from textwrap import shorten
 from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -197,6 +198,10 @@ class OpenAITacticalPolicy:
             return self._fallback_plan(snapshot)
 
         payload = self.serialiser.serialise(snapshot)
+        logging.debug(
+            "Serialised snapshot payload (truncated): %s",
+            shorten(json.dumps(payload, indent=2, sort_keys=True), width=2000, placeholder="..."),
+        )
         user_content = json.dumps(payload, indent=2, sort_keys=True)
 
         logging.debug("Dispatching snapshot to OpenAI tactical policy")
@@ -213,7 +218,12 @@ class OpenAITacticalPolicy:
                     messages=messages,
                     temperature=self.temperature,
                 )
-                return response.choices[0].message.content.strip()
+                content = response.choices[0].message.content.strip()
+                logging.debug(
+                    "Received chat.completions response (truncated): %s",
+                    shorten(content, width=2000, placeholder="..."),
+                )
+                return content
             except AttributeError:  # pragma: no cover - SDK differences
                 response = self._client.responses.create(
                     model=self.model,
@@ -226,8 +236,18 @@ class OpenAITacticalPolicy:
                         if getattr(block, "content", None):
                             first = block.content[0]
                             if getattr(first, "text", None):
-                                return first.text.strip()
-                return getattr(response, "output_text", "[]")
+                                content = first.text.strip()
+                                logging.debug(
+                                    "Received responses.create content block (truncated): %s",
+                                    shorten(content, width=2000, placeholder="..."),
+                                )
+                                return content
+                content = getattr(response, "output_text", "[]")
+                logging.debug(
+                    "Received responses.create text (truncated): %s",
+                    shorten(content, width=2000, placeholder="..."),
+                )
+                return content
 
         response = openai.ChatCompletion.create(
             model=self.model,
@@ -235,7 +255,12 @@ class OpenAITacticalPolicy:
             temperature=self.temperature,
             timeout=OPENAI_TIMEOUT,
         )
-        return response["choices"][0]["message"]["content"].strip()
+        content = response["choices"][0]["message"]["content"].strip()
+        logging.debug(
+            "Received ChatCompletion response (truncated): %s",
+            shorten(content, width=2000, placeholder="..."),
+        )
+        return content
 
     # Internals -------------------------------------------------------------------
 
@@ -292,10 +317,18 @@ class ActionPlanParser:
             data = json.loads(content)
         except json.JSONDecodeError as exc:
             logging.error("Failed to decode policy response: %s", exc)
+            logging.debug(
+                "Raw policy response that failed to decode (truncated): %s",
+                shorten(content, width=2000, placeholder="..."),
+            )
             return []
 
         if not isinstance(data, list):
             logging.error("Policy response must be a JSON array; received %s", type(data))
+            logging.debug(
+                "Unexpected policy response structure (truncated): %s",
+                shorten(content, width=2000, placeholder="..."),
+            )
             return []
 
         instructions: List[ActionInstruction] = []
@@ -711,6 +744,14 @@ class TacticalAgent:
                     time.sleep(SNAPSHOT_POLL_INTERVAL)
                     continue
 
+                logging.debug(
+                    "Snapshot ready: turn=%s phase_text=%s allies=%d enemies=%d",
+                    snapshot.current_turn,
+                    snapshot.phase_text,
+                    len(snapshot.units),
+                    len(snapshot.enemies),
+                )
+
                 signature = self._snapshot_signature(snapshot)
                 if signature == self.last_signature:
                     time.sleep(SNAPSHOT_POLL_INTERVAL)
@@ -719,7 +760,21 @@ class TacticalAgent:
                 self.last_signature = signature
 
                 plan_text = self.policy.request_plan(snapshot)
+                logging.debug(
+                    "Policy returned plan text (truncated): %s",
+                    shorten(plan_text, width=2000, placeholder="..."),
+                )
                 instructions = self.parser.parse(plan_text)
+                if instructions:
+                    summary = [
+                        f"{inst.order}:{inst.unit_id}:{inst.action_type}"
+                        for inst in instructions
+                    ]
+                    logging.debug(
+                        "Parsed %d instructions (order:unit:action): %s",
+                        len(instructions),
+                        ", ".join(summary),
+                    )
 
                 if not instructions:
                     logging.warning("No actionable instructions returned; waiting")
