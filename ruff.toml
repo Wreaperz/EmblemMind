@@ -1,0 +1,22 @@
+line-length = 88
+target-version = "py311"
+exclude = [
+  "agent",
+  "unused",
+  "utils",
+  "BizHawk",
+  "documentation",
+  "videos",
+  "data",
+  "main.py",
+  "neural_network.py",
+  "train_agent.py",
+  "test_control.py",
+  "trial_run_agent.py",
+]
+
+[lint]
+select = ["E", "F", "I"]
+
+[lint.per-file-ignores]
+"tests/*" = ["S101"]

@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 
-from dataclasses import dataclass
-from typing import List, Tuple, Dict, Optional
+from dataclasses import asdict, dataclass, is_dataclass
+from typing import Any, Dict, List, Optional, Tuple
 import os
 from utils.fe_state_parser import FEStateParser
 from utils.fe_data_mappings import (
-    get_item_name, get_character_name, get_class_name,
-    get_weapon_type
+    get_item_name,
+    get_character_name,
+    get_class_name,
+    get_weapon_type,
 )
+
 
 @dataclass
 class Unit:
     """Represents a unit (character or enemy) in the game state"""
+
     id: int
     name: str
     class_id: int
@@ -27,36 +31,39 @@ class Unit:
     raw_struct: bytes = None  # Optionally store the raw character struct bytes
 
     @classmethod
-    def from_raw_data(cls, raw_data: dict, is_enemy: bool = False) -> Optional['Unit']:
+    def from_raw_data(cls, raw_data: dict, is_enemy: bool = False) -> Optional["Unit"]:
         """Create a Unit object from raw data"""
         try:
             # Only create units that are alive and visible (for enemies)
-            if is_enemy and (raw_data.get('hp', (0, 0))[0] <= 0 or raw_data.get('turn_status', 0) == 0x81):
+            if is_enemy and (
+                raw_data.get("hp", (0, 0))[0] <= 0
+                or raw_data.get("turn_status", 0) == 0x81
+            ):
                 return None
 
             # Ensure turn_status is an integer
-            turn_status = raw_data.get('turn_status', 0)
+            turn_status = raw_data.get("turn_status", 0)
             if isinstance(turn_status, str):
                 # Try to convert from hex string if it starts with 0x
-                if turn_status.startswith('0x'):
+                if turn_status.startswith("0x"):
                     turn_status = int(turn_status, 16)
                 else:
                     turn_status = int(turn_status)
 
             return cls(
-                id=raw_data.get('id', 0),
-                name=get_character_name(raw_data.get('id', 0)),
-                class_id=raw_data.get('class', 0),
-                position=tuple(raw_data.get('position', (0, 0))),
-                hp=tuple(raw_data.get('hp', (0, 0))),
-                stats=raw_data.get('stats', [0] * 9),
-                items=raw_data.get('items', []),
+                id=raw_data.get("id", 0),
+                name=get_character_name(raw_data.get("id", 0)),
+                class_id=raw_data.get("class", 0),
+                position=tuple(raw_data.get("position", (0, 0))),
+                hp=tuple(raw_data.get("hp", (0, 0))),
+                stats=raw_data.get("stats", [0] * 9),
+                items=raw_data.get("items", []),
                 turn_status=turn_status,
-                status_effect=raw_data.get('status_effect', 0),
+                status_effect=raw_data.get("status_effect", 0),
                 is_enemy=is_enemy,
-                level=raw_data.get('level', 0),
-                exp=raw_data.get('exp', 0),
-                raw_struct=raw_data.get('raw_struct', None)
+                level=raw_data.get("level", 0),
+                exp=raw_data.get("exp", 0),
+                raw_struct=raw_data.get("raw_struct", None),
             )
         except Exception as e:
             print(f"Error creating unit: {e}")
@@ -76,7 +83,7 @@ class Unit:
             0x42: "Moved",
             0x52: "Rescuer, moved",
             0x21: "Rescued",
-            0x81: "Invisible (under roof)"
+            0x81: "Invisible (under roof)",
         }
         return status_map.get(self.turn_status, f"Unknown (0x{self.turn_status:02X})")
 
@@ -98,7 +105,7 @@ class Unit:
             5: "Attack Boost",
             6: "Defense Boost",
             7: "Critical Boost",
-            8: "Avoid Boost"
+            8: "Avoid Boost",
         }
 
         effect_name = effect_map.get(effect, "Unknown")
@@ -114,10 +121,13 @@ class Unit:
     def can_act(self) -> bool:
         """Check if the unit can act this turn"""
         # Units can't act if they're rescued, have already moved, or are invisible
-        return (self.is_alive and
-                not self.is_rescued and
-                not self.has_acted and
-                self.is_visible and self.turn_status != 0x02)
+        return (
+            self.is_alive
+            and not self.is_rescued
+            and not self.has_acted
+            and self.is_visible
+            and self.turn_status != 0x02
+        )
 
     @property
     def has_acted(self) -> bool:
@@ -159,13 +169,15 @@ class Unit:
         if self.raw_struct and len(self.raw_struct) > 0x0D:
             return (self.raw_struct[0x0D] & 0x10) != 0
         # Fallback: try to get from raw_data if available as 'char_struct_0D'
-        if hasattr(self, 'char_struct_0D'):
+        if hasattr(self, "char_struct_0D"):
             return (self.char_struct_0D & 0x10) != 0
         return False
+
 
 @dataclass
 class TerrainMap:
     """Represents the map terrain data"""
+
     width: int
     height: int
     grid: List[List[str]]  # 2D grid of terrain symbols
@@ -177,9 +189,11 @@ class TerrainMap:
             return self.grid[y][x]
         return None
 
+
 @dataclass
 class TurnSnapshot:
     """Represents the complete game state at a given turn"""
+
     current_turn: int
     chapter_id: int
     turn_phase: int  # 0x00 = Player, 0x40 = Neutral, 0x80 = Enemy
@@ -191,15 +205,11 @@ class TurnSnapshot:
     @property
     def phase_text(self) -> str:
         """Get human-readable text for the current turn phase"""
-        phase_map = {
-            0x00: "Player",
-            0x40: "Neutral",
-            0x80: "Enemy"
-        }
+        phase_map = {0x00: "Player", 0x40: "Neutral", 0x80: "Enemy"}
         return phase_map.get(self.turn_phase, f"Unknown (0x{self.turn_phase:02X})")
 
     @classmethod
-    def from_files(cls, state_file_path: str, map_file_path: str) -> 'TurnSnapshot':
+    def from_files(cls, state_file_path: str, map_file_path: str) -> "TurnSnapshot":
         """
         Create a TurnSnapshot from the state and map files
 
@@ -225,46 +235,173 @@ class TurnSnapshot:
         enemies = []
 
         # Process characters
-        for char_data in state_data['characters']:
+        for char_data in state_data["characters"]:
             unit = cls._create_unit(char_data, is_enemy=False)
             if unit and unit.is_alive:  # Only include alive units
                 units.append(unit)
 
         # Process enemies
-        for enemy_data in state_data['enemies']:
+        for enemy_data in state_data["enemies"]:
             unit = cls._create_unit(enemy_data, is_enemy=True)
             # IMPORTANT - THIS CONTROLS WHETHER ENEMIES ARE MARKED OR NOT (SEEN AND UNSEEN)
-            if unit and unit.is_alive:# and unit.is_visible:  # Only include alive and visible enemies
+            if (
+                unit and unit.is_alive
+            ):  # and unit.is_visible:  # Only include alive and visible enemies
                 enemies.append(unit)
 
         # Create terrain map
         terrain_map = TerrainMap(
-            width=map_data['width'],
-            height=map_data['height'],
-            grid=map_data['terrain_grid'],
-            legend=map_data['legend']
+            width=map_data["width"],
+            height=map_data["height"],
+            grid=map_data["terrain_grid"],
+            legend=map_data["legend"],
         )
 
         # Get turn_phase from turn_phase_raw
-        turn_phase = state_data['game_state'].get('turn_phase_raw', 0)
+        turn_phase = state_data["game_state"].get("turn_phase_raw", 0)
         if isinstance(turn_phase, str):
-            if turn_phase.startswith('0x'):
+            if turn_phase.startswith("0x"):
                 turn_phase = int(turn_phase, 16)
             else:
                 turn_phase = int(turn_phase)
 
         # Create snapshot
         return cls(
-            current_turn=state_data['game_state'].get('current_turn', 0),
-            chapter_id=state_data['game_state'].get('chapter_id', 0),
+            current_turn=state_data["game_state"].get("current_turn", 0),
+            chapter_id=state_data["game_state"].get("chapter_id", 0),
             turn_phase=turn_phase,
             cursor_position=(
-                state_data['game_state'].get('cursor_x', 0),
-                state_data['game_state'].get('cursor_y', 0)
+                state_data["game_state"].get("cursor_x", 0),
+                state_data["game_state"].get("cursor_y", 0),
             ),
             map=terrain_map,
             units=units,
-            enemies=enemies
+            enemies=enemies,
+        )
+
+    @classmethod
+    def from_bridge_state(cls, state: Any) -> "TurnSnapshot":
+        """Create a snapshot from the live bridge payload."""
+
+        if is_dataclass(state):
+            data = asdict(state)
+        elif hasattr(state, "__dict__"):
+            data = state.__dict__
+        elif isinstance(state, dict):
+            data = state
+        else:
+            raise TypeError("Unsupported state payload")
+
+        frame_units = data.get("units", ())
+        terrain_tiles = data.get("terrain", ())
+
+        def coerce_unit(raw: Any) -> Optional[Unit]:
+            side = getattr(raw, "side", None) or raw.get("side", "ally")
+            position = (
+                getattr(raw, "x", None) if hasattr(raw, "x") else raw.get("x", 0),
+                getattr(raw, "y", None) if hasattr(raw, "y") else raw.get("y", 0),
+            )
+            hp_value = (
+                getattr(raw, "hp", None) if hasattr(raw, "hp") else raw.get("hp", 0)
+            )
+            max_hp_value = (
+                getattr(raw, "max_hp", None)
+                if hasattr(raw, "max_hp")
+                else raw.get("max_hp", hp_value)
+            )
+            mov_value = (
+                getattr(raw, "mov", None) if hasattr(raw, "mov") else raw.get("mov", 0)
+            )
+            stats = [0] * 9
+            stats[6] = mov_value
+            unit = Unit(
+                id=getattr(raw, "id", None) if hasattr(raw, "id") else raw.get("id", 0),
+                name=(
+                    getattr(raw, "name", None)
+                    if hasattr(raw, "name")
+                    else raw.get("name", "")
+                ),
+                class_id=0,
+                position=(int(position[0]), int(position[1])),
+                hp=(int(hp_value), int(max_hp_value)),
+                stats=stats,
+                items=[],
+                turn_status=0,
+                status_effect=0,
+                is_enemy=side == "enemy",
+                level=0,
+                exp=0,
+                raw_struct=None,
+            )
+            return unit
+
+        units: List[Unit] = []
+        enemies: List[Unit] = []
+        for raw_unit in frame_units:
+            try:
+                unit = coerce_unit(raw_unit)
+            except Exception:
+                unit = None
+            if not unit:
+                continue
+            if unit.is_enemy:
+                enemies.append(unit)
+            else:
+                units.append(unit)
+
+        max_x = 0
+        max_y = 0
+        terrain_grid: Dict[Tuple[int, int], str] = {}
+        for tile in terrain_tiles:
+            try:
+                x = getattr(tile, "x", None) if hasattr(tile, "x") else tile.get("x", 0)
+                y = getattr(tile, "y", None) if hasattr(tile, "y") else tile.get("y", 0)
+                name = (
+                    getattr(tile, "tile", None)
+                    if hasattr(tile, "tile")
+                    else tile.get("tile", "")
+                )
+                max_x = max(max_x, int(x))
+                max_y = max(max_y, int(y))
+                terrain_grid[(int(x), int(y))] = str(name)
+            except Exception:
+                continue
+
+        width = max_x + 1
+        height = max_y + 1
+        grid: List[List[str]] = []
+        for y in range(height):
+            row: List[str] = []
+            for x in range(width):
+                row.append(terrain_grid.get((x, y), "."))
+            grid.append(row)
+
+        terrain_map = TerrainMap(width=width, height=height, grid=grid, legend={})
+
+        phase_map = {
+            "player": 0x00,
+            "enemy": 0x80,
+            "other": 0x40,
+        }
+        phase = data.get("phase", "other")
+        turn_phase = phase_map.get(phase, 0x40)
+
+        cursor = data.get("cursor", {})
+        cursor_x = (
+            getattr(cursor, "x", None) if hasattr(cursor, "x") else cursor.get("x", 0)
+        )
+        cursor_y = (
+            getattr(cursor, "y", None) if hasattr(cursor, "y") else cursor.get("y", 0)
+        )
+
+        return cls(
+            current_turn=int(data.get("turn", 0)),
+            chapter_id=0,
+            turn_phase=turn_phase,
+            cursor_position=(int(cursor_x), int(cursor_y)),
+            map=terrain_map,
+            units=units,
+            enemies=enemies,
         )
 
     @staticmethod
@@ -274,7 +411,7 @@ class TurnSnapshot:
             if not os.path.exists(map_file_path):
                 return None
 
-            with open(map_file_path, 'r') as f:
+            with open(map_file_path, "r") as f:
                 lines = f.readlines()
 
             if not lines or len(lines) < 3:
@@ -286,7 +423,7 @@ class TurnSnapshot:
                 return None
 
             dimensions = header.replace("Map size:", "").strip()
-            width, height = map(int, dimensions.split('x'))
+            width, height = map(int, dimensions.split("x"))
 
             # Parse terrain grid
             terrain_grid = []
@@ -311,10 +448,10 @@ class TurnSnapshot:
                         legend[j - legend_start] = legend_line
 
             return {
-                'width': width,
-                'height': height,
-                'terrain_grid': terrain_grid,
-                'legend': legend
+                "width": width,
+                "height": height,
+                "terrain_grid": terrain_grid,
+                "legend": legend,
             }
 
         except Exception as e:
@@ -322,18 +459,21 @@ class TurnSnapshot:
             return None
 
     @staticmethod
-    def _create_unit(raw_data: dict, is_enemy: bool = False) -> Optional['Unit']:
+    def _create_unit(raw_data: dict, is_enemy: bool = False) -> Optional["Unit"]:
         """Create a Unit object from raw data"""
         try:
             # For enemies: only create if alive and visible
-            if is_enemy and (raw_data.get('hp', (0, 0))[0] <= 0 or raw_data.get('turn_status', 0) == 0x81):
+            if is_enemy and (
+                raw_data.get("hp", (0, 0))[0] <= 0
+                or raw_data.get("turn_status", 0) == 0x81
+            ):
                 return None
 
             # For player units: only create if chosen for the level and not dead
             if not is_enemy:
-                turn_status = raw_data.get('turn_status', 0)
+                turn_status = raw_data.get("turn_status", 0)
                 if isinstance(turn_status, str):
-                    if turn_status.startswith('0x'):
+                    if turn_status.startswith("0x"):
                         turn_status = int(turn_status, 16)
                     else:
                         turn_status = int(turn_status)
@@ -373,16 +513,16 @@ class TurnSnapshot:
                 "height": 0,
                 "terrain_grid": [],
                 "debug_info": {},
-                "legend": {}
+                "legend": {},
             }
-            with open(map_file_path, 'r') as f:
+            with open(map_file_path, "r") as f:
                 lines = f.readlines()
             if not lines or len(lines) < 3:
                 return None
             header = lines[0].strip()
             if header.startswith("Map size:"):
                 dimensions = header.replace("Map size:", "").strip()
-                width, height = map(int, dimensions.split('x'))
+                width, height = map(int, dimensions.split("x"))
                 map_data["width"] = width
                 map_data["height"] = height
             terrain_start = 2
@@ -422,7 +562,12 @@ class TurnSnapshot:
         for y, row in enumerate(terrain_grid):
             line = ""
             for x, symbol in enumerate(row):
-                if cursor_x is not None and cursor_y is not None and x == cursor_x and y == cursor_y:
+                if (
+                    cursor_x is not None
+                    and cursor_y is not None
+                    and x == cursor_x
+                    and y == cursor_y
+                ):
                     line += "X "
                 else:
                     line += symbol + " "
@@ -436,26 +581,34 @@ class TurnSnapshot:
     def parse_realtime_data_from_state_file(state_file_path):
         """Parse the REALTIME_DATA section from fe_state.txt and return a dict."""
         import re
+
         data = {
-            'cursor_rt_x': None,
-            'cursor_rt_y': None,
-            'move_dest_x': None,
-            'move_dest_y': None,
-            'deployment_id': None
+            "cursor_rt_x": None,
+            "cursor_rt_y": None,
+            "move_dest_x": None,
+            "move_dest_y": None,
+            "deployment_id": None,
         }
         try:
-            with open(state_file_path, 'r') as f:
+            with open(state_file_path, "r") as f:
                 lines = f.readlines()
             in_realtime = False
             for line in lines:
                 line = line.strip()
-                if line == 'REALTIME_DATA':
+                if line == "REALTIME_DATA":
                     in_realtime = True
                     continue
                 if in_realtime:
-                    if line == '' or line.endswith('CHARACTERS') or line.startswith('CHARACTERS'):
+                    if (
+                        line == ""
+                        or line.endswith("CHARACTERS")
+                        or line.startswith("CHARACTERS")
+                    ):
                         break
-                    m = re.match(r'(cursor_rt_x|cursor_rt_y|move_dest_x|move_dest_y|deployment_id)=(\d+)', line)
+                    m = re.match(
+                        r"(cursor_rt_x|cursor_rt_y|move_dest_x|move_dest_y|deployment_id)=(\d+)",
+                        line,
+                    )
                     if m:
                         key, val = m.group(1), int(m.group(2))
                         data[key] = val
@@ -469,22 +622,26 @@ class TurnSnapshot:
         attacker = None
         defender = None
         try:
-            with open(state_file_path, 'r') as f:
+            with open(state_file_path, "r") as f:
                 lines = f.readlines()
             in_battle = False
             for line in lines:
                 line = line.strip()
-                if line == 'BATTLE_STRUCTS':
+                if line == "BATTLE_STRUCTS":
                     in_battle = True
                     continue
                 if in_battle:
-                    if line.startswith('attacker_battle='):
-                        hexstr = line.split('=', 1)[1].strip()
+                    if line.startswith("attacker_battle="):
+                        hexstr = line.split("=", 1)[1].strip()
                         attacker = [int(b, 16) for b in hexstr.split()]
-                    elif line.startswith('defender_battle='):
-                        hexstr = line.split('=', 1)[1].strip()
+                    elif line.startswith("defender_battle="):
+                        hexstr = line.split("=", 1)[1].strip()
                         defender = [int(b, 16) for b in hexstr.split()]
-                    elif line == '' or line.endswith('CHARACTERS') or line.startswith('CHARACTERS'):
+                    elif (
+                        line == ""
+                        or line.endswith("CHARACTERS")
+                        or line.startswith("CHARACTERS")
+                    ):
                         break
         except Exception as e:
             print(f"Error parsing BATTLE_STRUCTS: {e}")
@@ -493,7 +650,7 @@ class TurnSnapshot:
     @staticmethod
     def parse_map_section(state_file_path, section_name):
         """Parse a named section (e.g., MOVEMENT_MAP, RANGE_MAP) from fe_state.txt and return a grid."""
-        with open(state_file_path, 'r') as f:
+        with open(state_file_path, "r") as f:
             lines = f.readlines()
         in_section = False
         grid = []
@@ -503,102 +660,117 @@ class TurnSnapshot:
                 in_section = True
                 continue
             if in_section:
-                if not line or (line.replace('_', '').isupper() and line.replace('_', '').isalpha()):
+                if not line or (
+                    line.replace("_", "").isupper() and line.replace("_", "").isalpha()
+                ):
                     break
-                if not all(all(c in "0123456789ABCDEFabcdef" for c in b) for b in line.split()):
+                if not all(
+                    all(c in "0123456789ABCDEFabcdef" for c in b) for b in line.split()
+                ):
                     break
                 row = [int(b, 16) for b in line.split()]
                 grid.append(row)
         return grid
 
     @staticmethod
-    def parse_battle_struct(state_file_path, struct='attacker'):
+    def parse_battle_struct(state_file_path, struct="attacker"):
         """Parse the BATTLE_STRUCTS section and return a dict of intuitive fields for the attacker or defender."""
         # Get the raw bytes
-        attacker, defender = TurnSnapshot.parse_battle_structs_from_state_file(state_file_path)
-        data = attacker if struct == 'attacker' else defender
+        attacker, defender = TurnSnapshot.parse_battle_structs_from_state_file(
+            state_file_path
+        )
+        data = attacker if struct == "attacker" else defender
         if not data:
             return None
+
         # Map fields using RAM Offset Notes
         def get_word(offset):
-            return data[offset] | (data[offset+1] << 8) | (data[offset+2] << 16) | (data[offset+3] << 24)
+            return (
+                data[offset]
+                | (data[offset + 1] << 8)
+                | (data[offset + 2] << 16)
+                | (data[offset + 3] << 24)
+            )
+
         def get_short(offset):
-            return data[offset] | (data[offset+1] << 8)
+            return data[offset] | (data[offset + 1] << 8)
+
         def get_byte(offset):
             return data[offset]
+
         battle_struct = {
-            'level': get_byte(0x08),
-            'exp': get_byte(0x09),
-            'ai_flags': get_byte(0x0A),
-            'deployment': get_byte(0x0B),
-            'unit_state': get_word(0x0C),
-            'x': get_byte(0x10),
-            'y': get_byte(0x11),
-            'max_hp': get_byte(0x12),
-            'cur_hp': get_byte(0x13),
-            'str': get_byte(0x14),
-            'skl': get_byte(0x15),
-            'spd': get_byte(0x16),
-            'def': get_byte(0x17),
-            'res': get_byte(0x18),
-            'lck': get_byte(0x19),
-            'con_bonus': get_byte(0x1A),
-            'mov_bonus': get_byte(0x1D),
-            'items': [
+            "level": get_byte(0x08),
+            "exp": get_byte(0x09),
+            "ai_flags": get_byte(0x0A),
+            "deployment": get_byte(0x0B),
+            "unit_state": get_word(0x0C),
+            "x": get_byte(0x10),
+            "y": get_byte(0x11),
+            "max_hp": get_byte(0x12),
+            "cur_hp": get_byte(0x13),
+            "str": get_byte(0x14),
+            "skl": get_byte(0x15),
+            "spd": get_byte(0x16),
+            "def": get_byte(0x17),
+            "res": get_byte(0x18),
+            "lck": get_byte(0x19),
+            "con_bonus": get_byte(0x1A),
+            "mov_bonus": get_byte(0x1D),
+            "items": [
                 (get_short(0x1E), get_short(0x1F)),
                 (get_short(0x20), get_short(0x21)),
                 (get_short(0x22), get_short(0x23)),
                 (get_short(0x24), get_short(0x25)),
                 (get_short(0x26), get_short(0x27)),
             ],
-            'sword_rank': get_byte(0x28),
-            'lance_rank': get_byte(0x29),
-            'axe_rank': get_byte(0x2A),
-            'bow_rank': get_byte(0x2B),
-            'staff_rank': get_byte(0x2C),
-            'anima_rank': get_byte(0x2D),
-            'light_rank': get_byte(0x2E),
-            'dark_rank': get_byte(0x2F),
-            'status': get_byte(0x30),
-            'status_duration': get_byte(0x31),
+            "sword_rank": get_byte(0x28),
+            "lance_rank": get_byte(0x29),
+            "axe_rank": get_byte(0x2A),
+            "bow_rank": get_byte(0x2B),
+            "staff_rank": get_byte(0x2C),
+            "anima_rank": get_byte(0x2D),
+            "light_rank": get_byte(0x2E),
+            "dark_rank": get_byte(0x2F),
+            "status": get_byte(0x30),
+            "status_duration": get_byte(0x31),
             # Battle-only fields:
-            'equipped_item_after': get_short(0x48),
-            'equipped_item_before': get_short(0x4A),
-            'weapon_ability_word': get_word(0x4C),
-            'weapon_type': get_byte(0x50),
-            'weapon_slot': get_byte(0x51),
-            'can_counter': get_byte(0x52),
-            'wtriangle_hit': get_byte(0x53),
-            'wtriangle_dmg': get_byte(0x54),
-            'terrain_id': get_byte(0x55),
-            'terrain_def': get_byte(0x56),
-            'terrain_avo': get_byte(0x57),
-            'terrain_res': get_byte(0x58),
-            'attack': get_short(0x5A),
-            'defense': get_short(0x5C),
-            'attack_speed': get_short(0x5E),
-            'hit': get_short(0x60),
-            'avoid': get_short(0x62),
-            'battle_hit': get_short(0x64),
-            'crit': get_short(0x66),
-            'crit_avoid': get_short(0x68),
-            'battle_crit': get_short(0x6A),
-            'lethality': get_short(0x6C),
-            'exp_gain': get_byte(0x6E),
-            'status_to_write': get_byte(0x6F),
-            'level_pre_battle': get_byte(0x70),
-            'exp_pre_battle': get_byte(0x71),
-            'cur_hp_battle': get_byte(0x72),
-            'hp_change': get_byte(0x73),
-            'str_change': get_byte(0x74),
-            'skl_change': get_byte(0x75),
-            'spd_change': get_byte(0x76),
-            'def_change': get_byte(0x77),
-            'res_change': get_byte(0x78),
-            'luk_change': get_byte(0x79),
-            'con_change': get_byte(0x7A),
-            'wexp_multiplier': get_byte(0x7B),
-            'nonzero_damage': get_byte(0x7C),
-            'weapon_broke': get_byte(0x7D),
+            "equipped_item_after": get_short(0x48),
+            "equipped_item_before": get_short(0x4A),
+            "weapon_ability_word": get_word(0x4C),
+            "weapon_type": get_byte(0x50),
+            "weapon_slot": get_byte(0x51),
+            "can_counter": get_byte(0x52),
+            "wtriangle_hit": get_byte(0x53),
+            "wtriangle_dmg": get_byte(0x54),
+            "terrain_id": get_byte(0x55),
+            "terrain_def": get_byte(0x56),
+            "terrain_avo": get_byte(0x57),
+            "terrain_res": get_byte(0x58),
+            "attack": get_short(0x5A),
+            "defense": get_short(0x5C),
+            "attack_speed": get_short(0x5E),
+            "hit": get_short(0x60),
+            "avoid": get_short(0x62),
+            "battle_hit": get_short(0x64),
+            "crit": get_short(0x66),
+            "crit_avoid": get_short(0x68),
+            "battle_crit": get_short(0x6A),
+            "lethality": get_short(0x6C),
+            "exp_gain": get_byte(0x6E),
+            "status_to_write": get_byte(0x6F),
+            "level_pre_battle": get_byte(0x70),
+            "exp_pre_battle": get_byte(0x71),
+            "cur_hp_battle": get_byte(0x72),
+            "hp_change": get_byte(0x73),
+            "str_change": get_byte(0x74),
+            "skl_change": get_byte(0x75),
+            "spd_change": get_byte(0x76),
+            "def_change": get_byte(0x77),
+            "res_change": get_byte(0x78),
+            "luk_change": get_byte(0x79),
+            "con_change": get_byte(0x7A),
+            "wexp_multiplier": get_byte(0x7B),
+            "nonzero_damage": get_byte(0x7C),
+            "weapon_broke": get_byte(0x7D),
         }
         return battle_struct
