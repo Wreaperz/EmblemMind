@@ -198,13 +198,15 @@ class OpenAITacticalPolicy:
             return self._fallback_plan(snapshot)
 
         payload = self.serialiser.serialise(snapshot)
+        payload_text = json.dumps(payload, indent=2, sort_keys=True)
+        logging.info("OpenAI tactical policy request payload:%s%s", os.linesep, payload_text)
         logging.debug(
             "Serialised snapshot payload (truncated): %s",
-            shorten(json.dumps(payload, indent=2, sort_keys=True), width=2000, placeholder="..."),
+            shorten(payload_text, width=2000, placeholder="..."),
         )
-        user_content = json.dumps(payload, indent=2, sort_keys=True)
+        user_content = payload_text
 
-        logging.debug("Dispatching snapshot to OpenAI tactical policy")
+        logging.info("Dispatching snapshot to OpenAI tactical policy")
 
         messages = [
             {"role": "system", "content": POLICY_PROMPT},
@@ -219,6 +221,11 @@ class OpenAITacticalPolicy:
                     temperature=self.temperature,
                 )
                 content = response.choices[0].message.content.strip()
+                logging.info(
+                    "OpenAI tactical policy raw response:%s%s",
+                    os.linesep,
+                    content,
+                )
                 logging.debug(
                     "Received chat.completions response (truncated): %s",
                     shorten(content, width=2000, placeholder="..."),
@@ -237,12 +244,22 @@ class OpenAITacticalPolicy:
                             first = block.content[0]
                             if getattr(first, "text", None):
                                 content = first.text.strip()
+                                logging.info(
+                                    "OpenAI tactical policy raw response:%s%s",
+                                    os.linesep,
+                                    content,
+                                )
                                 logging.debug(
                                     "Received responses.create content block (truncated): %s",
                                     shorten(content, width=2000, placeholder="..."),
                                 )
                                 return content
                 content = getattr(response, "output_text", "[]")
+                logging.info(
+                    "OpenAI tactical policy raw response:%s%s",
+                    os.linesep,
+                    content,
+                )
                 logging.debug(
                     "Received responses.create text (truncated): %s",
                     shorten(content, width=2000, placeholder="..."),
@@ -256,6 +273,11 @@ class OpenAITacticalPolicy:
             timeout=OPENAI_TIMEOUT,
         )
         content = response["choices"][0]["message"]["content"].strip()
+        logging.info(
+            "OpenAI tactical policy raw response:%s%s",
+            os.linesep,
+            content,
+        )
         logging.debug(
             "Received ChatCompletion response (truncated): %s",
             shorten(content, width=2000, placeholder="..."),
@@ -313,8 +335,24 @@ class ActionPlanParser:
     """Parse and validate a JSON plan returned by the OpenAI policy."""
 
     def parse(self, content: str) -> List[ActionInstruction]:
+        if not content.strip():
+            logging.error("Policy response was empty; cannot parse instructions")
+            return []
+
+        normalised = self._extract_json_payload(content)
+        if normalised is None:
+            logging.error("Unable to locate JSON array in policy response")
+            logging.debug(
+                "Unparseable policy response (truncated): %s",
+                shorten(content, width=2000, placeholder="..."),
+            )
+            return []
+
+        if normalised != content.strip():
+            logging.info("Normalised policy response by extracting JSON payload")
+
         try:
-            data = json.loads(content)
+            data = json.loads(normalised)
         except json.JSONDecodeError as exc:
             logging.error("Failed to decode policy response: %s", exc)
             logging.debug(
@@ -403,6 +441,55 @@ class ActionPlanParser:
                 return int(target["x"]), int(target["y"])
             except (TypeError, ValueError):
                 return None
+        return None
+
+    @staticmethod
+    def _extract_json_payload(content: str) -> Optional[str]:
+        """Attempt to isolate a JSON array from *content*."""
+
+        stripped = content.strip()
+        if stripped.startswith("["):
+            return stripped
+
+        if stripped.startswith("```"):
+            blocks = stripped.split("```")
+            for block in blocks:
+                candidate = block.strip()
+                if not candidate:
+                    continue
+                if candidate.lower().startswith("json"):
+                    candidate = candidate[4:].strip()
+                if candidate.startswith("["):
+                    return candidate
+
+        start = stripped.find("[")
+        if start == -1:
+            return None
+
+        depth = 0
+        in_string = False
+        escaped = False
+        for idx in range(start, len(stripped)):
+            ch = stripped[idx]
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif ch == "\\":
+                    escaped = True
+                elif ch == '"':
+                    in_string = False
+                continue
+
+            if ch == '"':
+                in_string = True
+                continue
+            if ch == "[":
+                depth += 1
+            elif ch == "]":
+                depth -= 1
+                if depth == 0:
+                    return stripped[start : idx + 1]
+
         return None
 
 
