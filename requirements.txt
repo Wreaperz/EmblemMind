@@ -1,6 +1,9 @@
-numpy>=1.22.0
-pyautogui>=0.9.54
-matplotlib>=3.5.0
-pytest>=7.0.0
-pywinauto>=0.6.8
-keyboard
+black==24.4.2
+jsonschema==4.21.1
+mypy==1.9.0
+numpy==1.26.4
+pyyaml==6.0.1
+pytest==8.1.1
+pytest-cov==4.1.0
+ruff==0.3.5
+structlog==24.1.0

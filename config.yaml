@@ -1,0 +1,27 @@
+rom_sha1: null
+port: 17653
+seeds:
+  python: 17
+  numpy: 17
+  torch: 17
+search:
+  depth: 1
+  rollouts: 0
+  time_budget_ms: 500
+reward:
+  weights:
+    hp: 1.0
+    terrain_defense: 0.2
+    weapon_advantage: 0.5
+    objective: 1.0
+model:
+  path: null
+turbo:
+  enabled: true
+  enemy_phase: true
+logging:
+  level: INFO
+  output_dir: runs
+bridge:
+  enabled: true
+  timeout_ms: 100

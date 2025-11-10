@@ -1,5 +1,37 @@
-FEBuilderGBA/
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.dylib
 
-FEMapCreator/
+# Virtual environments
+.env/
+.venv/
+venv/
 
-*__pycache__*
+# Editor
+*.swp
+.idea/
+.vscode/
+
+# Data and runs
+runs/
+tmp/
+logs/
+
+# Models and artifacts
+models/
+*.pt
+*.onnx
+
+# Emulator dumps
+bizhawk/*.bk2
+bizhawk/*.wch
+
+# Coverage
+htmlcov/
+.coverage*
+
+# Misc
+.DS_Store
+*.log
