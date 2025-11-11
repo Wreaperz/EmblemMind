@@ -629,21 +629,17 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
     press_key("x", duration=0.05)
     time.sleep(0.1)
 
-    if action.target_position != action.unit.position:
-        cursor_pos = move_cursor_to(action.target_position, cursor_pos)
-        press_key("x", duration=0.05)
-        time.sleep(0.1)
-
-    # Select weapon if needed
-    if action.item_id is not None:
-        time.sleep(0.1)
-        press_key("x", duration=0.05)
-        time.sleep(0.1)
-
-    enemy_pos = action.target_unit.position
-    cursor_pos = move_cursor_to(enemy_pos, cursor_pos)
+    cursor_pos = move_cursor_to(action.target_position, cursor_pos)
     press_key("x", duration=0.05)
-    time.sleep(0.2)
+    time.sleep(0.1)
+
+    time.sleep(0.1)
+    press_key("x", duration=0.05)
+    time.sleep(0.1)
+    press_key("x", duration=0.05)
+    time.sleep(0.1)
+    press_key("x", duration=0.05)
+    time.sleep(0.1)
 
     return cursor_pos
 

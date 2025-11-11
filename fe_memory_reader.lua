@@ -702,12 +702,18 @@ local function export_game_state()
       end
       file:write("BATTLE_STRUCTS\n")
       local function read_battle_only_bytes(base_addr)
-        return read_bytes(base_addr, 0x7D + 1)
+        return read_bytes(base_addr, 0x80)
       end
       local attacker_battle = read_battle_only_bytes(0x0203A3F0)
       file:write("attacker_battle=", bytes_to_hexstr(attacker_battle), "\n")
       local defender_battle = read_battle_only_bytes(0x0203A470)
       file:write("defender_battle=", bytes_to_hexstr(defender_battle), "\n")
+      file:write("ROUNDS_DATA\n")
+      local function read_round_stats_bytes(base_addr)
+        return read_bytes(base_addr, 0x1C)
+      end
+      local round_data = read_round_stats_bytes(0x0203A470 + 0x80)
+      file:write("7-round_data=", bytes_to_hexstr(round_data), "\n")
 
       file:write("CHARACTERS\n")
       for i, char in ipairs(state.characters) do
