@@ -71,8 +71,7 @@ PLANNING_PROMPT = (
     "survival of lords, progress toward objectives, and net advantage.\n\n"
     "Preview Phase Instructions:\n"
     "- Review the snapshot, full terrain map, and each ally's movement grid.\n"
-    "- Movement grids encode distance in steps (0x00 = current tile, higher "
-    "numbers are step counts, 0xFF = unreachable or blocked).\n"
+    "- Movement grids use characters (0 = unit tile, + = reachable, X = blocked).\n"
     "- Request battle previews only when they meaningfully inform risk/reward; "
     "skip obvious or impossible attacks.\n"
     "- Prefer preparations that protect lords, advance objectives, and preserve "
@@ -142,8 +141,8 @@ class SnapshotSerialiser:
         self,
         snapshot: TurnSnapshot,
         *,
-        map_grid: Optional[List[List[str]]] = None,
-        movement_maps: Optional[Dict[int, List[List[int]]]] = None,
+        map_grid: Optional[List[str]] = None,
+        movement_maps: Optional[Dict[int, Any]] = None,
     ) -> Dict[str, Any]:
         payload: Dict[str, Any] = {
             "turn": snapshot.current_turn,
@@ -170,7 +169,7 @@ class SnapshotSerialiser:
 
     @staticmethod
     def _unit_dict(
-        unit: Unit, movement_maps: Optional[Dict[int, List[List[int]]]]
+        unit: Unit, movement_maps: Optional[Dict[int, Any]]
     ) -> Dict[str, Any]:
         data: Dict[str, Any] = {
             "id": unit.id,
@@ -283,7 +282,12 @@ class OpenAITacticalPolicy:
                     temperature=self.temperature,
                     timeout=OPENAI_TIMEOUT,
                 )
-                content = response.choices[0].message["content"]
+                choice = response.choices[0]
+                message = getattr(choice, "message", None)
+                if isinstance(message, dict):
+                    content = message.get("content", "")
+                else:
+                    content = getattr(message, "content", "")
             except AttributeError:  # pragma: no cover - SDK differences
                 response = self._client.responses.create(
                     model=self.model,
@@ -647,8 +651,8 @@ class BattlePreview:
     rounds: List[Dict[str, Any]]
 
 
-def read_map_grid() -> List[List[str]]:
-    grid: List[List[str]] = []
+def read_map_grid() -> List[str]:
+    grid: List[str] = []
     try:
         with open(MAP_FILE, "r", encoding="utf-8") as handle:
             for line in handle:
@@ -657,16 +661,37 @@ def read_map_grid() -> List[List[str]]:
                     if grid:
                         break
                     continue
-                if stripped.startswith("Terrain pointer"):
-                    break
+                if ":" in stripped and not stripped.startswith((".", "H", "^", "#", "F", "C", "T", "D", "R", "=", "~", "M", "X")):
+                    if grid:
+                        break
+                    continue
                 tokens = stripped.split()
                 if tokens:
-                    grid.append(tokens)
+                    grid.append("".join(tokens))
     except FileNotFoundError:
         logging.error("Map file %s not found", MAP_FILE)
     except Exception as exc:
         logging.error("Failed to read map grid: %s", exc)
     return grid
+
+
+def summarise_movement_grid(grid: List[List[int]]) -> List[str]:
+    """Compress movement grids into reachability masks for the model."""
+
+    summary: List[str] = []
+    for row in grid:
+        chars: List[str] = []
+        for value in row:
+            if value == 0:
+                chars.append("0")
+            elif value >= 0xFF:
+                chars.append("X")
+            elif value > 0:
+                chars.append("+")
+            else:
+                chars.append("X")
+        summary.append("".join(chars))
+    return summary
 
 
 def _parse_hex_stream(text: str) -> List[int]:
@@ -1213,8 +1238,8 @@ class TacticalAgent:
 
     # Helpers --------------------------------------------------------------------
 
-    def _collect_movement_maps(self, snapshot: TurnSnapshot) -> Dict[int, List[List[int]]]:
-        movement_maps: Dict[int, List[List[int]]] = {}
+    def _collect_movement_maps(self, snapshot: TurnSnapshot) -> Dict[int, List[str]]:
+        movement_maps: Dict[int, List[str]] = {}
         cursor_pos = get_cursor_position() or snapshot.cursor_position
         for unit in snapshot.units:
             if unit.hp[0] <= 0:
@@ -1226,7 +1251,7 @@ class TacticalAgent:
 
             grid = self._read_movement_grid()
             if grid:
-                movement_maps[unit.id] = grid
+                movement_maps[unit.id] = summarise_movement_grid(grid)
             else:
                 logging.warning("Failed to read movement grid for unit %s", unit.name)
 
@@ -1247,7 +1272,7 @@ class TacticalAgent:
     def _build_planning_payload(
         self,
         snapshot: TurnSnapshot,
-        movement_maps: Dict[int, List[List[int]]],
+        movement_maps: Dict[int, List[str]],
     ) -> List[Dict[str, Any]]:
         base = self.serialiser.serialise(
             snapshot,
@@ -1263,7 +1288,7 @@ class TacticalAgent:
             {"movement_grids": movement_blob},
             {
                 "notes": {
-                    "movement": "0x00=current tile; >0 steps away; 0xFF unreachable",
+                    "movement": "Rows of 0/+/X showing unit tile, reachable tiles, and blocks",
                     "map": "Map grid comes from fe_map.txt characters",
                 }
             },
@@ -1272,7 +1297,7 @@ class TacticalAgent:
     def _build_execution_payload(
         self,
         snapshot: TurnSnapshot,
-        movement_maps: Dict[int, List[List[int]]],
+        movement_maps: Dict[int, List[str]],
         preview_instructions: List[PreviewInstruction],
         battle_previews: List[BattlePreview],
     ) -> List[Dict[str, Any]]:
