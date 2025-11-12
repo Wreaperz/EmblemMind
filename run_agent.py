@@ -887,6 +887,9 @@ def move_cursor_to(
     target_pos: Tuple[int, int],
     current_pos: Optional[Tuple[int, int]],
     max_attempts: int = 3,
+    *,
+    verify: bool = True,
+    step_delay: float = 0.05,
 ) -> Tuple[int, int]:
     if current_pos is None:
         current_pos = target_pos
@@ -897,14 +900,24 @@ def move_cursor_to(
         dy = target_pos[1] - current_pos[1]
 
         for _ in range(abs(dx)):
-            press_key("RIGHT" if dx > 0 else GBA_KEY_MAP["LEFT"], duration=0.05)
-            time.sleep(0.05)
+            press_key(
+                GBA_KEY_MAP["RIGHT"] if dx > 0 else GBA_KEY_MAP["LEFT"],
+                duration=0.05,
+            )
+            time.sleep(step_delay)
 
         for _ in range(abs(dy)):
-            press_key("DOWN" if dy > 0 else GBA_KEY_MAP["UP"], duration=0.05)
-            time.sleep(0.05)
+            press_key(
+                GBA_KEY_MAP["DOWN"] if dy > 0 else GBA_KEY_MAP["UP"],
+                duration=0.05,
+            )
+            time.sleep(step_delay)
 
-        time.sleep(0.1)
+        if not verify:
+            time.sleep(0.2)
+            return target_pos
+
+        time.sleep(0.2)
         pos = get_cursor_position()
         if pos == target_pos:
             return target_pos
@@ -950,7 +963,10 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
     time.sleep(0.1)
 
     if action.target_position != action.unit.position:
-        cursor_pos = move_cursor_to(action.target_position, cursor_pos)
+        cursor_pos = move_cursor_to(
+            action.target_position, cursor_pos, verify=False
+        )
+        time.sleep(0.2)
         press_key("x", duration=0.05)
         time.sleep(0.1)
 
@@ -961,7 +977,8 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
         time.sleep(0.1)
 
     enemy_pos = action.target_unit.position
-    cursor_pos = move_cursor_to(enemy_pos, cursor_pos)
+    cursor_pos = move_cursor_to(enemy_pos, cursor_pos, verify=False)
+    time.sleep(0.2)
     press_key("x", duration=0.05)
     time.sleep(0.2)
 
@@ -995,7 +1012,8 @@ def execute_action_in_bizhawk(
         time.sleep(0.1)
 
         target_position = action.target_position or action.unit.position
-        cursor_pos = move_cursor_to(target_position, cursor_pos)
+        cursor_pos = move_cursor_to(target_position, cursor_pos, verify=False)
+        time.sleep(0.2)
         press_key("x", duration=0.05)
         time.sleep(0.2)
 
@@ -1417,7 +1435,8 @@ class TacticalAgent:
 
         attack_tile = instruction.from_tile
         if attack_tile != unit.position:
-            cursor_pos = move_cursor_to(attack_tile, cursor_pos)
+            cursor_pos = move_cursor_to(attack_tile, cursor_pos, verify=False)
+            time.sleep(0.2)
 
         press_key("x", duration=0.05)
         time.sleep(0.2)
