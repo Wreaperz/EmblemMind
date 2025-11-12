@@ -883,6 +883,21 @@ def get_cursor_position() -> Optional[Tuple[int, int]]:
     return None
 
 
+def _normalise_button(button: str) -> str:
+    if not button:
+        return button
+    upper = button.upper()
+    if upper in GBA_KEY_MAP:
+        return GBA_KEY_MAP[upper]
+    return button
+
+
+def press_button(button: str, *, duration: float = 0.05, post_delay: float = 0.05) -> None:
+    key = _normalise_button(button)
+    press_key(key, duration=duration)
+    time.sleep(post_delay)
+
+
 def move_cursor_to(
     target_pos: Tuple[int, int],
     current_pos: Optional[Tuple[int, int]],
@@ -891,36 +906,40 @@ def move_cursor_to(
     verify: bool = True,
     step_delay: float = 0.05,
 ) -> Tuple[int, int]:
+    if verify:
+        actual_pos = get_cursor_position()
+        if actual_pos is not None:
+            current_pos = actual_pos
     if current_pos is None:
         current_pos = target_pos
+    if current_pos == target_pos:
+        return target_pos
+
     logging.debug("Moving cursor from %s to %s", current_pos, target_pos)
 
     for attempt in range(max_attempts):
         dx = target_pos[0] - current_pos[0]
         dy = target_pos[1] - current_pos[1]
 
-        for _ in range(abs(dx)):
-            press_key(
-                GBA_KEY_MAP["RIGHT"] if dx > 0 else GBA_KEY_MAP["LEFT"],
-                duration=0.05,
-            )
-            time.sleep(step_delay)
+        if dx != 0:
+            direction = "RIGHT" if dx > 0 else "LEFT"
+            for _ in range(abs(dx)):
+                press_button(direction, post_delay=step_delay)
 
-        for _ in range(abs(dy)):
-            press_key(
-                GBA_KEY_MAP["DOWN"] if dy > 0 else GBA_KEY_MAP["UP"],
-                duration=0.05,
-            )
-            time.sleep(step_delay)
+        if dy != 0:
+            direction = "DOWN" if dy > 0 else "UP"
+            for _ in range(abs(dy)):
+                press_button(direction, post_delay=step_delay)
 
         if not verify:
-            time.sleep(0.2)
+            time.sleep(0.1)
             return target_pos
 
-        time.sleep(0.2)
-        pos = get_cursor_position()
-        if pos == target_pos:
-            return target_pos
+        for _ in range(5):
+            pos = get_cursor_position()
+            if pos == target_pos:
+                return target_pos
+            time.sleep(0.05)
 
         logging.warning(
             "Cursor failed to reach %s on attempt %s; retrying after returning to map",
@@ -928,7 +947,12 @@ def move_cursor_to(
             attempt + 1,
         )
         return_to_map()
-        current_pos = get_cursor_position() or current_pos
+        time.sleep(0.1)
+        refreshed = get_cursor_position()
+        if refreshed is not None:
+            current_pos = refreshed
+            if current_pos == target_pos:
+                return target_pos
 
     logging.error("Could not position cursor at %s", target_pos)
     return current_pos
@@ -936,20 +960,34 @@ def move_cursor_to(
 
 def return_to_map() -> None:
     for _ in range(5):
-        press_key("z", duration=0.01)  # B button
-        time.sleep(0.05)
+        press_button("B", duration=0.01, post_delay=0.05)
+
+
+def _nudge_cursor(origin: Tuple[int, int], *, width: int, height: int) -> Tuple[int, int]:
+    directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    current = get_cursor_position() or origin
+    for dx, dy in directions:
+        target = (min(max(origin[0] + dx, 0), width - 1), min(max(origin[1] + dy, 0), height - 1))
+        if target == origin:
+            continue
+        moved = move_cursor_to(target, current, verify=True)
+        current = moved
+        if moved == target:
+            move_cursor_to(origin, moved, verify=True)
+            return origin
+    logging.debug("Unable to nudge cursor from %s", origin)
+    return current
 
 
 def is_menu_open() -> bool:
     before = get_cursor_position()
     if before is None:
         return False
-    press_key(GBA_KEY_MAP["RIGHT"], duration=0.01)
-    time.sleep(0.05)
+    press_button("RIGHT", duration=0.01, post_delay=0.05)
     after = get_cursor_position()
     if after is not None and after != before:
         # Restore cursor
-        press_key(GBA_KEY_MAP["LEFT"], duration=0.01)
+        press_button("LEFT", duration=0.01, post_delay=0.05)
     return before == after
 
 
@@ -959,7 +997,7 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
         return cursor_pos or action.unit.position
 
     cursor_pos = move_cursor_to(action.unit.position, cursor_pos)
-    press_key("x", duration=0.05)
+    press_button("A")
     time.sleep(0.1)
 
     if action.target_position != action.unit.position:
@@ -967,19 +1005,19 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
             action.target_position, cursor_pos, verify=False
         )
         time.sleep(0.2)
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.1)
 
     # Select weapon if needed
     if action.item_id is not None:
         time.sleep(0.1)
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.1)
 
     enemy_pos = action.target_unit.position
     cursor_pos = move_cursor_to(enemy_pos, cursor_pos, verify=False)
     time.sleep(0.2)
-    press_key("x", duration=0.05)
+    press_button("A")
     time.sleep(0.2)
 
     return cursor_pos
@@ -1008,20 +1046,19 @@ def execute_action_in_bizhawk(
             )
             return cursor_pos, prev_snapshot
 
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.1)
 
         target_position = action.target_position or action.unit.position
         cursor_pos = move_cursor_to(target_position, cursor_pos, verify=False)
         time.sleep(0.2)
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.2)
 
         # Default to wait at the end of movement
         time.sleep(0.2)
-        press_key("UP", duration=0.05)
-        time.sleep(0.05)
-        press_key("x", duration=0.05)
+        press_button("UP")
+        press_button("A")
 
     def action_completed(snapshot: TurnSnapshot) -> bool:
         unit_after = next((u for u in snapshot.units if u.id == action.unit.id), None)
@@ -1049,11 +1086,9 @@ def end_turn_in_bizhawk(
         return cursor_pos or (0, 0), snapshot
 
     cursor_pos = move_cursor_to(moved_unit.position, cursor_pos)
-    press_key("x", duration=0.05)
-    time.sleep(0.1)
-    press_key("UP", duration=0.05)
-    time.sleep(0.1)
-    press_key("x", duration=0.05)
+    press_button("A")
+    press_button("UP")
+    press_button("A")
     time.sleep(0.5)
 
     snapshot = wait_for_animation_complete(snapshot, timeout=3.0, stable_checks=5)
@@ -1150,7 +1185,6 @@ class TacticalAgent:
     def __init__(self) -> None:
         self.policy = OpenAITacticalPolicy()
         self.parser = ActionPlanParser()
-        self.preview_parser = PreviewPlanParser()
         self.executor = ActionPlanExecutor()
         self.data_gatherer = DataGatherer()
         self.serialiser = SnapshotSerialiser()
@@ -1191,32 +1225,10 @@ class TacticalAgent:
                 self.last_signature = signature
 
                 movement_maps = self._collect_movement_maps(snapshot)
-                planning_payload = self._build_planning_payload(snapshot, movement_maps)
-                preview_text = self.policy.request_preview_plan(planning_payload)
-                logging.debug(
-                    "Preview planner returned (truncated): %s",
-                    shorten(preview_text, width=2000, placeholder="..."),
-                )
-                preview_instructions = self.preview_parser.parse(preview_text)
-                if preview_instructions:
-                    logging.debug(
-                        "Received %d preview requests", len(preview_instructions)
-                    )
-
-                battle_previews = []
-                if preview_instructions:
-                    battle_previews = self._collect_battle_previews(
-                        snapshot, preview_instructions
-                    )
-
-                # Refresh snapshot after previews in case positions updated
-                snapshot = self.data_gatherer.get_snapshot() or snapshot
 
                 execution_payload = self._build_execution_payload(
                     snapshot,
                     movement_maps,
-                    preview_instructions,
-                    battle_previews,
                 )
                 plan_text = self.policy.request_final_plan(execution_payload)
                 logging.debug(
@@ -1259,13 +1271,29 @@ class TacticalAgent:
     def _collect_movement_maps(self, snapshot: TurnSnapshot) -> Dict[int, List[str]]:
         movement_maps: Dict[int, List[str]] = {}
         cursor_pos = get_cursor_position() or snapshot.cursor_position
+        map_width = snapshot.map.width
+        map_height = snapshot.map.height
+
         for unit in snapshot.units:
             if unit.hp[0] <= 0:
                 continue
 
             cursor_pos = move_cursor_to(unit.position, cursor_pos)
-            press_key("x", duration=0.05)
+            pos_check = get_cursor_position()
+            if pos_check != unit.position:
+                logging.warning(
+                    "Cursor mismatch when priming unit %s: expected %s got %s",
+                    unit.name,
+                    unit.position,
+                    pos_check,
+                )
+                continue
+
+            press_button("A")
             time.sleep(0.2)
+
+            _nudge_cursor(unit.position, width=map_width, height=map_height)
+            time.sleep(0.1)
 
             grid = self._read_movement_grid()
             if grid:
@@ -1287,38 +1315,15 @@ class TacticalAgent:
             time.sleep(delay)
         return []
 
-    def _build_planning_payload(
-        self,
-        snapshot: TurnSnapshot,
-        movement_maps: Dict[int, List[str]],
-    ) -> List[Dict[str, Any]]:
-        base = self.serialiser.serialise(
-            snapshot,
-            map_grid=self.map_grid,
-            movement_maps=movement_maps,
-        )
-        movement_blob = {
-            str(unit_id): movement_maps[unit_id]
-            for unit_id in movement_maps
-        }
-        return [
-            {"snapshot": base},
-            {"movement_grids": movement_blob},
-            {
-                "notes": {
-                    "movement": "Rows of 0/+/X showing unit tile, reachable tiles, and blocks",
-                    "map": "Map grid comes from fe_map.txt characters",
-                }
-            },
-        ]
-
     def _build_execution_payload(
         self,
         snapshot: TurnSnapshot,
         movement_maps: Dict[int, List[str]],
-        preview_instructions: List[PreviewInstruction],
-        battle_previews: List[BattlePreview],
+        preview_instructions: Optional[List[PreviewInstruction]] = None,
+        battle_previews: Optional[List[BattlePreview]] = None,
     ) -> List[Dict[str, Any]]:
+        preview_instructions = preview_instructions or []
+        battle_previews = battle_previews or []
         base = self.serialiser.serialise(
             snapshot,
             map_grid=self.map_grid,
@@ -1430,7 +1435,7 @@ class TacticalAgent:
         )
 
         cursor_pos = move_cursor_to(unit.position, cursor_pos)
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.2)
 
         attack_tile = instruction.from_tile
@@ -1438,26 +1443,22 @@ class TacticalAgent:
             cursor_pos = move_cursor_to(attack_tile, cursor_pos, verify=False)
             time.sleep(0.2)
 
-        press_key("x", duration=0.05)
+        press_button("A")
         time.sleep(0.2)
 
-        press_key("x", duration=0.05)  # Attack command
+        press_button("A")  # Attack command
         time.sleep(0.2)
 
         for _ in range(weapon_slot):
-            press_key("DOWN", duration=0.05)
-            time.sleep(0.05)
-        press_key("x", duration=0.05)  # Select weapon
+            press_button("DOWN")
+        press_button("A")  # Select weapon
         time.sleep(0.4)
 
         for _ in range(4):
-            press_key("z", duration=0.05)
-            time.sleep(0.05)
+            press_button("B")
 
-        press_key("LEFT", duration=0.05)
-        time.sleep(0.05)
-        press_key("RIGHT", duration=0.05)
-        time.sleep(0.05)
+        press_button("LEFT")
+        press_button("RIGHT")
 
         battle = wait_for_battle_data()
         preview: Optional[BattlePreview] = None
