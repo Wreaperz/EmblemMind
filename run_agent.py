@@ -898,6 +898,18 @@ def press_button(button: str, *, duration: float = 0.05, post_delay: float = 0.0
     time.sleep(post_delay)
 
 
+def weapon_slot_for(unit: Unit, weapon_id: Optional[int]) -> Optional[int]:
+    """Return the weapon slot index for ``weapon_id`` or ``None`` if missing."""
+
+    if weapon_id is None:
+        return 0
+
+    for idx, (item_id, _) in enumerate(unit.items):
+        if item_id == weapon_id:
+            return idx
+    return None
+
+
 def move_cursor_to(
     target_pos: Tuple[int, int],
     current_pos: Optional[Tuple[int, int]],
@@ -997,27 +1009,53 @@ def perform_attack_action(action: Action, cursor_pos: Optional[Tuple[int, int]])
         return cursor_pos or action.unit.position
 
     cursor_pos = move_cursor_to(action.unit.position, cursor_pos)
+    pos_check = get_cursor_position()
+    if pos_check != action.unit.position:
+        logging.error(
+            "Cursor mismatch when selecting unit %s for attack: expected %s got %s",
+            action.unit.name,
+            action.unit.position,
+            pos_check,
+        )
+        return cursor_pos or action.unit.position
+
     press_button("A")
     time.sleep(0.1)
 
-    if action.target_position != action.unit.position:
-        cursor_pos = move_cursor_to(
-            action.target_position, cursor_pos, verify=False
+    attack_tile = action.target_position or action.unit.position
+    cursor_pos = move_cursor_to(attack_tile, cursor_pos)
+    pos_check = get_cursor_position()
+    if pos_check != attack_tile:
+        logging.error(
+            "Cursor failed to reach attack tile %s for %s (got %s)",
+            attack_tile,
+            action.unit.name,
+            pos_check,
         )
-        time.sleep(0.2)
-        press_button("A")
-        time.sleep(0.1)
+        return cursor_pos
 
-    # Select weapon if needed
-    if action.item_id is not None:
-        time.sleep(0.1)
-        press_button("A")
-        time.sleep(0.1)
-
-    enemy_pos = action.target_unit.position
-    cursor_pos = move_cursor_to(enemy_pos, cursor_pos, verify=False)
+    press_button("A")  # Confirm movement onto the attack tile
     time.sleep(0.2)
-    press_button("A")
+
+    press_button("A")  # Attack is the first option in the action menu
+    time.sleep(0.2)
+
+    weapon_slot = weapon_slot_for(action.unit, action.item_id)
+    if weapon_slot is None:
+        logging.warning(
+            "Unit %s missing weapon %s; defaulting to first slot",
+            action.unit.name,
+            action.item_id,
+        )
+        weapon_slot = 0
+
+    for _ in range(weapon_slot):
+        press_button("DOWN")
+
+    press_button("A")  # Choose weapon
+    time.sleep(0.3)
+
+    press_button("A")  # Confirm the attack from the forecast screen
     time.sleep(0.2)
 
     return cursor_pos
@@ -1050,14 +1088,23 @@ def execute_action_in_bizhawk(
         time.sleep(0.1)
 
         target_position = action.target_position or action.unit.position
-        cursor_pos = move_cursor_to(target_position, cursor_pos, verify=False)
-        time.sleep(0.2)
-        press_button("A")
+        cursor_pos = move_cursor_to(target_position, cursor_pos)
+        pos_check = get_cursor_position()
+        if pos_check != target_position:
+            logging.error(
+                "Cursor failed to reach destination %s for %s (got %s)",
+                target_position,
+                action.unit.name,
+                pos_check,
+            )
+            return cursor_pos, prev_snapshot
+
+        press_button("A")  # Confirm movement to the target tile
         time.sleep(0.2)
 
         # Default to wait at the end of movement
-        time.sleep(0.2)
         press_button("UP")
+        time.sleep(0.05)
         press_button("A")
 
     def action_completed(snapshot: TurnSnapshot) -> bool:
@@ -1394,7 +1441,7 @@ class TacticalAgent:
                 )
                 continue
 
-            weapon_slot = self._weapon_slot_for(unit, instruction.weapon_id)
+            weapon_slot = weapon_slot_for(unit, instruction.weapon_id)
             if weapon_slot is None:
                 logging.warning(
                     "Unit %s missing weapon %s for preview",
@@ -1415,13 +1462,6 @@ class TacticalAgent:
 
         return previews
 
-    @staticmethod
-    def _weapon_slot_for(unit: Unit, weapon_id: int) -> Optional[int]:
-        for idx, (item_id, _) in enumerate(unit.items):
-            if item_id == weapon_id:
-                return idx
-        return None
-
     def _execute_preview(
         self,
         unit: Unit,
@@ -1439,9 +1479,16 @@ class TacticalAgent:
         time.sleep(0.2)
 
         attack_tile = instruction.from_tile
-        if attack_tile != unit.position:
-            cursor_pos = move_cursor_to(attack_tile, cursor_pos, verify=False)
-            time.sleep(0.2)
+        cursor_pos = move_cursor_to(attack_tile, cursor_pos)
+        pos_check = get_cursor_position()
+        if pos_check != attack_tile:
+            logging.error(
+                "Cursor failed to reach preview tile %s for %s (got %s)",
+                attack_tile,
+                unit.name,
+                pos_check,
+            )
+            return cursor_pos, None
 
         press_button("A")
         time.sleep(0.2)
